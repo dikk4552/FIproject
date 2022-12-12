@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Huiri Place</title>
+    <style>
+        html, body, body > div, #container, #container-uiarea {
+            height: 100%;
+        }
+    </style>
+    <!-- <link rel="stylesheet" href="css/style.css"> -->
+    <!-- <script src="index.js"></script> -->
+    <script
+        id="sap-ui-bootstrap"
+        src="https://sapui5.hana.ondemand.com/resources/sap-ui-core.js" 
+        data-sap-ui-theme="sap_horizon" 
+        data-sap-ui-resourceroots='{
+            "project1": "./",
+            "project4": "./../component/Product",
+            "project2": "./../component/Request",
+            "project3": "./../component/Company"
+            
+        }'
+        data-sap-ui-compatVersion="edge"
+        data-sap-ui-async="true" 
+        data-sap-ui-frameOptions="trusted"
+        data-sap-ui-onInit="module:project1/index"
+    ></script>
+    <script id="locate-reuse-libs" src="./utils/locate-reuse-libs.js"
+        data-sap-ui-manifest-uri="./manifest.json" 
+        data-sap-ui-componentName="project1" > 
+    </script> 
+</head>
+<!-- #ui5 라이브러리 로드 # 기존 resources/sap-ui-core.js(로컬) -->
+<!-- #앱에서 사용할 테마 # fiori_3 -->
+<!-- # 프로젝트에 사용하는 자원의 경로 별칭
+# 필요한 파일들 동기화 처리
+#설명자 파일 경로 지정
+# 컴포넌트 이름 지정 -->
+<!-- <body class="sapUiBody sapUiSizeCompact" id="content" onload="myFunction()"> -->
+<body class="sapUiBody sapUiSizeCompact" id="content">
+    <div
+        data-sap-ui-component
+        data-name="project1"
+        data-id="container"
+        data-settings='{"id" : "project1"}'
+        data-handle-validation="true"
+    ></div>
+    <!-- FLP용 앱, 독립실행형 앱 빌드 -->
+<!-- 
+FLP용 앱
+* 설명자 파일에 제공된 정보를 기반으로 구성요소 인스턴스화
+* 동시에 여러 개의 앱 포함 가능
+* 지원되는 테마, 장치와 같은 로컬 설정 정의 가능
+* FLP 샌드박스에서 앱을 테스트하기 위한 HTML 파일만 생성 => 독립적으로 실행 불가
+ -->
+ <!-- 
+독립 실행형 앱
+* 독립 실행 시 index.html 파일 생성
+* 파일 내에서 구성요소 인스턴스화
+ -->
+</body>
+</html>

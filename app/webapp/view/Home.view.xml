@@ -1,0 +1,11 @@
+<mvc:View 
+  controllerName="project1.controller.Home"
+  xmlns:mvc="sap.ui.core.mvc" 
+  xmlns="sap.m" 
+  displayBlock="true">
+  <MessagePage id="_IDGenMessagePage1"
+    text="환영합니다." 
+    icon="sap-icon://home">
+  </MessagePage>
+
+</mvc:View>
