@@ -22,16 +22,16 @@ modules:
         properties:
           srv-url: ${default-url}
     requires:
-      - name: FIproject-db
+      - name: Fiproject-dev
       - name: FIproject-auth
 
-  - name: FIproject-db-deployer
+  - name: Fiproject-dev-deployer
     type: hdb
     path: db #gen/db
     parameters:
       buildpack: nodejs_buildpack
     requires:
-      - name: FIproject-db
+      - name: Fiproject-dev
 
   - name: FIproject
     type: approuter.nodejs
@@ -50,7 +50,7 @@ modules:
       - name: FIproject-auth
 
 resources:
-  - name: FIproject-db
+  - name: Fiproject-dev
     type: com.sap.xs.hdi-container
     parameters:
       service: hana
