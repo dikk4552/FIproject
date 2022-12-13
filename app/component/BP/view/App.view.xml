@@ -1,0 +1,11 @@
+<!-- XML, HTML, JS, JSON 지원, XMLView 추천 -->
+
+<mvc:View controllerName="projectBP.controller.App"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    height = "100%">
+
+            <App id="app">
+            </App>
+
+</mvc:View>

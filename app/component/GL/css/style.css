@@ -1,0 +1,40 @@
+html[dir="ltr"] .myAppDemoWT .myCustomButton.sapMBtn {
+    background-color: aliceblue;
+}
+
+html[dir="rtl"] .myAppDemoWT .myCustomButton.sapMBtn {
+    background-color: rgb(221, 193, 78);
+}
+.myAppDemoWT .myCustomText {
+    display : inline-block;
+    font-weight : bold;
+    color : yellow;
+}
+
+/*
+#start{
+    color : rgb(137, 137, 137);
+}
+#start:hover { 
+    cursor : pointer;
+}
+#menu{
+    color : green;
+    font-weight : bold;
+}
+#menu2{
+    font-weight : bold;
+}
+#logo-img:hover {
+    cursor : pointer;
+ 
+}
+.search-input{
+    height : 1.7rem;
+    border-radius: 5px;
+    border : solid 1px grey;
+}
+.search-input:active {
+     border : solid 2px grey;
+}
+*/

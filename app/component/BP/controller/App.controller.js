@@ -5,9 +5,8 @@ sap.ui.define(
     function(BaseController) {
       "use strict";
   
-      return BaseController.extend("project1.controller.App", {
-        onHome : function(){
-          this.getOwnerComponent().getRouter().navTo("Home")
+      return BaseController.extend("projectBP.controller.App", {
+        onInit() {
         }
 
         }

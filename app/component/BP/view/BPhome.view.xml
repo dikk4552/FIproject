@@ -1,0 +1,6 @@
+<mvc:View controllerName="projectBP.controller.BPhome"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    height = "100%">
+
+</mvc:View>

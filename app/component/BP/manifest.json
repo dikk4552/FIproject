@@ -1,7 +1,7 @@
 {
   "_version": "1.42.0",
   "sap.app": {
-    "id": "project1",
+    "id": "projectBP",
     "type": "application",
     "i18n": "i18n/i18n.properties",
     "applicationVersion": {
@@ -69,20 +69,20 @@
       }
     },
     "componentUsages": {
-      "BPComponent" : {
-        "name" : "projectBP",
+      "requestComponent" : {
+        "name" : "project2",
         "settings" : {},
         "componentData" : {},
         "lazy" : true
       },
-      "GLComponent" : {
-        "name" : "projectGL",
+      "companyComponent" : {
+        "name" : "project3",
         "settings" : {},
         "componentData" : {},
         "lazy" : true
       },
-      "DocComponent" : {
-        "name" : "projectDoc",
+      "productComponent" : {
+        "name" : "project4",
         "settings" : {},
         "componentData" : {},
         "lazy" : true
@@ -96,7 +96,7 @@
       "i18n": {
         "type": "sap.ui.model.resource.ResourceModel",
         "settings": {
-          "bundleName": "project1.i18n.i18n"
+          "bundleName": "projectBP.i18n.i18n"
         }
       },
       "Request" : {
@@ -132,73 +132,34 @@
         "routerClass": "sap.m.routing.Router",
         "viewType": "XML",
         "async": true,
-        "viewPath": "project1.view",
+        "viewPath": "projectBP.view",
         "controlAggregation": "pages",
         "controlId": "app",
         "clearControlAggregation": false
       },
       "routes": [
         {
-          "name": "Home",
+          "name": "BPhome",
           "pattern": "",
           "target": [
-            "Home"
+            "BPhome"
           ]
-        },
-        {
-          "name": "BP",
-          "pattern": "BP",
-          "target": {
-            "name": "BP",
-            "prefix": "BP"
-          }
-        },
-        {
-          "name": "GL",
-          "pattern": "GL",
-          "target": {
-            "name": "GL",
-            "prefix": "GL"
-          }
-        },
-        {
-          "name": "Doc",
-          "pattern": "Doc",
-          "target": {
-            "name": "Doc",
-            "prefix": "Doc"
-          }
         }
         
         
       ],
       "targets": {
-        "Home" : {
+        "BPhome" : {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
-          "viewId": "Home",
-          "viewName": "Home"
-        },
-        "BP" : {
-          "type":"Component",
-          "usage":"BPComponent",
-          "title":"BP"
-        },
-        "GL" : {
-          "type":"Component",
-          "usage":"GLComponent",
-          "title":"GL"
-        },
-        "Doc" : {
-          "type":"Component",
-          "usage":"DocComponent",
-          "title":"Doc"
+          "viewId": "BPhome",
+          "viewName": "BPhome"
         }
       }
     },
     "rootView": {
-      "viewName": "project1.view.App",
+      "viewName": "projectBP.view.App",
       "type": "XML",
       "async": true,
       "id": "App"
