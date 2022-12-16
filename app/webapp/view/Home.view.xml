@@ -1,11 +1,34 @@
-<mvc:View 
-  controllerName="project1.controller.Home"
-  xmlns:mvc="sap.ui.core.mvc" 
-  xmlns="sap.m" 
-  displayBlock="true">
-  <MessagePage id="_IDGenMessagePage1"
-    text="환영합니다!" 
-    icon="sap-icon://home">
-  </MessagePage>
+<mvc:View controllerName="project1.controller.Home"
+xmlns:mvc="sap.ui.core.mvc"
+xmlns="sap.m"     xmlns:f="sap.f">
 
+ <ScrollContainer height="100%" width="100%" vertical="true">
+  <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region">
+    <content class="panelbottomline">    
+        <HBox width="100%" height="3rem">          
+            <Title text="Management"/>        
+        </HBox>                    
+       <GenericTile width="15rem" class="sapUiTinyMarginBegin sapUiTinyMarginTop sapUiSmallMarginEnd " 
+       header="BP 마스터 데이터 관리" press=".onBP_list">                     
+          <TileContent>                         
+              <ImageContent src="sap-icon://menu" />                     
+          </TileContent>                 
+       </GenericTile>   
+
+       <GenericTile width="15rem" class="sapUiTinyMarginBegin sapUiTinyMarginTop sapUiSmallMarginEnd" 
+       header="G/L 계정과목 마스터 관리" press=".onGL_list">                     
+          <TileContent>                         
+            <ImageContent src="sap-icon://menu" />                     
+          </TileContent>
+      </GenericTile> 
+
+      <HBox width="100%" height="3rem"/>
+      <HBox width="100%" height="3rem"/>
+      <HBox width="100%" height="3rem">          
+            <Title text="Overview"/>        
+      </HBox> 
+  
+      </content>
+    </Panel>
+  </ScrollContainer>
 </mvc:View>

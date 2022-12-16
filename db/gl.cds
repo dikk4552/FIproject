@@ -1,6 +1,6 @@
 namespace FIproject.gl;
 entity GL {
-GL_number : String @title : 'G/L 계정';
+key GL_number : String @title : 'G/L 계정';
 GL_coa : String @title : '계정과목표';
 GL_accttype : String @title : 'G/L 계정 유형';
 GL_acctgroup : String @title : '계정 그룹';
@@ -16,12 +16,15 @@ CoA_name : String @title : '내역';
 }
 
 entity AcctGroup {
-AcctGroup_number : String @title : '계정그룹';
+key AcctGroup_number : String @title : '계정그룹';
 AcctGroup_coa : String @title : '계정과목표';
 AcctGroup_name : String @title : '의미';
 }
 
 entity CoCd {
-CoCd_number : String @title : '회사코드';
+key CoCd_number : String @title : '회사코드';
+CoCd_name : String @title : '회사이름';
 CoCd_coarea : String @title : '관리회계영역';
+CoCd_coa : String @title : '계정과목표';
+CoCd_curr : String @title : '통화';
 }

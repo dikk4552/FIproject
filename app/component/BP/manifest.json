@@ -16,8 +16,13 @@
       "toolsId": "d1a40033-ed7a-4cb8-b161-66f0a52632fc"
     },
     "dataSources": {
+<<<<<<< HEAD
       "BPService": {
         "uri": "/BP/",
+=======
+      "BPservice":{
+        "uri": "/bpservice/",
+>>>>>>> master
         "type": "OData",
         "settings": {
           "annotations": [],
@@ -25,8 +30,8 @@
           "odataVersion": "4.0"
         }
       },
-      "companyService": {
-        "uri": "/company/",
+      "GLservice":{
+        "uri": "/glservice/",
         "type": "OData",
         "settings": {
           "annotations": [],
@@ -69,6 +74,7 @@
       }
     },
     "componentUsages": {
+<<<<<<< HEAD
       "BPComponent" : {
         "name" : "projectBP",
         "settings" : {},
@@ -87,6 +93,8 @@
         "componentData" : {},
         "lazy" : true
       }
+=======
+>>>>>>> master
     },
     "contentDensities": {
       "compact": true,
@@ -99,8 +107,14 @@
           "bundleName": "projectBP.i18n.i18n"
         }
       },
+<<<<<<< HEAD
       "BP" : {
         "dataSource": "BPService",
+=======
+      
+      "BP":{
+        "dataSource": "BPservice",
+>>>>>>> master
         "preload": true,
         "settings": {
           "operationMode" : "Server",
@@ -109,8 +123,8 @@
           "autoExpandSelect" : true
         }
       },
-      "Vendor" : {
-        "dataSource": "companyService",
+      "GL":{
+        "dataSource": "GLservice",
         "preload": true,
         "settings": {
           "operationMode" : "Server",
@@ -146,11 +160,19 @@
           ]
         },
         {
+<<<<<<< HEAD
           "name": "BPmain",
           "pattern": "",
           "target": {
             "name": "BPmain"
           }
+=======
+          "name": "BPdetail",
+          "pattern": "BPdetail/{bpnumber}",
+          "target": [
+            "BPdetail"
+          ]
+>>>>>>> master
         },
         {
           "name": "BPcreate",
@@ -169,12 +191,21 @@
           "viewId": "BPhome",
           "viewName": "BPhome"
         },
+<<<<<<< HEAD
         "BPmain" : {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
           "viewId": "BPmain",
           "viewName": "BPmain"
+=======
+        "BPdetail" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "BPdetail",
+          "viewName": "BPdetail"
+>>>>>>> master
         },
         "BPcreate" : {
           "viewType": "XML",
