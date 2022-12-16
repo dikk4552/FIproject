@@ -19,6 +19,8 @@
                 <MenuButton id="_IDGenMenuButton1" enabled="true" text="메뉴" buttonMode="Split" width="auto">
                     <menu>
                         <Menu id="_IDGenMenu1">
+                            <MenuItem text ="BP" press=".onBPmain"/> 
+                            <MenuItem text ="DOC" press=".onDocmain"/> 
 
                         </Menu>
                     </menu>

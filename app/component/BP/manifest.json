@@ -16,8 +16,8 @@
       "toolsId": "d1a40033-ed7a-4cb8-b161-66f0a52632fc"
     },
     "dataSources": {
-      "requestService": {
-        "uri": "/request/",
+      "BPService": {
+        "uri": "/BP/",
         "type": "OData",
         "settings": {
           "annotations": [],
@@ -54,7 +54,7 @@
     }
   },
   "sap.ui5": {
-    "flexEnabled": true,
+    "flexEnabled": false,
     "dependencies": {
       "minUI5Version": "1.102.1",
       "libs": {
@@ -69,8 +69,8 @@
       }
     },
     "componentUsages": {
-      "requestComponent" : {
-        "name" : "project2",
+      "BPComponent" : {
+        "name" : "projectBP",
         "settings" : {},
         "componentData" : {},
         "lazy" : true
@@ -99,8 +99,8 @@
           "bundleName": "projectBP.i18n.i18n"
         }
       },
-      "Request" : {
-        "dataSource": "requestService",
+      "BP" : {
+        "dataSource": "BPService",
         "preload": true,
         "settings": {
           "operationMode" : "Server",
@@ -140,12 +140,25 @@
       "routes": [
         {
           "name": "BPhome",
-          "pattern": "",
+          "pattern": "BPhome",
           "target": [
             "BPhome"
           ]
+        },
+        {
+          "name": "BPmain",
+          "pattern": "",
+          "target": {
+            "name": "BPmain"
+          }
+        },
+        {
+          "name": "BPcreate",
+          "pattern": "BPcreate/{num}/{category}",
+          "target": {
+            "name": "BPcreate"
+          }
         }
-        
         
       ],
       "targets": {
@@ -155,8 +168,24 @@
           "clearControlAggregation": true,
           "viewId": "BPhome",
           "viewName": "BPhome"
+        },
+        "BPmain" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "BPmain",
+          "viewName": "BPmain"
+        },
+        "BPcreate" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "BPcreate",
+          "viewName": "BPcreate"
         }
       }
+        
+      
     },
     "rootView": {
       "viewName": "projectBP.view.App",

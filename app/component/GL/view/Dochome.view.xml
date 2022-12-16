@@ -1,5 +1,5 @@
 <mvc:View 
-  controllerName="projectGL.controller.Dochome"
+  controllerName="projectGL.controller.GLhome"
   xmlns:mvc="sap.ui.core.mvc" 
   xmlns="sap.m" 
   displayBlock="true">

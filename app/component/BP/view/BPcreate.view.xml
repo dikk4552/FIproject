@@ -1,0 +1,193 @@
+<mvc:View controllerName="projectBP.controller.BPcreate"    
+    xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
+    xmlns="sap.m"   
+    xmlns:f="sap.f" 
+    xmlns:form="sap.ui.layout.form"   
+    xmlns:layout="sap.ui.layout"
+    xmlns:core="sap.ui.core"
+    xmlns:t="sap.ui.table" 
+   > 
+
+    <f:DynamicPage id="Page" headerExpanded="false" showFooter="true" toggleHeaderOnTitleClick="true">
+    
+    <f:title>
+        <f:DynamicPageTitle>
+            <f:heading>
+                <HBox>
+                    <Button icon="sap-icon://nav-back" press=".onBack" type="Transparent"  />
+                    <Title id="text" text="{BPcreate>/title}" />
+                </HBox>
+            </f:heading>
+           </f:DynamicPageTitle> 
+    </f:title>       
+                <f:content> 
+                <form:SimpleForm  layout="ResponsiveGridLayout">
+                    <form:content >
+                    
+                    <VBox width="50%">
+                        <OverflowToolbar class="sapUiLargeMarginBottom sapUiSmallMarginTop">
+                            <Title text= "일반 데이터" />
+                            <Text id="a" />
+                        </OverflowToolbar>
+                        <VBox class="sapUiSmallMargin" height="3rem">
+                            <Label text="비즈니스 파트너(BP) :"  />
+                            <Text id="BP_number" />
+                        </VBox>
+                        <VBox class="sapUiSmallMargin" height="3rem">
+                            <Label text="비즈니스 파트너(BP) 범주 :"  />
+                            <Text id="BP_category" text="{BPcreate>/BP_category}" />
+                         
+                        </VBox>
+                        <VBox class="sapUiSmallMargin" height="3rem">
+                            <Label id="name"  text="{BPcreate>/name}"/>
+                            <Input id="BP_name" />
+                        
+                        </VBox>
+                        
+                        <VBox class="sapUiSmallMargin" height="3rem">
+                            <Label text="개인 칭호 :"  visible="{= ${BPcreate>/BP_category} === 1 ? true : false}" />
+                            <ComboBox width="100%" id="BP_title" visible="{= ${BPcreate>/BP_category} === 1 ? true : false}">
+                                <core:Item text="Mr." key="Mr."/>
+                                <core:Item text="Mrs." key="Mrs"/>
+                            </ComboBox>
+                        </VBox>
+                        
+                            <layoutData>
+                                <layout:GridData span="XL4 L4 M6 S12"  />
+                            </layoutData>
+                        </VBox>
+
+                    <VBox width="50%">
+                        <OverflowToolbar class="sapUiLargeMarginBottom sapUiSmallMarginTop">
+                            <Title text= "표준 데이터" />
+                            <Text id="b" />
+                        </OverflowToolbar>
+                        <VBox class="sapUiSmallMargin" height="3rem">
+                            <Label text="도로 주소 :"  />
+                            <Input id="BP_street" />
+                           
+                        </VBox>
+                        <VBox class="sapUiSmallMargin" height="3rem">
+                            <Label text="번지 :"  />
+                            <Input id="BP_house" />
+                           
+                        </VBox>
+                        <VBox class="sapUiSmallMargin" height="3rem">
+                            <Label text="우편 번호 :"  />
+                            <Input id="BP_zipcode" />
+                           
+                        </VBox>
+                        <VBox class="sapUiSmallMargin" height="3rem">
+                            <Label text="도시 :"  />
+                            <Input id="BP_city" />
+                           
+                        </VBox>
+                        <VBox class="sapUiSmallMargin" height="3rem">
+                            <Label text="국가/지역 :"  />
+                            <Input id="BP_country" 
+                                   showValueHelp="true"
+			                       valueHelpRequest=".onValueHelpContry"
+                                   valueHelpOnly="true"/>
+                           
+                        </VBox>
+                        <VBox class="sapUiSmallMargin" height="3rem">
+                            <Label text="언어 :"  />
+                            <Input id="BP_language" />
+                          
+                        </VBox>
+                        <layoutData>
+                                <layout:GridData span="XL4 L4 M6 S12"  />
+                            </layoutData>
+                       </VBox>
+                    
+                    <VBox width="50%">
+                        <OverflowToolbar class="sapUiLargeMarginBottom sapUiSmallMarginTop">
+                            <Title text= "조직 데이터" />
+                            <Text id="c" />
+                        </OverflowToolbar>
+                        <VBox class="sapUiSmallMargin" height="3rem">
+                            <Label text="회사코드 :"  />
+                            <ComboBox id="BP_cocd" width="100%"
+                                    items="{
+                                        path: 'CocdModel>/'
+                                    }">
+                                <core:Item key="{CocdModel>CoCd_number}" text="{CocdModel>CoCd_number}"/>
+                            </ComboBox>
+                         
+                        </VBox>
+                        <VBox class="sapUiSmallMargin" height="3rem">
+                            <Label text="지급조건 :"  />
+                            <ComboBox id="BP_payterm" width="100%"
+                                    items="{
+                                            path: 'PayTermModel>/'
+                                    }">
+                                <core:Item key="{PayTermModel>PayTerm_number}" text="{PayTermModel>PayTerm_number}" />
+                            </ComboBox>
+                          
+                        </VBox>
+                        <VBox class="sapUiSmallMargin" height="3rem">
+                            <Label text="담당자 :"  />
+                            <Input id="BP_manager" />
+                          
+                        </VBox>
+                        <VBox class="sapUiSmallMargin" height="3rem">
+                            <Label text="생성일자 :"  />
+                            <Text id="BP_createdate" />
+                            
+                        </VBox>
+                         <VBox class="sapUiSmallMargin" height="3rem">
+                            <Label text="생일/설립일 :"  />
+                            <DatePicker id="BP_estdate"
+                                    displayFormat="yyyy-MM-dd" 
+                                    valueFormat="yyyy-MM-dd"/>
+                        </VBox>
+                        <VBox class="sapUiSmallMargin" height="3rem">
+                            <Label text="사업자등록번호 :"  />
+                            <Input id="BP_tin" />
+                          
+                        </VBox>
+                        <VBox class="sapUiSmallMargin" height="3rem">
+                            <Label text="업종 :"  />
+                            <Input id="BP_industry" />
+                         
+                        </VBox>
+                        <VBox class="sapUiSmallMargin" height="3rem">
+                            <Label text="전화번호 :"  />
+                            <Input id="BP_phone" />
+                          
+                        </VBox>
+                        <VBox class="sapUiSmallMargin" height="3rem">
+                            <Label text="팩스 :"  />
+                            <Input id="BP_fax" />
+                          
+                        </VBox>
+                        <VBox class="sapUiSmallMargin" height="3rem">
+                            <Label text="이메일 :"  />
+                            <Input id="BP_email" />
+                          
+                        </VBox>
+                        <VBox class="sapUiSmallMargin" height="3rem">
+                            <Label text="웹사이트 :"  />
+                            <Input id="BP_website" />
+                          
+                        </VBox>
+                         <layoutData>
+                                <layout:GridData span="XL4 L4 M6 S12"  />
+                            </layoutData>
+                       </VBox> 
+                        
+                    </form:content>
+                </form:SimpleForm>            
+                </f:content> 
+
+
+        <f:footer>
+        <OverflowToolbar>
+            <ToolbarSpacer/>
+            <Button type="Emphasized" text="생성"  press=".onCreate"/>
+            <Button type="Default" text="취소" press=".onBack"  />
+        </OverflowToolbar> 
+    </f:footer>
+
+    </f:DynamicPage> 
+</mvc:View>
