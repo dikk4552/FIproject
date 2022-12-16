@@ -1,0 +1,38 @@
+<core:FragmentDefinition
+	xmlns="sap.ui.comp.valuehelpdialog"
+	xmlns:m="sap.m"
+	xmlns:fb="sap.ui.comp.filterbar"
+	xmlns:core="sap.ui.core">
+	<ValueHelpDialog
+		title="계정 그룹"
+		ok=".onValueHelpOkPress_Group"
+		cancel=".onValueHelpCancelPress_Group"
+		supportRanges="false"
+		key="AcctGroup_number"
+		descriptionKey="">
+		<filterBar>
+			<fb:FilterBar advancedMode="true" search=".onFilterBarSearch_Group" isRunningInValueHelpDialog="true">
+				<fb:filterGroupItems>
+					<fb:FilterGroupItem
+						groupName="__$INTERNAL$"
+						name="AcctGroup_number"
+						label="계정 그룹"
+						visibleInFilterBar="true">
+						<fb:control>
+							<m:Input name="AcctGroup_number" />
+						</fb:control>
+					</fb:FilterGroupItem>
+					<fb:FilterGroupItem
+						groupName="__$INTERNAL$"
+						name="AcctGroup_coa"
+						label="계정과목표"
+						visibleInFilterBar="true">
+						<fb:control>
+							<m:Input name="AcctGroup_coa" />
+						</fb:control>
+					</fb:FilterGroupItem>
+				</fb:filterGroupItems>
+			</fb:FilterBar>
+		</filterBar>
+	</ValueHelpDialog>
+</core:FragmentDefinition>

@@ -139,10 +139,11 @@
       },
       "routes": [
         {
-          "name": "GLhome",
+
+          "name": "GL",
           "pattern": "",
           "target": [
-            "GLhome"
+            "GLmain"
           ]
         },
         {
@@ -161,12 +162,12 @@
         }
       ],
       "targets": {
-        "GLhome" : {
+        "GLmain" : {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
-          "viewId": "GLhome",
-          "viewName": "GLhome"
+          "viewId": "GLmain",
+          "viewName": "GLmain"
         },
         "GLcreate" : {
           "viewType": "XML",

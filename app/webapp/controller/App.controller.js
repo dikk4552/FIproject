@@ -8,8 +8,21 @@ sap.ui.define(
       return BaseController.extend("project1.controller.App", {
         onHome : function(){
           this.getOwnerComponent().getRouter().navTo("Home")
-        }
+        },
+        onBP : function(){
+          this.getOwnerComponent().getRouter().navTo("BP")
+        },
 
+        onGL : function(){
+          this.getOwnerComponent().getRouter().navTo("GL")
+        },
+
+        onDoc : function(){
+          this.getOwnerComponent().getRouter().navTo("Doc")
+          },
+        onMenuGL : function() {
+          this.getOwnerComponent().getRouter().navTo("GL")
+        }
         }
       );
     }
