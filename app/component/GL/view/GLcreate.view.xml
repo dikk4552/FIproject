@@ -1,0 +1,118 @@
+<mvc:View controllerName="projectGL.controller.GLcreate"
+    xmlns="sap.uxap"
+    xmlns:m="sap.m"
+	xmlns:f="sap.f"
+    xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns:layout="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form"
+	height="100%">
+
+	<ObjectPageLayout id="ObjectPageLayout"
+		useIconTabBar="true"
+		enableLazyLoading="true"
+		showTitleInHeaderContent="true"
+		showEditHeaderButton="true"
+		editHeaderButtonPress="handleEditBtnPress"
+		upperCaseAnchorBar="false"> 
+        <!-- useIconTabBar : 탭으로 페이지 이동 -->
+
+		<headerTitle>
+			<ObjectPageDynamicHeaderTitle>
+
+				<actions>
+					<m:Button text="생성" press=".onCreate" type="Emphasized"/>
+					<m:Button text="취소" press=".onCancel" type="Default"/>
+				</actions>
+
+				<expandedHeading>
+					<m:HBox class="sapUiSmallMargin">
+						<m:Title text="G/L 계정 생성" wrapping="true"/>
+					</m:HBox>
+				</expandedHeading>
+
+				<expandedContent>
+				</expandedContent>
+
+			</ObjectPageDynamicHeaderTitle>
+		</headerTitle>
+
+		<headerContent>
+		</headerContent>
+
+		<sections>
+			<ObjectPageSection id="basicSection" titleUppercase="false">
+                <subSections>
+					<ObjectPageSubSection id="headerSubsection" title="헤더 정보" titleUppercase="false">
+						<blocks>
+							<form:SimpleForm layout="ResponsiveGridLayout">
+								<m:VBox>
+									<m:layoutData>
+						            	<layout:GridData span="XL3 L3 M6 S12"/>
+					            	</m:layoutData>
+									<m:VBox class="sapUiTinyMarginBottom" height="2.5rem">
+										<m:Label	text="G/L 계정 : "/>
+										<m:Input	id="gl" showValueHelp="true" valueHelpRequest="onOpenGLDialog"/>
+									</m:VBox>
+								</m:VBox>
+							</form:SimpleForm>
+						</blocks>
+					</ObjectPageSubSection>
+					<ObjectPageSubSection id="basicSubsection" title="기본 정보" titleUppercase="false">
+						<blocks>
+							<form:SimpleForm layout="ResponsiveGridLayout">
+								<core:Title text="관리"/>
+								<m:VBox>
+									<m:layoutData>
+						            	<layout:GridData span="XL6 L6 M6 S12"/>
+					            	</m:layoutData>
+									<m:VBox class="sapUiTinyMarginBottom" height="2.5rem">
+										<m:Label	text="계정과목표 : "/>
+										<m:Input	id="coa" showValueHelp="true" valueHelpRequest="onOpenCoaDialog"/>
+									</m:VBox>
+									<m:VBox class="sapUiTinyMarginBottom" height="2.5rem">
+										<m:Label	text="G/L 계정 유형 : "/>
+										<m:Select	id="accttype" width="100%">
+											<core:Item text="X (Balance Sheet Account)" 			key="X (Balance Sheet Account)"/>
+											<core:Item text="C (Cash Account)"						key="C (Cash Account)"/>
+											<core:Item text="N (Nonoperating Expense or Income)"	key="N (Nonoperating Expense or Income)"/>
+											<core:Item text="P (Primary Costs or Revenue)"			key="P (Primary Costs or Revenue)"/>
+											<core:Item text="S (Secondary Costs)"					key="S (Secondary Costs)"/>
+										</m:Select>
+									</m:VBox>
+									<m:VBox class="sapUiTinyMarginBottom" height="2.5rem">
+										<m:Label	text="계정 그룹 : "/>
+										<m:Input	id="acctgroup" showValueHelp="true" valueHelpRequest="onOpenAcctGroupDialog"/>
+									</m:VBox>
+									<m:VBox class="sapUiTinyMarginBottom" height="2.5rem">
+										<m:Label	text="손익계산서 계정 유형 : "/>
+										<m:Input	id="pltype"/>
+									</m:VBox>
+									<m:VBox class="sapUiTinyMarginBottom" height="2.5rem">
+										<m:Label	text="기능 영역 : "/>
+										<m:Input	id="function"/>
+									</m:VBox>
+								</m:VBox>
+								<core:Title text="내역"/>
+								<m:VBox>
+									<m:layoutData>
+						            	<layout:GridData span="XL6 L6 M6 S12"/>
+					            	</m:layoutData>
+									<m:VBox class="sapUiTinyMarginBottom" height="2.5rem">
+										<m:Label	text="내역 : "/>
+										<m:Input	id="shorttext"/>
+									</m:VBox>
+									<m:VBox class="sapUiTinyMarginBottom" height="2.5rem">
+										<m:Label	text="G/L 계정 설명 : "/>
+										<m:Input	id="longtext"/>
+									</m:VBox>
+								</m:VBox>
+							</form:SimpleForm>
+						</blocks>
+					</ObjectPageSubSection>
+				</subSections>
+			</ObjectPageSection>
+		</sections>
+		
+	</ObjectPageLayout>
+</mvc:View>

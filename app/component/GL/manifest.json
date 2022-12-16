@@ -139,22 +139,48 @@
       },
       "routes": [
         {
-          "name": "Dochome",
+          "name": "GLhome",
           "pattern": "",
           "target": [
-            "Dochome"
+            "GLhome"
+          ]
+        },
+        {
+          "name": "GLcreate",
+          "pattern": "GLcreate",
+          "target": [
+            "GLcreate"
+          ]
+        },
+        {
+          "name": "GLdetail",
+          "pattern": "GLdetail/{num}",
+          "target": [
+            "GLdetail"
           ]
         }
-        
-        
       ],
       "targets": {
-        "Dochome" : {
+        "GLhome" : {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
-          "viewId": "Dochome",
-          "viewName": "Dochome"
+          "viewId": "GLhome",
+          "viewName": "GLhome"
+        },
+        "GLcreate" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "GLcreate",
+          "viewName": "GLcreate"
+        },
+        "GLdetail" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "GLdetail",
+          "viewName": "GLdetail"
         }
       }
     },
