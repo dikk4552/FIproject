@@ -5,6 +5,7 @@ sap.ui.define([
 ) {
 	"use strict";
 
-	return Controller.extend("projectDoc.controller.GLhome", {
+	return Controller.extend("projectDoc.controller.Dochome", {
+
 	});
 });
