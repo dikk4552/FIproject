@@ -139,22 +139,22 @@
       },
       "routes": [
         {
-          "name": "GLhome",
+          "name": "Dochome",
           "pattern": "",
           "target": [
-            "GLhome"
+            "Dochome"
           ]
         }
         
         
       ],
       "targets": {
-        "GLhome" : {
+        "Dochome" : {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
-          "viewId": "GLhome",
-          "viewName": "GLhome"
+          "viewId": "Dochome",
+          "viewName": "Dochome"
         }
       }
     },

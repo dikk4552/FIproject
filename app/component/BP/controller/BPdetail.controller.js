@@ -11,6 +11,8 @@ sap.ui.define(
         onInit: function(){
           const MyRoute = this.getOwnerComponent().getRouter().getRoute("BPdetail");
           MyRoute.attachPatternMatched(this.onMatched,this);
+
+          
         },
 
         onMatched : function(oEvent){
@@ -22,6 +24,25 @@ sap.ui.define(
         },
 
         onDataView : async function(){
+          var Data = {
+            Charts :[{
+              "Term":"60 Days",
+              "금액":"1500000"
+          },
+          {
+            "Term":"30 Days",
+            "금액":"5000000"
+        },
+        {
+          "Term":"15 Days",
+          "금액":"2000000"
+      },
+        ]
+          } ;
+          
+          var jsonData=new JSONModel(Data);
+          this.getView().setModel(jsonData,"DataModel");
+          
           var ed={
             EditMode:false,
             CEditMode:false,
