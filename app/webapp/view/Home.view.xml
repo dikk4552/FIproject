@@ -2,7 +2,6 @@
 xmlns:mvc="sap.ui.core.mvc"
 xmlns="sap.m"     xmlns:f="sap.f">
 
-
  <ScrollContainer height="100%" width="100%" vertical="true">
   <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region">
     <content class="panelbottomline">    

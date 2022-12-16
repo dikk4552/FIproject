@@ -19,8 +19,10 @@ sap.ui.define(
 
         onDoc : function(){
           this.getOwnerComponent().getRouter().navTo("Doc")
+          },
+        onMenuGL : function() {
+          this.getOwnerComponent().getRouter().navTo("GL")
         }
-
         }
       );
     }
