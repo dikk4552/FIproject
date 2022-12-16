@@ -1,6 +1,6 @@
 namespace FIproject.doc;
 entity Doc {
-Doc_number : String @title : '전표번호';
+key Doc_number : String @title : '전표번호';
 Doc_docdate : String @title : '증빙일';
 Doc_postdate : String @title : '전기일';
 Doc_cocd : String @title : '회사코드';

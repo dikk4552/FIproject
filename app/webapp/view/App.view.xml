@@ -16,11 +16,16 @@
                 <Image id="IdGenImage2" height = "1.5rem"
                      class="sapUiSmallMarginBegin"
                      src="view/img/logo.svg" press=".onHome"/>
-                <MenuButton id="_IDGenMenuButton1" enabled="true" text="메뉴" buttonMode="Split" width="auto">
+                <MenuButton enabled="true" text="메뉴" buttonMode="Split" width="auto">
                     <menu>
+                        <Menu>
+                            <MenuItem id="menu1" text="BP" press=".onBP"/>
+                            <MenuItem text="GL" press=".onGL"/>
+                            <MenuItem text="Doc" press=".onDoc"/>
                         <Menu id="_IDGenMenu1">
                             <MenuItem text="GL 계정과목" press="onMenuGL"></MenuItem>
                         </Menu>
+
                     </menu>
                 </MenuButton>
             </tnt:ToolHeader>
