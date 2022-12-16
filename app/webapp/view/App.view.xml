@@ -19,7 +19,7 @@
                 <MenuButton id="_IDGenMenuButton1" enabled="true" text="메뉴" buttonMode="Split" width="auto">
                     <menu>
                         <Menu id="_IDGenMenu1">
-
+                            <MenuItem text="GL 계정과목" press="onMenuGL"></MenuItem>
                         </Menu>
                     </menu>
                 </MenuButton>

@@ -8,8 +8,10 @@ sap.ui.define(
       return BaseController.extend("project1.controller.App", {
         onHome : function(){
           this.getOwnerComponent().getRouter().navTo("Home")
+        },
+        onMenuGL : function() {
+          this.getOwnerComponent().getRouter().navTo("GL")
         }
-
         }
       );
     }
