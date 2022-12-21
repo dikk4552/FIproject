@@ -22,14 +22,6 @@
                             <MenuItem id="menu1" text="BP" press=".onBP"/>
                             <MenuItem text="GL" press=".onGL"/>
                             <MenuItem text="Doc" press=".onDoc"/>
-                        <Menu id="_IDGenMenu1">
-<<<<<<< HEAD
-                            <MenuItem text ="BP" press=".onBPmain"/> 
-                            <MenuItem text ="DOC" press=".onDocmain"/> 
-
-=======
-                            <MenuItem text="GL 계정과목" press="onMenuGL"></MenuItem>
->>>>>>> master
                         </Menu>
 
                     </menu>

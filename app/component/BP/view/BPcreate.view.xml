@@ -14,10 +14,7 @@
         <f:DynamicPageTitle>
             <f:heading>
                 <HBox>
-<<<<<<< HEAD
                     <Button icon="sap-icon://nav-back" press=".onBack" type="Transparent"  />
-=======
->>>>>>> master
                     <Title id="text" text="{BPcreate>/title}" />
                 </HBox>
             </f:heading>
@@ -25,20 +22,6 @@
     </f:title>       
                 <f:content> 
                 <form:SimpleForm  layout="ResponsiveGridLayout">
-<<<<<<< HEAD
-                    <form:content >
-                    
-                    <VBox width="50%">
-                        <OverflowToolbar class="sapUiLargeMarginBottom sapUiSmallMarginTop">
-                            <Title text= "일반 데이터" />
-                            <Text id="a" />
-                        </OverflowToolbar>
-                        <VBox class="sapUiSmallMargin" height="3rem">
-                            <Label text="비즈니스 파트너(BP) :"  />
-                            <Text id="BP_number" />
-                        </VBox>
-                        <VBox class="sapUiSmallMargin" height="3rem">
-=======
                     <form:content class="sapUiSmallMargin">
                     
                     <VBox width="50%">
@@ -51,26 +34,17 @@
                             <Text id="BP_number" />
                         </VBox>
                         <VBox class="sapUiSmallMargin">
->>>>>>> master
                             <Label text="비즈니스 파트너(BP) 범주 :"  />
                             <Text id="BP_category" text="{BPcreate>/BP_category}" />
                          
                         </VBox>
-<<<<<<< HEAD
-                        <VBox class="sapUiSmallMargin" height="3rem">
-=======
                         <VBox class="sapUiSmallMargin">
->>>>>>> master
                             <Label id="name"  text="{BPcreate>/name}"/>
                             <Input id="BP_name" />
                         
                         </VBox>
                         
-<<<<<<< HEAD
-                        <VBox class="sapUiSmallMargin" height="3rem">
-=======
                         <VBox class="sapUiSmallMargin">
->>>>>>> master
                             <Label text="개인 칭호 :"  visible="{= ${BPcreate>/BP_category} === 1 ? true : false}" />
                             <ComboBox width="100%" id="BP_title" visible="{= ${BPcreate>/BP_category} === 1 ? true : false}">
                                 <core:Item text="Mr." key="Mr."/>
@@ -84,55 +58,31 @@
                         </VBox>
 
                     <VBox width="50%">
-<<<<<<< HEAD
-                        <OverflowToolbar class="sapUiLargeMarginBottom sapUiSmallMarginTop">
-                            <Title text= "표준 데이터" />
-                            <Text id="b" />
-                        </OverflowToolbar>
-                        <VBox class="sapUiSmallMargin" height="3rem">
-=======
                         <VBox class="sapUiSmallMargin">
                             <Title text= "표준 데이터" />
                             <Text id="b" />
                         </VBox>
                         <VBox class="sapUiSmallMargin">
->>>>>>> master
                             <Label text="도로 주소 :"  />
                             <Input id="BP_street" />
                            
                         </VBox>
-<<<<<<< HEAD
-                        <VBox class="sapUiSmallMargin" height="3rem">
-=======
                         <VBox class="sapUiSmallMargin">
->>>>>>> master
                             <Label text="번지 :"  />
                             <Input id="BP_house" />
                            
                         </VBox>
-<<<<<<< HEAD
-                        <VBox class="sapUiSmallMargin" height="3rem">
-=======
                         <VBox class="sapUiSmallMargin">
->>>>>>> master
                             <Label text="우편 번호 :"  />
                             <Input id="BP_zipcode" />
                            
                         </VBox>
-<<<<<<< HEAD
-                        <VBox class="sapUiSmallMargin" height="3rem">
-=======
                         <VBox class="sapUiSmallMargin">
->>>>>>> master
                             <Label text="도시 :"  />
                             <Input id="BP_city" />
                            
                         </VBox>
-<<<<<<< HEAD
-                        <VBox class="sapUiSmallMargin" height="3rem">
-=======
                         <VBox class="sapUiSmallMargin">
->>>>>>> master
                             <Label text="국가/지역 :"  />
                             <Input id="BP_country" 
                                    showValueHelp="true"
@@ -140,11 +90,7 @@
                                    valueHelpOnly="true"/>
                            
                         </VBox>
-<<<<<<< HEAD
-                        <VBox class="sapUiSmallMargin" height="3rem">
-=======
                         <VBox class="sapUiSmallMargin">
->>>>>>> master
                             <Label text="언어 :"  />
                             <Input id="BP_language" />
                           
@@ -155,19 +101,11 @@
                        </VBox>
                     
                     <VBox width="50%">
-<<<<<<< HEAD
-                        <OverflowToolbar class="sapUiLargeMarginBottom sapUiSmallMarginTop">
-                            <Title text= "조직 데이터" />
-                            <Text id="c" />
-                        </OverflowToolbar>
-                        <VBox class="sapUiSmallMargin" height="3rem">
-=======
                         <VBox class="sapUiSmallMargin">
                             <Title text= "조직 데이터" />
                             <Text id="c" />
                         </VBox>
                         <VBox class="sapUiSmallMargin">
->>>>>>> master
                             <Label text="회사코드 :"  />
                             <ComboBox id="BP_cocd" width="100%"
                                     items="{
@@ -177,11 +115,7 @@
                             </ComboBox>
                          
                         </VBox>
-<<<<<<< HEAD
-                        <VBox class="sapUiSmallMargin" height="3rem">
-=======
                         <VBox class="sapUiSmallMargin">
->>>>>>> master
                             <Label text="지급조건 :"  />
                             <ComboBox id="BP_payterm" width="100%"
                                     items="{
@@ -191,84 +125,48 @@
                             </ComboBox>
                           
                         </VBox>
-<<<<<<< HEAD
-                        <VBox class="sapUiSmallMargin" height="3rem">
-=======
                         <VBox class="sapUiSmallMargin">
->>>>>>> master
                             <Label text="담당자 :"  />
                             <Input id="BP_manager" />
                           
                         </VBox>
-<<<<<<< HEAD
-                        <VBox class="sapUiSmallMargin" height="3rem">
-=======
                         <VBox class="sapUiSmallMargin">
->>>>>>> master
                             <Label text="생성일자 :"  />
                             <Text id="BP_createdate" />
                             
                         </VBox>
-<<<<<<< HEAD
-                         <VBox class="sapUiSmallMargin" height="3rem">
-=======
                          <VBox class="sapUiSmallMargin">
->>>>>>> master
                             <Label text="생일/설립일 :"  />
                             <DatePicker id="BP_estdate"
                                     displayFormat="yyyy-MM-dd" 
                                     valueFormat="yyyy-MM-dd"/>
                         </VBox>
-<<<<<<< HEAD
-                        <VBox class="sapUiSmallMargin" height="3rem">
-=======
                         <VBox class="sapUiSmallMargin">
->>>>>>> master
                             <Label text="사업자등록번호 :"  />
                             <Input id="BP_tin" />
                           
                         </VBox>
-<<<<<<< HEAD
-                        <VBox class="sapUiSmallMargin" height="3rem">
-=======
                         <VBox class="sapUiSmallMargin">
->>>>>>> master
                             <Label text="업종 :"  />
                             <Input id="BP_industry" />
                          
                         </VBox>
-<<<<<<< HEAD
-                        <VBox class="sapUiSmallMargin" height="3rem">
-=======
                         <VBox class="sapUiSmallMargin">
->>>>>>> master
                             <Label text="전화번호 :"  />
                             <Input id="BP_phone" />
                           
                         </VBox>
-<<<<<<< HEAD
-                        <VBox class="sapUiSmallMargin" height="3rem">
-=======
                         <VBox class="sapUiSmallMargin">
->>>>>>> master
                             <Label text="팩스 :"  />
                             <Input id="BP_fax" />
                           
                         </VBox>
-<<<<<<< HEAD
-                        <VBox class="sapUiSmallMargin" height="3rem">
-=======
                         <VBox class="sapUiSmallMargin">
->>>>>>> master
                             <Label text="이메일 :"  />
                             <Input id="BP_email" />
                           
                         </VBox>
-<<<<<<< HEAD
-                        <VBox class="sapUiSmallMargin" height="3rem">
-=======
                         <VBox class="sapUiSmallMargin">
->>>>>>> master
                             <Label text="웹사이트 :"  />
                             <Input id="BP_website" />
                           
@@ -292,8 +190,4 @@
     </f:footer>
 
     </f:DynamicPage> 
-<<<<<<< HEAD
 </mvc:View>
-=======
-</mvc:View>
->>>>>>> master
