@@ -25,11 +25,6 @@
             <form:SimpleForm layout = "ResponsiveGridLayout">
                 <form:content>
                     <VBox>
-                        <layoutData>
-                            <layout:GridData span = "XL2 L2 M6 S12"/>
-                        </layoutData>                
-                    </VBox>                
-                    <VBox>
                         <Label text = "계정과목표 : "/>
                    		<MultiInput id="GL_coa"
                             showValueHelp="true"
@@ -134,6 +129,13 @@
                         <Text text = "{GLmodel>GL_acctgroup}" />
                     </t:template>
                 </t:Column>
+                <t:Column hAlign = "Center">
+                    <Label text = "계정 비활성"/>
+                    <t:template>
+                        <CheckBox selected="true" 
+                        textAlign="Center" enabled="false"/>                   
+                    </t:template>
+                </t:Column>                
             </t:columns>
         </t:Table>
     </f:content>

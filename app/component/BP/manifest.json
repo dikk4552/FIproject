@@ -122,10 +122,10 @@
       },
       "routes": [
         {
-          "name": "BPhome",
+          "name": "BPmain",
           "pattern": "",
           "target": [
-            "BPhome"
+            "BPmain"
           ]
         },
         {
@@ -141,17 +141,24 @@
           "target": {
             "name": "BPcreate"
           }
+        },
+        {
+          "name": "BPcreateWizard",
+          "pattern": "BPcreateWizard/{num}",
+          "target": {
+            "name": "BPcreateWizard"
+          }
         }
         
         
       ],
       "targets": {
-        "BPhome" : {
+        "BPmain" : {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
-          "viewId": "BPhome",
-          "viewName": "BPhome"
+          "viewId": "BPmain",
+          "viewName": "BPmain"
         },
         "BPdetail" : {
           "viewType": "XML",
@@ -166,6 +173,13 @@
           "clearControlAggregation": true,
           "viewId": "BPcreate",
           "viewName": "BPcreate"
+        },
+        "BPcreateWizard" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "BPcreateWizard",
+          "viewName": "BPcreateWizard"
         }
       }
     },

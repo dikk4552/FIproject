@@ -67,8 +67,7 @@
 					            	</layoutData>
 									<VBox class="sapUiTinyMarginBottom" height="2.5rem">
 										<Label	text="계정과목표 : "/>
-										<Text		id="coa"		text="{GLModel>/GL_coa}"	visible="{=!${editModel>/editMode}}"/>
-										<Input	id="coaInput"	visible="{=${editModel>/editMode}}"/>
+										<Text		id="coa"		text="{GLModel>/GL_coa}"/>
 									</VBox>
 									<VBox class="sapUiTinyMarginBottom" height="2.5rem">
 										<Label	text="G/L 계정 유형 : "/>
@@ -84,7 +83,7 @@
 									<VBox class="sapUiTinyMarginBottom" height="2.5rem">
 										<Label	text="계정 그룹 : "/>
 										<Text		id="acctgroup"		text="{GLModel>/GL_acctgroup}"	visible="{=!${editModel>/editMode}}"/>
-										<Input	id="acctgroupInput"	visible="{=${editModel>/editMode}}" showValueHelp="true" valueHelpRequest="onOpenAcctGroupDialog"/>
+										<Input	id="acctgroupInput"	visible="{=${editModel>/editMode}}" showValueHelp="true"  valueHelpOnly="true" valueHelpRequest="onOpenAcctGroupDialog"/>
 									</VBox>
 									<VBox class="sapUiTinyMarginBottom" height="2.5rem">
 										<Label	text="손익계산서 계정 유형 : "/>

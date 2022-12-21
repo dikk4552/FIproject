@@ -1,19 +1,28 @@
 sap.ui.define([
     "sap/ui/core/mvc/Controller",
 	"sap/ui/model/json/JSONModel",
-    "sap/ui/core/Fragment"
-], function (Controller, JSONModel, Fragment) {
+    "sap/ui/core/Fragment",
+    "sap/ui/model/Filter",
+    "sap/ui/model/FilterOperator"
+], function (Controller, JSONModel, Fragment, Filter, FilterOperator) {
 	"use strict";
     
     let glNUM, glURL;
 
 	return Controller.extend("projectGL.controller.GLdetail", {
-		onInit: function () {
+		onInit: async function () {
 			this.getOwnerComponent().getRouter().getRoute("GLdetail").attachPatternMatched(this.onRoutePatternMatched, this);
 
 			var oData = { editMode : false };
 			var editModel = new JSONModel(oData);
 			this.getView().setModel(editModel, "editModel");
+
+            const Group = await $.ajax({
+				type: "get",
+				url: "/glservice/AcctGroup"
+			});
+			let AcctGroup = new JSONModel(Group.value);
+			this.getView().setModel(AcctGroup,"AcctGroup");
 		},
         onRoutePatternMatched: function (oEvent) {
             glNUM = oEvent.getParameter("arguments").num;
@@ -39,7 +48,6 @@ sap.ui.define([
             console.log(this.getView().getModel("CoCdModel"));
         },
 		onEdit: function () {
-            this.byId("coaInput").setValue(this.getView().getModel("GLModel").getProperty("/GL_coa"));
             this.byId("accttypeInput").setSelectedKey(this.getView().getModel("GLModel").getProperty("/GL_accttype"));
             this.byId("acctgroupInput").setValue(this.getView().getModel("GLModel").getProperty("/GL_acctgroup"));
             this.byId("pltypeInput").setValue(this.getView().getModel("GLModel").getProperty("/GL_pltype"));
@@ -89,7 +97,54 @@ sap.ui.define([
 		},
         onOpenAcctGroupDialog: function () {
             
-        }
+        },
+
+        // 선택 : 계정그룹 Value Help Fragment 
+
+        onOpenAcctGroupDialog: function () {
+            var oView = this.getView();
+            // Fragment를 load해주는 과정
+            if (!this._pValueHelpDialog_Group) {
+                this._pValueHelpDialog_Group = Fragment.load({
+                    id: oView.getId(),
+                    name: "projectGL.view.fragment.GroupSingleValueHelp",
+                    controller: this
+                }).then(function (_pValueHelpDialog_Group) {
+                    oView.addDependent(_pValueHelpDialog_Group);
+                    return _pValueHelpDialog_Group;
+                });
+            }
+            this._pValueHelpDialog_Group.then(function(_pValueHelpDialog_Group) {
+                _pValueHelpDialog_Group.open();
+                var aFilters = [];
+                var coatext = this.byId("coa").getText();
+                aFilters.push(new Filter("AcctGroup_coa", FilterOperator.Contains, coatext));
+                this.byId("selectDialog").getBinding("items").filter(aFilters);
+            }.bind(this));
+        },
+        handleSearchGroup: function (oEvent) {
+            var aFilters = [];
+            var sValue = oEvent.getParameter("value");
+            aFilters.push(new Filter({
+                filters: [
+                    new Filter({ path: "AcctGroup_number", operator: FilterOperator.Contains, value1: sValue }),
+                    new Filter({ path: "AcctGroup_coa", operator: FilterOperator.Contains, value1: sValue }),
+                    new Filter({ path: "AcctGroup_name", operator: FilterOperator.Contains, value1: sValue })
+                ],
+                and: false
+            }));
+            var oBinding = oEvent.getSource().getBinding("items");
+            oBinding.filter(aFilters);
+        },
+        handleCloseGroup: function (oEvent) {
+            // reset the filter
+            var oBinding = oEvent.getSource().getBinding("items");
+            oBinding.filter([]);
+
+            var aContexts = oEvent.getParameter("selectedContexts");
+            var text = aContexts.map(function (oContext) { return oContext.getObject().AcctGroup_number; })
+            this.byId("acctgroupInput").setValue(text);
+        },          
 	});
 });
 

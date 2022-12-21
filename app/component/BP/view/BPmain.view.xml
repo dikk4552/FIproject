@@ -1,4 +1,4 @@
-<mvc:View controllerName="projectBP.controller.BPhome"    
+<mvc:View controllerName="projectBP.controller.BPmain"    
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns="sap.m"   
     xmlns:f="sap.f" 
@@ -53,9 +53,9 @@
                         </VBox>
                         <VBox>
                             <Label text="국가/지역 : " />
-                            <Input id="BP_country" 
+                            <MultiInput id="BP_country" 
                                    showValueHelp="true"
-			                       valueHelpRequest=".onValueHelpContry"
+			                       valueHelpRequest=".onValueHelpCountry"
                                    valueHelpOnly="true"/>
                             <layoutData>
                                 <layout:GridData span="XL1 L1 M6 S12" />
@@ -129,6 +129,8 @@
                         </Menu>
                     </menu>
                 </MenuButton>
+
+                <Button type="Emphasized" text="생성마법사 TEST"  press=".onBPCreateWizard"/>
                 
                 </OverflowToolbar>     
             </t:extension>

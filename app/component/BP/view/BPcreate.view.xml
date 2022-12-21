@@ -85,7 +85,7 @@
                             <Label text="국가/지역 :"  />
                             <Input id="BP_country" 
                                    showValueHelp="true"
-			                       valueHelpRequest=".onValueHelpContry"
+			                       valueHelpRequest=".onValueHelpCountry"
                                    valueHelpOnly="true"/>
                            
                         </VBox>

@@ -1,0 +1,334 @@
+<mvc:View
+		height="100%"
+		controllerName="projectBP.controller.BPcreateWizard"
+		xmlns:layout="sap.ui.layout"
+		xmlns:form="sap.ui.layout.form"
+		xmlns:mvc="sap.ui.core.mvc"
+        xmlns:core="sap.ui.core"
+		xmlns="sap.m">
+	<NavContainer id="BPcreateWizardContainer">
+		<pages>
+			<Page
+				id="wizardContentPage"
+				showHeader="false">
+				
+				<content>
+					<Wizard id="BPcreateWizard"
+							complete="completedHandler"
+							enableBranching="true"
+							class="sapUiResponsivePadding--header sapUiResponsivePadding--content">
+                        
+                        <!-- 1단계 : 비즈니스 카테고리(BP 범주) 선택 -->
+						<WizardStep
+								id="BPcategoryStep"
+								title="Business Partner Category"
+								subsequentSteps="PerGeneralStep, OrgGeneralStep"
+								complete="goToGeneralStep"
+								icon="sap-icon://group">
+							<Text class="sapUiSmallMarginBottom"
+									text="Please Choose Business Partner Category"/>
+							<HBox
+									alignItems="Center"
+									justifyContent="Center"
+									width="100%">
+								<SegmentedButton selectionChange="setCategory" width="400px"
+									id="categorySelection" selectedKey="{wizardModel>/BP_category}">
+									<items>
+										<SegmentedButtonItem key="개인" icon="sap-icon://person-placeholder" text="Person" />
+										<SegmentedButtonItem key="조직" icon="sap-icon://building" text="Organization" />
+									</items>
+								</SegmentedButton>
+							</HBox>
+						</WizardStep>
+
+                        <!-- 개인 일반 정보 입력하는 단계 -->
+						<WizardStep
+								id="PerGeneralStep"
+								title="일반 데이터(Person)"
+								nextStep="StandardStep"
+								activate="checkPerGeneralStep"								
+								icon="sap-icon://business-card">
+							<MessageStrip text="개인 - 비즈니스 파트너의 일반 데이터를 입력하세요." />
+							<form:SimpleForm
+									editable="true">
+								<Label text="이름" id="BP_name" required="true" />
+								<Input value="{wizardModel>/BP_name}" liveChange="checkPerGeneralStep" valueLiveUpdate="true"/>
+								<Label text="개인 칭호"/>
+                                <ComboBox width="100%" id="BP_title" 
+									required="true" selectedKey="{wizardModel>/BP_title}" 
+									change="checkPerGeneralStep" showClearIcon="true" >
+                                    <core:Item text="Mr." key="Mr."/>
+                                    <core:Item text="Mrs." key="Mrs"/>
+                                </ComboBox>
+							</form:SimpleForm>
+						</WizardStep>
+                        <!-- 조직 일반 정보 입력하는 단계 -->
+						<WizardStep
+								id="OrgGeneralStep"
+								title="일반 데이터(Organization)"
+								nextStep="StandardStep"
+								activate="checkOrgGeneralStep"								
+								icon="sap-icon://business-card">
+							<MessageStrip text="조직 - 비즈니스 파트너의 일반 데이터를 입력하세요." />
+							<form:SimpleForm
+									editable="true">
+								<Label text="조직명" id="BP_orgname" required="true" />
+								<Input value="{wizardModel>/BP_name}" liveChange="checkOrgGeneralStep" valueLiveUpdate="true"/>
+							</form:SimpleForm>
+						</WizardStep>
+
+						<!-- 표준 정보 입력 단계 -->
+						<WizardStep
+								id="StandardStep"
+								title="표준 데이터"
+								nextStep="CompanyStep"
+								activate="checkStandardStep"								
+								icon="sap-icon://addresses">
+							<MessageStrip text="비즈니스 파트너의 표준 데이터를 입력하세요." />
+							<form:SimpleForm editable="true">
+								<Title text= "표준 데이터" />
+								<Label text="도로 주소 "  />
+								<Input id="BP_street" value="{wizardModel>/BP_street}" liveChange="checkStandardStep" valueLiveUpdate="true"/>
+								<Label text="번지 "  />
+								<Input id="BP_house" value="{wizardModel>/BP_house}" liveChange="checkStandardStep" valueLiveUpdate="true"/>
+								<Label text="우편 번호 " />
+								<Input id="BP_zipcode" value="{wizardModel>/BP_zipcode}" liveChange="checkStandardStep" valueLiveUpdate="true"/>
+								<Label text="도시 "  />
+								<Input id="BP_city" value="{wizardModel>/BP_city}" liveChange="checkStandardStep" valueLiveUpdate="true"/>
+								<Label text="국가/지역 "  />
+								<Input id="BP_country" 
+									showValueHelp="true"
+									valueHelpRequest=".onValueHelpCountry"
+									valueHelpOnly="true"
+									value="{wizardModel>/BP_country}" liveChange="checkStandardStep" valueLiveUpdate="true"/>
+								<Label text="언어 "  />
+								<Input id="BP_language" value="{wizardModel>/BP_language}" liveChange="checkStandardStep" valueLiveUpdate="true"/>
+							</form:SimpleForm>
+						</WizardStep>			
+
+						<!-- 조직 정보 입력 단계 -->
+						<WizardStep
+								id="CompanyStep"
+								title="조직 데이터"
+								activate="checkCompanyStep"								
+								icon="sap-icon://create-form">
+							<MessageStrip text="비즈니스 파트너의 조직 데이터를 입력하세요." />
+							<form:SimpleForm editable="true">
+								<Label text="회사코드 "  />
+								<ComboBox id="BP_cocd" width="100%" selectedKey="{wizardModel>/BP_cocd}" change="checkCompanyStep"
+										items="{
+											path: 'CocdModel>/'
+										}">
+									<core:Item key="{CocdModel>CoCd_number}" text="{CocdModel>CoCd_number}"/>
+								</ComboBox>
+								<Label text="지급조건 "  />
+								<ComboBox id="BP_payterm" width="100%" selectedKey="{wizardModel>/BP_payterm}" change="checkCompanyStep"
+										items="{
+												path: 'PayTermModel>/'
+										}">
+									<core:Item key="{PayTermModel>PayTerm_number}" text="{PayTermModel>PayTerm_number}" />
+								</ComboBox>
+								<Label text="담당자 "  />
+								<Input id="BP_manager" value="{wizardModel>/BP_manager}" liveChange="checkCompanyStep" valueLiveUpdate="true"/>
+								<Label text="생성일자 "  />
+								<Text id="BP_createdate1" />
+								<Label text="생일/설립일 "  />
+								<DatePicker id="BP_estdate"
+										displayFormat="yyyy-MM-dd" 
+										valueFormat="yyyy-MM-dd"
+										value="{wizardModel>/BP_estdate}" change="checkCompanyStep"/>
+								<Label text="사업자등록번호 " />
+								<Input id="BP_tin" value="{wizardModel>/BP_tin}" liveChange="checkCompanyStep" valueLiveUpdate="true"/>
+								<Label text="업종 "  />
+								<Input id="BP_industry" value="{wizardModel>/BP_industry}" liveChange="checkCompanyStep" valueLiveUpdate="true"/>
+								<Label text="전화번호 "  />
+								<Input id="BP_phone" value="{wizardModel>/BP_phone}" liveChange="checkCompanyStep" valueLiveUpdate="true"/>
+								<Label text="팩스 "  />
+								<Input id="BP_fax" value="{wizardModel>/BP_fax}" liveChange="checkCompanyStep" valueLiveUpdate="true"/>
+								<Label text="이메일 "  />
+								<Input id="BP_email" value="{wizardModel>/BP_email}" liveChange="checkCompanyStep" valueLiveUpdate="true"/>
+								<Label text="웹사이트 "  />
+								<Input id="BP_website" value="{wizardModel>/BP_website}" liveChange="checkCompanyStep" valueLiveUpdate="true"/>
+							</form:SimpleForm>
+						</WizardStep>										
+
+					</Wizard>
+				</content>
+				<footer>
+					<OverflowToolbar height="60px">
+						<ToolbarSpacer/>
+						<Button text="Back to BP Main" press="handleWizardBack" type="Back"/>
+						<Button text="Cancel" press="handleWizardCancel"/>
+					</OverflowToolbar>
+				</footer>
+			</Page>
+
+            <!-- Wizard로 입력한 내용을 검토하는 페이지 -->
+			<Page id="wizardBranchingReviewPage" showHeader="false">
+				<content>
+
+				<!-- 기본 데이터 -->
+				<form:SimpleForm backgroundDesign="Solid" 
+					layout="ResponsiveGridLayout"
+					title = "1. 일반 데이터">
+						<VBox width="50%">
+							<HBox class="sapUiSmallMargin">
+								<Label text="비즈니스 파트너(BP) :  "  />
+								<Text text="{wizardModel>/BP_number}" id = "BP_number" />
+							</HBox>
+							<HBox class="sapUiSmallMargin">
+								<Label text="비즈니스 파트너(BP) 범주 :  "  />
+								<Text text="{wizardModel>/BP_category}"/>
+							</HBox>
+						</VBox>
+				</form:SimpleForm>
+
+				<!-- 개인 BP 데이터 검토-->	
+				<form:SimpleForm backgroundDesign="Solid" 
+					visible="{= ${wizardModel>/BP_category}==='개인' ? true : false}">
+				        <VBox width="50%">
+							<HBox class="sapUiSmallMargin">
+								<Label text="이 름 :  "/>
+								<Text text="{wizardModel>/BP_name}"/>
+							</HBox>
+							<HBox class="sapUiSmallMargin">
+								<Label text="개인 칭호  :  "/>
+								<Text text="{wizardModel>/BP_title}"/>
+							</HBox>
+							<Button press="_navBackToPerGeneralStep" text="Edit" type="Ghost"/>
+							<layoutData>
+								<layout:GridData span="XL4 L4 M6 S12"  />
+							</layoutData>
+                        </VBox>
+				</form:SimpleForm>
+
+				<!-- 조직 BP 데이터 검토 -->
+				<form:SimpleForm backgroundDesign="Solid" 
+					visible="{= ${wizardModel>/BP_category} === '조직' ? true : false}">
+						<VBox width="50%">
+							<HBox class="sapUiSmallMargin">
+								<Label text="조직명 :  "/>
+								<Text text="{wizardModel>/BP_name}"/>
+							</HBox>	
+							<Button press="_navBackToOrgGeneralStep" text="Edit" type="Ghost"/>
+						</VBox>
+				</form:SimpleForm>
+
+				<!-- 공통 정보 데이터 검토 -->
+
+                <form:SimpleForm backgroundDesign="Solid" 
+					title = "2. 표준 데이터"  
+					layout="ResponsiveGridLayout">
+                    <form:content class="sapUiSmallMargin">
+						<VBox width="50%">
+							<HBox class="sapUiSmallMargin">
+								<Label text="도로 주소 :  "  />
+								<Text text="{wizardModel>/BP_street}"/>
+							
+							</HBox>
+							<HBox class="sapUiSmallMargin">
+								<Label text="번지 :  "  />
+								<Text text="{wizardModel>/BP_house}"/>
+							
+							</HBox>
+							<HBox class="sapUiSmallMargin">
+								<Label text="우편 번호 :  "  />
+								<Text text="{wizardModel>/BP_zipcode}"/>
+							
+							</HBox>
+							<HBox class="sapUiSmallMargin">
+								<Label text="도시 :  "  />
+								<Text text="{wizardModel>/BP_city}"/>
+							
+							</HBox>
+							<HBox class="sapUiSmallMargin">
+								<Label text="국가/지역 :  "  />
+								<Text text="{wizardModel>/BP_country}"/>
+							</HBox>
+							<HBox class="sapUiSmallMargin">
+								<Label text="언어 :  "  />
+								<Text text="{wizardModel>/BP_language}"/>
+							</HBox>
+							<Button press="_navBackToStandardStep" text="Edit" type="Ghost"/>
+							<layoutData>
+									<layout:GridData span="XL4 L4 M6 S12"  />
+							</layoutData>
+                      	</VBox>
+                    </form:content>
+				</form:SimpleForm>  
+                <form:SimpleForm backgroundDesign="Solid" 
+					title = "3. 조직 데이터"  
+					layout="ResponsiveGridLayout">
+					<form:content class="sapUiSmallMargin">
+						<VBox width="50%">
+							<HBox class="sapUiSmallMargin">
+								<Label text="회사코드 :  "  />
+								<Text text="{wizardModel>/BP_cocd}"/>
+							</HBox>
+							<HBox class="sapUiSmallMargin">
+								<Label text="지급조건 :  "  />
+								<Text text="{wizardModel>/BP_payterm}"/>
+							</HBox>
+							<HBox class="sapUiSmallMargin">
+								<Label text="담당자 :  "  />
+								<Text text="{wizardModel>/BP_manager}"/>
+							</HBox>
+							<HBox class="sapUiSmallMargin">
+								<Label text="생성일자 :  "  />
+								<Text text="{wizardModel>/BP_createdate}" id = "BP_createdate2"/>
+							</HBox>
+							<HBox class="sapUiSmallMargin">
+								<Label text="생일/설립일 :  "  />
+								<Text text="{wizardModel>/BP_estdate}"/>
+							</HBox>
+							<Button press="_navBackToCompanyStep" text="Edit" type="Ghost"/>
+							<layoutData>
+								<layout:GridData span="XL4 L4 M6 S12"  />
+							</layoutData>
+						</VBox> 
+
+						<VBox width="50%">
+							<HBox class="sapUiSmallMargin">
+								<Label text="사업자등록번호 :  "  />
+								<Text text="{wizardModel>/BP_tin}"/>
+							</HBox>
+							<HBox class="sapUiSmallMargin">
+								<Label text="업종 :  "  />
+								<Text text="{wizardModel>/BP_industry}"/>
+							</HBox>
+							<HBox class="sapUiSmallMargin">
+								<Label text="전화번호 :  "  />
+								<Text text="{wizardModel>/BP_phone}"/>
+							</HBox>
+							<HBox class="sapUiSmallMargin">
+								<Label text="팩스 :  "  />
+								<Text text="{wizardModel>/BP_fax}"/>
+							</HBox>
+							<HBox class="sapUiSmallMargin">
+								<Label text="이메일 :  "  />
+								<Text text="{wizardModel>/BP_email}"/>
+							</HBox>
+							<HBox class="sapUiSmallMargin">
+								<Label text="웹사이트 :  "  />
+								<Text text="{wizardModel>/BP_website}"/>
+							</HBox>
+							<layoutData>
+								<layout:GridData span="XL4 L4 M6 S12"  />
+							</layoutData>
+						</VBox> 						
+							
+                    </form:content>
+                </form:SimpleForm>            
+				</content>
+				<footer>
+					<OverflowToolbar height="60px">
+						<ToolbarSpacer/>
+							<Button text="Back to BP Main" press="handleWizardBack" type="Back"/>
+							<Button text="Submit" press="handleWizardSubmit" type="Success"/>
+							<Button text="Cancel" press="handleWizardCancel"/>					
+					</OverflowToolbar>
+				</footer>				
+			</Page>
+		</pages>
+	</NavContainer>
+</mvc:View>

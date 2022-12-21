@@ -239,15 +239,19 @@
                         </VBox>
                         <VBox class="sapUiTinyMarginBottom" width="70%" height="2.5rem">
                                 <Label text="국가/지역: "/>
-	                        	<!-- <Text id="oldBPcountry" text="{BPModel>/BP_country}"  visible="{=!${oModel>/EditMode}}"/> -->
+	                        	<Text id="oldBPcountry" text="{BPModel>/BP_country}"  visible="{=!${oModel>/EditMode}}"/>
                                 <!-- <Input id="InputBPcountry" value="" visible="{=${oModel>/EditMode}}"/> -->
-                                <ObjectStatus visible="{=!${oModel>/EditMode}}" id="oldBPcountry"/>
-                                <Select id="SelectBPcountry" width="100%"
+                                <!-- <ObjectStatus visible="{=!${oModel>/EditMode}}" id="oldBPcountry"/> -->
+                                <Input id="BP_country" 
+                                   showValueHelp="true"
+			                       valueHelpRequest=".onValueHelpCountry"
+                                   valueHelpOnly="true"
+                                   visible="{=${oModel>/EditMode}}"/>
+<!--                                 <Select id="BP_country" width="100%"
                                         items="{path: 'BPregionModel>/'}"
                                         visible="{=${oModel>/EditMode}}">
                                     <core:Item key="{BPregionModel>Reg_number}" text="{BPregionModel>Reg_name} ({BPregionModel>Reg_number})"/>
-
-                                </Select>
+                                </Select> -->
                                 <layoutData>
 						            <l:GridData span="XL3 L4 M6 S12"/>
 					            </layoutData>
