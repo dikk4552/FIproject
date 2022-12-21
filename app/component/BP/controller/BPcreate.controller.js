@@ -6,17 +6,10 @@ sap.ui.define(
         "sap/m/MessageBox"
        
     ],
-<<<<<<< HEAD
     function(Controller, JSONModel, Filter, MessageBox) {
        "use strict";
 
-       let Today, CreateNum, category;
-=======
-    function(Controller, JSONModel, Filter,MessageBox) {
-       "use strict";
-
        let Today;
->>>>>>> master
   
       return Controller.extend("projectBP.controller.BPcreate", {
 
@@ -29,18 +22,12 @@ sap.ui.define(
             myRoute.attachPatternMatched(this.onMyRoutePatternMatched, this);
         },
 
-<<<<<<< HEAD
-        _initModel: function() {
-=======
         _initModel: async function() {
->>>>>>> master
             this.getView()
                 .setModel(
                     new JSONModel({}),
                     'BPcreate'
                 );
-<<<<<<< HEAD
-=======
 
             const Cocd=await $.ajax({
             type:"get",
@@ -49,7 +36,6 @@ sap.ui.define(
             var CocdModel=new JSONModel(Cocd.value);
             this.getView().setModel(CocdModel,"CocdModel");
 
->>>>>>> master
         },
 
         /**
@@ -120,7 +106,6 @@ sap.ui.define(
             oComboBox.getBinding('items').filter(aFilter)
         },
 
-<<<<<<< HEAD
         onDataView: async function (sCategory) {  
             
             const Cocd=await $.ajax({
@@ -131,9 +116,6 @@ sap.ui.define(
               var CocdModel=new JSONModel(Cocd.value);
               this.getView().setModel(CocdModel,"CocdModel");
 
-=======
-        onDataView: async function (sCategory) {      
->>>>>>> master
             const BPcreate = await $.ajax({      
                 type: "get",
                 url: "/bpservice/PayTerm"
@@ -149,10 +131,6 @@ sap.ui.define(
         
         onCreate : async function () {
         // let temp = new JSONModel(this.temp).oData;
-<<<<<<< HEAD
-
-=======
->>>>>>> master
         let temp = {};
             temp.BP_number = this._createNum;
             temp.BP_category = this.byId('BP_category').getText() === '1' ? '개인' : '조직';
@@ -175,11 +153,6 @@ sap.ui.define(
             temp.BP_fax = this.byId("BP_fax").getValue();
             temp.BP_email = this.byId("BP_email").getValue();
             temp.BP_website = this.byId("BP_website").getValue();
-<<<<<<< HEAD
-
-=======
-        
->>>>>>> master
             var bValidationError=false;
             for(var key in temp){
               if(temp[key]===''){
@@ -192,7 +165,6 @@ sap.ui.define(
                     url: "/bpservice/BP",
                     contentType: "application/json;IEEE754Compatible=true",
                     data:JSON.stringify(temp)
-<<<<<<< HEAD
 
 
         })
@@ -201,38 +173,20 @@ sap.ui.define(
         MessageBox.alert("입력이 완료되지 않았습니다.");
       }
  
-=======
-                });
-                this.onBack();
-            }else{
-              MessageBox.alert("입력이 완료되지 않았습니다.");
-            }
-        
-        
->>>>>>> master
        
     },
 
     onClearField: function () {
         this.getView().byId("BP_name").setValue("");
-<<<<<<< HEAD
         this.getView().byId("BP_title").setSelectedKey("");
-=======
-        this.getView().byId("BP_title").setValue("");
->>>>>>> master
         this.getView().byId("BP_street").setValue("");
         this.getView().byId("BP_house").setValue("");
         this.getView().byId("BP_zipcode").setValue("");
         this.getView().byId("BP_city").setValue("");
         this.getView().byId("BP_country").setValue("");
         this.getView().byId("BP_language").setValue("");
-<<<<<<< HEAD
         this.getView().byId("BP_cocd").setSelectedKey("");
         this.getView().byId("BP_payterm").setSelectedKey("");
-=======
-        this.getView().byId("BP_cocd").setValue("");
-        this.getView().byId("BP_payterm").setValue("");
->>>>>>> master
         this.getView().byId("BP_manager").setValue("");
         this.getView().byId("BP_estdate").setValue("");
         this.getView().byId("BP_tin").setValue("");
@@ -245,17 +199,9 @@ sap.ui.define(
 
 
            onBack : function() {
-<<<<<<< HEAD
             this.getOwnerComponent().getRouter().navTo("BPmain");
            }
         
       });
     });
   
-=======
-            this.getOwnerComponent().getRouter().navTo("BPhome");
-           }
-        
-      });
-    });
->>>>>>> master

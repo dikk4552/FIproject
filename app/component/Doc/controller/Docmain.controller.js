@@ -4,11 +4,13 @@ sap.ui.define(
         "sap/ui/model/Filter",
         "sap/ui/core/Fragment",
         "sap/ui/model/FilterOperator",
-        "sap/ui/model/json/JSONModel"
+        "sap/ui/model/json/JSONModel",
+        "sap/ui/export/Spreadsheet",
+        "sap/ui/export/library"
     ],
-    function(BaseController, Filter, Fragment, FilterOperator, JSONModel) {
+    function(BaseController, Filter, Fragment, FilterOperator, JSONModel, Spreadsheet, exportLibrary ) {
       "use strict";
-      let totalNumber;
+      const EdmType = exportLibrary.EdmType;
   
       return BaseController.extend("projectDoc.controller.Docmain", {
         onInit: async function() {
@@ -98,13 +100,106 @@ sap.ui.define(
             this.getOwnerComponent().getRouter().navTo("Doccreate", { num: CreateNum });
 
         },
+        
+        onDataExport: function () {
+            let aCols, oRowBinding, tableIndices, oSettings, oSheet, oTable;
 
+            oTable = this.byId('Docmain');    // 테이블 
+            oRowBinding = oTable.getBinding('rows');    // 테이블 전체 데이터
+            tableIndices = oRowBinding.aIndices;        // 조건에 의해 필터링된 데이터의 테이블 Index
+            console.log(oRowBinding);
 
-        onNavToDetail: function () {
-  
-          this.getOwnerComponent().getRouter().navTo("Docdetail");
-  
-        }
+            let oList = []; // 데이터 담을 배열 생성
+
+            var selectedIndex = this.byId("Docmain").getSelectedIndices();    // 멀티토글에서 체크한 열의 테이블 데이터
+            console.log(selectedIndex);
+            if (selectedIndex.length == 0) {    // 선택한 열이 없을 때
+                for (let j = 0; j < oRowBinding.oList.length; j++) {    // 전체 데이터 만큼 for문 돌림
+                    if (oRowBinding.aIndices.indexOf(j) > -1) {         // 데이터가 있을 때
+                        oList.push(oRowBinding.oList[j]);               // 전체 데이터를 oList에 Push
+                    }
+                }
+            }
+            else {                              // 선택한 열이 있을 때
+                for (let j = 0; j < selectedIndex.length; j++) {        // 선택한 열의 수만큼 for문 돌림
+                    oList.push(oRowBinding.oList[tableIndices[selectedIndex[j]]]);      // [전체 데이터의 [필터링된 데이터의 [선택한 데이터[j]]]]
+                    // console.log(oRowBinding.oList[tableIndices[selectedIndex[j]]]);
+                }
+            }
+
+            aCols = this.createColumnConfig();
+
+            oSettings = {
+                workbook: {
+                    columns: aCols,
+                    hierarchyLevel: 'Level'
+                },
+                dataSource: oList,
+                fileName: 'DocumentList.xlsx',
+                worker: false
+            };
+            oSheet = new Spreadsheet(oSettings);
+            oSheet.build().finally(function () {
+                oSheet.destroy();
+            });
+        },
+        createColumnConfig: function() {
+            const aCols = [];
+
+            aCols.push({
+                label: '전표 번호',
+                property: 'Doc_number',
+                type: EdmType.Int32
+              });
+              aCols.push({
+                label: '증빙일',
+                property: 'Doc_docdate',
+                type: EdmType.Int32
+              });
+              aCols.push({
+                label: '전기일',
+                property: 'Doc_postdate',
+                type: EdmType.Int32
+              });
+              aCols.push({
+                label: '회사코드',
+                property: 'Doc_cocd',
+                type: EdmType.Int32
+              });
+              aCols.push({
+                label: '전표유형',
+                property: 'Doc_type',
+                type: EdmType.Int32
+              });
+              aCols.push({
+                label: '통화',
+                property: 'Doc_curr',
+                type: EdmType.Int32
+              });
+      
+              aCols.push({
+                label: '헤더텍스트',
+                property: 'Doc_text',
+                type: EdmType.Int32
+              });
+      
+              aCols.push({
+                label: '참조',
+                property: 'Doc_ref',
+                type: EdmType.Int32
+              });
+      
+              return aCols;
+
+        },
+
+        onNavToDetail: function (oEvent) {
+            let SelectedNum = oEvent.getParameters().row.mAggregations.cells[0].mProperties.text;
+    
+            this.getOwnerComponent().getRouter().navTo("Docdetail", { num: SelectedNum });
+                
+
+          }
 
     });
     });

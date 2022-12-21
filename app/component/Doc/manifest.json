@@ -140,7 +140,6 @@
       "routes": [
         {
           "name": "Dochome",
-<<<<<<< HEAD
           "pattern": "Dochome",
           "target": [
             "Dochome"
@@ -160,13 +159,19 @@
           "pattern": "Doccreate/{num}",
           "target": [
             "Doccreate"
-=======
-          "pattern": "",
-          "target": [
-            "Dochome"
->>>>>>> master
           ]
         }        
+        ,
+        
+        {
+          "name": "Docdetail",
+          "pattern": "Docdetail/{num}",
+          "target": [
+            "Docdetail"
+          ]
+        }  
+         
+
       ],
       "targets": {
         "Dochome" : {
@@ -187,13 +192,15 @@
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
-<<<<<<< HEAD
           "viewId": "Doccreate",
           "viewName": "Doccreate"
-=======
-          "viewId": "Dochome",
-          "viewName": "Dochome"
->>>>>>> master
+        }        ,
+        "Docdetail" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "Docdetail",
+          "viewName": "Docdetail"
         }
       }
     },

@@ -139,12 +139,6 @@
       },
       "routes": [
         {
-<<<<<<< HEAD
-          "name": "GLhome",
-          "pattern": "",
-          "target": [
-            "GLhome"
-=======
 
           "name": "GL",
           "pattern": "",
@@ -164,7 +158,6 @@
           "pattern": "GLdetail/{num}",
           "target": [
             "GLdetail"
->>>>>>> master
           ]
         }
       ],
@@ -187,13 +180,8 @@
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
-<<<<<<< HEAD
-          "viewId": "GLhome",
-          "viewName": "GLhome"
-=======
           "viewId": "GLdetail",
           "viewName": "GLdetail"
->>>>>>> master
         }
       }
     },
