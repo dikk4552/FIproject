@@ -4,16 +4,25 @@ sap.ui.define(
         "sap/ui/model/json/JSONModel",
 	      "sap/m/MessageBox",
         "sap/ui/core/Fragment",
-        "../model/formatter"
+        "../model/formatter",
+        "sap/ui/model/Filter",
+        "sap/ui/model/FilterOperator",
     ],
-    function(Controller,JSONModel,MessageBox,Fragment,formatter) {
+    function(Controller,JSONModel,MessageBox,Fragment,formatter,Filter,FilterOperator) {
       "use strict";
       var BPnum,sUrl,BPModel,oModel,BPregionModel,DRDocModel,due;
       return Controller.extend("projectBP.controller.BPdetail", {
         formatter:formatter,
-        onInit: function(){
+        onInit: async function(){
           const MyRoute = this.getOwnerComponent().getRouter().getRoute("BPdetail");
           MyRoute.attachPatternMatched(this.onMatched,this);
+
+          const BPregion=await $.ajax({
+            type:"get",
+            url:"/bpservice/Region"
+          });
+          BPregionModel=new JSONModel(BPregion.value);
+          this.getView().setModel(BPregionModel,"RegionModel");
         },
 
         onMatched : function(oEvent){
@@ -37,18 +46,6 @@ sap.ui.define(
           });
           BPModel=new JSONModel(BP);
           this.getView().setModel(BPModel,"BPModel");
-
-          const BPregion=await $.ajax({
-            type:"get",
-            url:"/bpservice/Region"
-          });
-          BPregionModel=new JSONModel(BPregion.value);
-          this.getView().setModel(BPregionModel,"BPregionModel");
-          var key = this.getView().getModel("BPModel").oData.BP_country;
-
-          this.byId("SelectBPcountry").setSelectedKey(key);
-          var countryText = this.byId("SelectBPcountry").getSelectedItem().getText();
-          this.byId("oldBPcountry").setText(countryText);
 
           this.paytermChartView();
 
@@ -165,7 +162,7 @@ sap.ui.define(
         },
 
         onNavToBack : function(){
-          this.getOwnerComponent().getRouter().navTo("BPhome");
+          this.getOwnerComponent().getRouter().navTo("BPmain");
           this.byId("ObjectPageLayout").setSelectedSection(this.getView().byId("normaldata").getId());
         },
 
@@ -180,7 +177,7 @@ sap.ui.define(
            var oldBPzipcode = this.byId("oldBPzipcode").getText();
            this.byId("InputBPzipcode").setValue(oldBPzipcode);
            var oldBPcountry = this.byId("oldBPcountry").getText();
-           this.byId("SelectBPcountry").setSelectedKey(oldBPcountry.split(" (")[1].split(")")[0]);
+           this.byId("BP_country").setValue(oldBPcountry); // Value Help Dialog를 위해 Input으로 변경
            var oldBPhouse = this.byId("oldBPhouse").getText();
            this.byId("InputBPhouse").setValue(oldBPhouse);
            var oldBPcity = this.byId("oldBPcity").getText();
@@ -243,7 +240,7 @@ sap.ui.define(
               BP_website:this.byId("InputBPwebsite").getValue(),
               BP_street:this.byId("InputBPstreet").getValue(),
               BP_zipcode:this.byId("InputBPzipcode").getValue(),
-              BP_country:this.byId("SelectBPcountry").getSelectedKey(),
+              BP_country:this.byId("BP_country").getValue(),
               BP_house:this.byId("InputBPhouse").getValue(),
               BP_city:this.byId("InputBPcity").getValue(),
             };
@@ -376,7 +373,50 @@ sap.ui.define(
             contentType: "application/json;IEEE754Compatible=true"
           });
           this.onNavToBack();
+        },
+
+        // Country Single Value Help Funtion 구현
+
+      onValueHelpCountry: function () {
+        var oView = this.getView();
+        // Fragment를 load해주는 과정
+        if (!this._pValueHelpDialog) {
+          this._pValueHelpDialog = Fragment.load({
+            id: oView.getId(),
+            name: "projectBP.view.fragment.CountrySingleValueHelp",
+            controller: this
+          }).then(function (oValueHelpDialog) {
+            oView.addDependent(oValueHelpDialog);
+            return oValueHelpDialog;
+          });
         }
+        this._pValueHelpDialog.then(function (oValueHelpDialog) {
+          oValueHelpDialog.open();
+        }.bind(this));
+      },
+      handleSearch: function (oEvent) {
+        var aFilters = [];
+        var sValue = oEvent.getParameter("value");
+        aFilters.push(new Filter({
+          filters: [
+            new Filter({ path: "Reg_number", operator: FilterOperator.Contains, value1: sValue }),
+            new Filter({ path: "Reg_name", operator: FilterOperator.Contains, value1: sValue })
+          ],
+          and: false
+        }));
+        var oBinding = oEvent.getSource().getBinding("items");
+        oBinding.filter(aFilters);
+      },
+      handleClose: function (oEvent) {
+        // reset the filter
+        var oBinding = oEvent.getSource().getBinding("items");
+        oBinding.filter([]);
+
+        var aContexts = oEvent.getParameter("selectedContexts");
+        var text = aContexts.map(function (oContext) { return oContext.getObject().Reg_number; })
+        this.byId("BP_country").setValue(text);
+      },
+
       });
     }
 );

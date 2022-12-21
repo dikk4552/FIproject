@@ -19,7 +19,7 @@ sap.ui.define([
 	return Controller.extend("projectGL.controller.GLmain", {
 
 		onInit: async function() {
-			this.getOwnerComponent().getRouter().getRoute("GL").attachPatternMatched(this.onMyRoutePatternMatched, this);
+			this.getOwnerComponent().getRouter().getRoute("GLmain").attachPatternMatched(this.onMyRoutePatternMatched, this);
 
 			// Fragment(선택: 계정과목표)를 위해 데이터 모델 정의
 			const CoA = await $.ajax({

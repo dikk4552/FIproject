@@ -67,7 +67,7 @@ sap.ui.define([
             this.onCancel();
         },
         onCancel: function () {
-            this.getOwnerComponent().getRouter().navTo("GLhome");
+            this.getOwnerComponent().getRouter().navTo("GLmain");
         },
 
         // 선택 : GL계정 Value Help Fragment 

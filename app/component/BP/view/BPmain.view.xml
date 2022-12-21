@@ -57,7 +57,7 @@
 			                       valueHelpRequest=".onValueHelpCountry"
                                    valueHelpOnly="true"/>
                             <layoutData>
-                                <layout:GridData span="XL1 L1 M6 S12" />
+                                <layout:GridData span="XL2 L2 M6 S12" />
                             </layoutData>
                         </VBox>
                         <VBox>
@@ -113,7 +113,7 @@
                 <ToolbarSpacer />
 
                 <Button icon="sap-icon://excel-attachment" tooltip="Excel Download" press=".onDataExport" type="Transparent"  />
-                <MenuButton tooltip="생성" useDefaultActionOnly="true" type="Transparent" icon="sap-icon://add-document">
+<!--                 <MenuButton tooltip="생성" useDefaultActionOnly="true" type="Transparent" icon="sap-icon://add-document">
                     <menu>
                         <Menu itemSelected="onMenuAction">
                                     <MenuItem text="Person" press=".onBPCreate($event, 'A')"  />
@@ -121,9 +121,9 @@
                                     <MenuItem text="Organization" press=".onBPCreate($event, 'B')" />
                         </Menu>
                     </menu>
-                </MenuButton>
+                </MenuButton> -->
 
-                <Button type="Emphasized" text="생성마법사 TEST"  press=".onBPCreateWizard"/>
+                <Button type="Emphasized" text="생성"  press=".onBPCreateWizard"/>
                 
                 </OverflowToolbar>     
             </t:extension>

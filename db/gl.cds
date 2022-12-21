@@ -35,6 +35,7 @@ entity CoCd {
 entity History {
     key History_number   : String @title : '변경이력번호';
         History_table    : String @title : '테이블명';
+        History_key      : String @title : 'KEY';
         History_column   : String @title : '컬럼명';
         History_old      : String @title : '변경전';
         History_new      : String @title : '변경후';

@@ -226,7 +226,7 @@ sap.ui.define([
 			this.oDeleteDialog.open();
         },
 		onBack: function () {
-			this.getOwnerComponent().getRouter().navTo("GLhome");
+			this.getOwnerComponent().getRouter().navTo("GLmain");
 		},
         onOpenAcctGroupDialog: function () {
             

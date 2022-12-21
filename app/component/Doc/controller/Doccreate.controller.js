@@ -52,7 +52,7 @@ sap.ui.define(
 
                 var CocdModel = new JSONModel(Cocd.value);
                 this.getView().setModel(CocdModel, "CocdModel");
-
+                
 
             },
 
@@ -175,13 +175,55 @@ sap.ui.define(
                 this.getView().byId("Doc_text").setValue(null);
                 this.getView().byId("Doc_ref").setValue(null);
                 this.getView().byId("Doc_b").setValue(null);
-
             },
 
 
             onBack: function () {
                 this.getOwnerComponent().getRouter().navTo("Docmain");
-            }
+
+                this.validateclear("simpleform");
+                this.tablevalidateclear("Docmain");
+            },
+            validateclear: function (form) {
+                var check=true;
+                var content = this.byId(form).getContent();
+                for (var i = 0; i < content.length; i++) {
+                    var item = content[i].mAggregations.items
+                    for (var j = 0; j < item.length; j++) {
+                        var element_type = item[j].getMetadata().getName().split('.')[2];
+                        if (element_type === 'Input' || element_type === 'DatePicker' || element_type === 'ComboBox') {
+                            item[j].setValueState("None");
+                            item[j].setValueStateText(null);
+                        }
+                    }
+                }
+
+                return check;
+            },
+            tablevalidateclear : function(tableid){
+                var check;
+                var table_rows = this.byId(tableid).mAggregations.rows;
+                for(var i=0; i<table_rows.length;i++){
+                    var table_cells = table_rows[i].mAggregations.cells;
+                    for(var j=0;j<table_cells.length;j++){
+                        console.log(table_cells[j].getMetadata().getName());
+                        var element_type = table_cells[j].getMetadata().getName().split('.')[2];
+
+                        if (element_type === 'Input' || element_type === 'DatePicker' || element_type === 'ComboBox') {
+                            console.log(table_cells[j].mProperties);
+                            table_cells[j].setValueState("None");
+                            table_cells[j].setValueStateText(null);
+                        }
+                    }
+
+                }
+                return check;
+            },
+            ontest:function(oEvent){
+                var value = oEvent.getSource().getValue().replace(/[^\d]/g, '');
+                oEvent.getSource().setValue(value);
+        }
+        
 
         });
     });
