@@ -31,7 +31,8 @@ sap.ui.define([
                 GL_pltype:		String(this.byId("pltype").getValue()),
                 GL_function:	String(this.byId("function").getValue()),
                 GL_shorttext:	String(this.byId("shorttext").getValue()),
-                GL_longtext:	String(this.byId("longtext").getValue())
+                GL_longtext:	String(this.byId("longtext").getValue()),
+                GL_deletion:    false
             };
             await $.ajax({
                 type: "POST",
@@ -42,7 +43,7 @@ sap.ui.define([
             this.onCancel();
         },
         onCancel: function() {
-            this.getOwnerComponent().getRouter().navTo("GLhome");
+            this.getOwnerComponent().getRouter().navTo("GL");
         }
     });
 });

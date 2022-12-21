@@ -336,6 +336,14 @@ sap.ui.define([
 		onValueHelpCancelPress_Group: function () {
 			this._oVHD.close();
 		},
-	
+
+		onNavToCreate: function () {
+			this.getOwnerComponent().getRouter().navTo("GLcreate");					
+		},
+
+		onNavToDetail: function (oEvent) {
+			var selectedGLNum = oEvent.getParameters().row.mAggregations.cells[0].mProperties.text;
+			this.getOwnerComponent().getRouter().navTo("GLdetail", {num: selectedGLNum});
+		}
 	});
 });
