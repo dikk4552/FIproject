@@ -68,7 +68,7 @@
 					            	</m:layoutData>
 									<m:VBox class="sapUiTinyMarginBottom" height="2.5rem">
 										<m:Label	text="계정과목표 : "/>
-										<m:Input	id="coa" showValueHelp="true" valueHelpRequest="onOpenCoaDialog"/>
+										<m:Input	id="coa" enabled="false"/>
 									</m:VBox>
 									<m:VBox class="sapUiTinyMarginBottom" height="2.5rem">
 										<m:Label	text="G/L 계정 유형 : "/>

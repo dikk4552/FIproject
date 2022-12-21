@@ -97,6 +97,10 @@ sap.ui.define([
 			this.onTableLength();
 		},
 
+		onCreateGLWizard : function() {
+			this.getOwnerComponent().getRouter().navTo("")
+		},
+
 
 		// CoA Value Help Dialog Operation and Functions
 
@@ -169,7 +173,6 @@ sap.ui.define([
 			}.bind(this));
 		},
 		onFilterBarSearch: function (oEvent) {
-			console.log(this._oBasicSearchField.getValue());
 			var sSearchQuery = this._oBasicSearchField.getValue(),
 				aSelectionSet = oEvent.getParameter("selectionSet");
 
@@ -244,19 +247,28 @@ sap.ui.define([
 				// Set Basic Search for FilterBar
 				oFilterBar.setFilterBarExpanded(false);
 				oFilterBar.setBasicSearch(this._oBasicSearchField);
-
+				
 				// Trigger filter bar search when the basic search is fired
 				this._oBasicSearchField.attachSearch(function() {
 					oFilterBar.search();
 				});
 				
-				var aFilters = [];
-				this._filterTable(new Filter({
-					filters: aFilters,
-					and: true
-				}));
-
 				if (this._bDialogInitialized2) {
+					var bFilters = [];
+					var CoATokens = this._oMultiInput.getTokens()
+					if (CoATokens.length) { // 계정과목표 선택에 맞게 계정 그룹 테이블 필터링
+						CoATokens.forEach( (oToken) => { bFilters.push(new Filter("AcctGroup_coa", FilterOperator.EQ, oToken.getKey() ) ) } )
+						this._filterTable(new Filter({
+							filters: bFilters,
+							and: false
+						}));
+					} else {
+						this._filterTable(new Filter({
+							filters: bFilters,
+							and: true
+						}));
+					}
+
 					// Re-set the tokens from the input and update the table
 					oDialog2.setTokens([]);
 					oDialog2.setTokens(this._oMultiInput2.getTokens());
@@ -286,6 +298,21 @@ sap.ui.define([
 					}
 					oDialog2.update();
 				}.bind(this));
+
+				var bFilters = [];
+				var CoATokens = this._oMultiInput.getTokens()
+				if (CoATokens.length) {
+					CoATokens.forEach( (oToken) => { bFilters.push(new Filter("AcctGroup_coa", FilterOperator.EQ, oToken.getKey() ) ) } )
+					this._filterTable(new Filter({
+						filters: bFilters,
+						and: false
+					}));
+				} else {
+					this._filterTable(new Filter({
+						filters: bFilters,
+						and: true
+					}));
+				}
 
 				oDialog2.setTokens(this._oMultiInput2.getTokens());
 				
@@ -326,9 +353,26 @@ sap.ui.define([
 		},
 		onValueHelpOkPress_Group: function (oEvent) {
 			var aTokens = oEvent.getParameter("tokens");
+			var AcctGroup = this.getView().getModel("AcctGroup").oData;
+			var coaTokens = [];
+
 			for(var i =0;i<aTokens.length;i++){
 				aTokens[i].mProperties.text = aTokens[i].mProperties.key;
+
+				var GroupKey = aTokens[i].mProperties.key;
+				for(var j = 0 ; j < AcctGroup.length ; j++){
+					if(GroupKey == AcctGroup[j].AcctGroup_number) {
+						coaTokens.push( new Token({text: AcctGroup[j].AcctGroup_coa, key: AcctGroup[j].AcctGroup_coa}) )
+					}
+				}
 			}
+
+			coaTokens = coaTokens.reduce((prev, now) => {
+				if (!prev.some(obj => obj.mProperties.key === now.mProperties.key)) prev.push(now);
+					return prev;
+			}, []); // coaTokens 안에 중복된 key값을 가진 토큰을 제거(reduce : 배열 중복값 제거)
+
+			this._oMultiInput.setTokens(coaTokens);
 			this._oMultiInput2.setTokens(aTokens);
 			this._oVHD.close();
 		},

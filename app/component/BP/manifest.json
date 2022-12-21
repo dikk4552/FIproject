@@ -161,9 +161,9 @@
         {
           "name": "BPmain",
           "pattern": "",
-          "target": {
-            "name": "BPmain"
-          }
+          "target": [
+            "BPmain"
+          ]
         },
         {
           "name": "BPdetail",
@@ -175,9 +175,16 @@
         {
           "name": "BPcreate",
           "pattern": "BPcreate/{num}/{category}",
-          "target": [
-            "BPcreate"
-          ]
+          "target": {
+            "name": "BPcreate"
+          }
+        },
+        {
+          "name": "BPcreateWizard",
+          "pattern": "BPcreateWizard/{num}",
+          "target": {
+            "name": "BPcreateWizard"
+          }
         }
         
       ],
@@ -202,6 +209,13 @@
           "clearControlAggregation": true,
           "viewId": "BPcreate",
           "viewName": "BPcreate"
+        },
+        "BPcreateWizard" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "BPcreateWizard",
+          "viewName": "BPcreateWizard"
         }
       }
         

@@ -1,0 +1,32 @@
+<core:FragmentDefinition
+	xmlns="sap.m"
+	xmlns:core="sap.ui.core">
+	<TableSelectDialog
+        contentHeight="300px" contentWidth="400px"
+		noDataText="No Products Found"
+		title="계정과목표"
+		search=".handleSearch"
+		confirm=".handleClose"
+		cancel=".handleClose"
+		showClearButton="true"
+		items="{path : 'GLCoA>/'}">
+		<ColumnListItem>
+			<cells>
+				<Text text="{GLCoA>CoA_number}" />
+				<Text text="{GLCoA>CoA_name}" />
+			</cells>
+		</ColumnListItem>
+		<columns>
+			<Column width="9em">
+				<header>
+					<Text text="계정과목표" />
+				</header>
+			</Column>
+			<Column minScreenWidth="Tablet" demandPopin="true">
+				<header>
+					<Text text="내 역" />
+				</header>
+			</Column>
+		</columns>
+	</TableSelectDialog>
+</core:FragmentDefinition>

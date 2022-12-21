@@ -92,7 +92,7 @@
 									<VBox class="sapUiTinyMarginBottom" height="2.5rem">
 										<Label	text="계정 그룹 : "/>
 										<Text		id="acctgroup"		text="{GLModel>/GL_acctgroup}"	visible="{=!${editModel>/editMode}}"/>
-										<Input	id="acctgroupInput"	visible="{=${editModel>/editMode}}" showValueHelp="true" valueHelpRequest="onOpenAcctGroupDialog"/>
+										<Input	id="acctgroupInput"	visible="{=${editModel>/editMode}}" showValueHelp="true"  valueHelpOnly="true" valueHelpRequest="onOpenAcctGroupDialog"/>
 									</VBox>
 									<VBox class="sapUiTinyMarginBottom" height="2.5rem">
 										<Label	text="손익계산서 계정 유형 : "/>

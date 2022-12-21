@@ -253,21 +253,21 @@ sap.ui.define(
                 bValidationError=true;
               }
             }
-            if(!bValidationError){
-              await $.ajax({
-                type:"patch",
-                url:sUrl,
-                contentType: "application/json;IEEE754Compatible=true",
-                data:JSON.stringify(temp)
-              });
-            }else{
-              MessageBox.alert("입력이 완료되지 않았습니다.");
-            }
-           }
-          this.onDataView();
-        },
+          }
+          if (!bValidationError) {
+            await $.ajax({
+              type: "patch",
+              url: sUrl,
+              contentType: "application/json;IEEE754Compatible=true",
+              data: JSON.stringify(temp)
+            });
+          } else {
+            MessageBox.alert("입력이 완료되지 않았습니다.");
+          }
+        this.onDataView();
+      },
 
-        onCancel : function(){
+      onCancel: function () {
 
           this.getView().getModel("oModel").setProperty("/EditMode",false);
           this.getView().getModel("oModel").setProperty("/CEditMode",false);

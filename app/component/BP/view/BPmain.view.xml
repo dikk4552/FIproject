@@ -52,12 +52,12 @@
                         </VBox>
                         <VBox>
                             <Label text="국가/지역 : " />
-                            <Input id="BP_country" 
+                            <MultiInput id="BP_country" 
                                    showValueHelp="true"
-			                       valueHelpRequest=".onValueHelpContry"
+			                       valueHelpRequest=".onValueHelpCountry"
                                    valueHelpOnly="true"/>
                             <layoutData>
-                                <layout:GridData span="XL2 L2 M6 S12" />
+                                <layout:GridData span="XL1 L1 M6 S12" />
                             </layoutData>
                         </VBox>
                         <VBox>
@@ -118,11 +118,12 @@
                         <Menu itemSelected="onMenuAction">
                                     <MenuItem text="Person" press=".onBPCreate($event, 'A')"  />
                               
-                                    <MenuItem text="Organization" press=".onBPCreate($event, 'B')"/>
+                                    <MenuItem text="Organization" press=".onBPCreate($event, 'B')" />
                         </Menu>
                     </menu>
                 </MenuButton>
 
+                <Button type="Emphasized" text="생성마법사 TEST"  press=".onBPCreateWizard"/>
                 
                 </OverflowToolbar>     
             </t:extension>
