@@ -128,20 +128,48 @@
       },
       "routes": [
         {
-          "name": "GLhome",
+          "name": "GLmain",
           "pattern": "",
           "target": [
-            "GLhome"
+            "GLmain"
+          ]
+        },
+        {
+          "name": "GLcreate",
+          "pattern": "GLcreate",
+          "target": [
+            "GLcreate"
+          ]
+        },
+        {
+          "name": "GLdetail",
+          "pattern": "GLdetail/{num}",
+          "target": [
+            "GLdetail"
           ]
         }
       ],
       "targets": {
-        "GLhome" : {
+        "GLmain" : {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
-          "viewId": "GLhome",
-          "viewName": "GLhome"
+          "viewId": "GLmain",
+          "viewName": "GLmain"
+        },
+        "GLcreate" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "GLcreate",
+          "viewName": "GLcreate"
+        },
+        "GLdetail" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "GLdetail",
+          "viewName": "GLdetail"
         }
       }
     },

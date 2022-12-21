@@ -159,7 +159,7 @@
                                 <t:Column hAlign="Center" >
                                     <Label text="금액" labelFor="Doc_D_amount"/>
                                     <t:template>
-                                        <Input id="Doc_D_amount"  value="{createDoc>Doc_D_amount}" required="true"/>
+                                        <Input id="Doc_D_amount"  value="{createDoc>Doc_D_amount}" required="true" liveChange=".ontest"/>
                                     </t:template>
                                 </t:Column>
                                 <t:Column hAlign="Center">

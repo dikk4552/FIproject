@@ -29,13 +29,14 @@
 				</uxap:actions>
 
 				<uxap:expandedHeading>
-					<VBox class="sapUiTinyMarginTop">
+					<HBox class="sapUiTinyMarginTop">
+                        <Button icon="sap-icon://nav-back" press=".onBack" type="Transparent"/>
 						<Title text="G/L 계정 {GLModel>/GL_number}" wrapping="true"/>
-					</VBox>
+					</HBox>
 				</uxap:expandedHeading>
 
 				<uxap:expandedContent>
-					<Text text="{GLModel>/GL_shorttext}"/>
+					<Text text="{GLModel>/GL_shorttext}" class="sapUiMediumMarginBegin"/>
 					
 					<FlexBox wrap="Wrap" alignItems="Start" class="sapUiDemoFlexBoxSizeAdjustmentsZeroWidthItems">
 						<VBox>

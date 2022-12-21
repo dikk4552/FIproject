@@ -21,12 +21,12 @@
                         <!-- 1단계 : 비즈니스 카테고리(BP 범주) 선택 -->
 						<WizardStep
 								id="BPcategoryStep"
-								title="Business Partner Category"
+								title="비즈니스 파트너 카테고리"
 								subsequentSteps="PerGeneralStep, OrgGeneralStep"
 								complete="goToGeneralStep"
 								icon="sap-icon://group">
 							<Text class="sapUiSmallMarginBottom"
-									text="Please Choose Business Partner Category"/>
+									text="카테고리를 선택하세요"/>
 							<HBox
 									alignItems="Center"
 									justifyContent="Center"
@@ -34,8 +34,8 @@
 								<SegmentedButton selectionChange="setCategory" width="400px"
 									id="categorySelection" selectedKey="{wizardModel>/BP_category}">
 									<items>
-										<SegmentedButtonItem key="개인" icon="sap-icon://person-placeholder" text="Person" />
-										<SegmentedButtonItem key="조직" icon="sap-icon://building" text="Organization" />
+										<SegmentedButtonItem key="개인" icon="sap-icon://person-placeholder" text="개인" />
+										<SegmentedButtonItem key="조직" icon="sap-icon://building" text="조직" />
 									</items>
 								</SegmentedButton>
 							</HBox>
@@ -44,7 +44,7 @@
                         <!-- 개인 일반 정보 입력하는 단계 -->
 						<WizardStep
 								id="PerGeneralStep"
-								title="일반 데이터(Person)"
+								title="일반 데이터(개인)"
 								nextStep="StandardStep"
 								activate="checkPerGeneralStep"								
 								icon="sap-icon://business-card">
@@ -65,7 +65,7 @@
                         <!-- 조직 일반 정보 입력하는 단계 -->
 						<WizardStep
 								id="OrgGeneralStep"
-								title="일반 데이터(Organization)"
+								title="일반 데이터(조직)"
 								nextStep="StandardStep"
 								activate="checkOrgGeneralStep"								
 								icon="sap-icon://business-card">
@@ -323,9 +323,9 @@
 				<footer>
 					<OverflowToolbar height="60px">
 						<ToolbarSpacer/>
-							<Button text="Back to BP Main" press="handleWizardBack" type="Back"/>
-							<Button text="Submit" press="handleWizardSubmit" type="Success"/>
-							<Button text="Cancel" press="handleWizardCancel"/>					
+							<Button text="돌아가기" press="handleWizardBack" type="Back"/>
+							<Button text="생성하기" press="handleWizardSubmit" type="Emphasized"/>
+							<Button text="취소하기" press="handleWizardCancel"/>					
 					</OverflowToolbar>
 				</footer>				
 			</Page>

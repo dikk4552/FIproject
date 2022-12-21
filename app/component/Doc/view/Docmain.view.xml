@@ -102,10 +102,8 @@
                 <OverflowToolbar>
                     <Title id="TableName"/>
                     <ToolbarSpacer />
-
                     <Button icon="sap-icon://excel-attachment" tooltip="Excel Download" press=".onDataExport" type="Transparent"  />
-                    <Button tooltip="생성"  type="Transparent" press=".onDoccreate" icon="sap-icon://add-document"/>
-
+                    <Button text="생성" press="onDoccreate" type="Emphasized"/>
                 </OverflowToolbar>     
             </t:extension>
 

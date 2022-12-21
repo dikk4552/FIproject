@@ -13,6 +13,7 @@ sap.ui.define(
 
     "use strict";
     let totalNumber;
+    const EdmType = exportLibrary.EdmType;
 
     return BaseController.extend("projectBP.controller.BPmain", {
       onInit: async function() {
@@ -74,16 +75,20 @@ sap.ui.define(
         let BP_cocd = this.byId("BP_cocd").getSelectedKey();
         let BP_category = this.byId("BP_category").getSelectedKey();
         let BP_city = this.byId("BP_city").getValue();
-        let BP_country = this.byId("BP_country").getValue();
+        let BP_country = this.byId("BP_country").getTokens();
 
     
-          var aFilter = []; 
-
+          var aFilter = [];
+          
+          var aFilter = []; var value;
+          if (BP_country) { for(var i = 0 ; i < BP_country.length ; i++ ) {
+              value = BP_country[i].mProperties.key;
+              aFilter.push(new Filter("BP_country", FilterOperator.Contains, value))}
+          }
           if (BP_number) {aFilter.push(new Filter("BP_number", FilterOperator.Contains, BP_number))}
           if (BP_name) {aFilter.push(new Filter("BP_name", FilterOperator.Contains, BP_name))}
           if (BP_cocd) {aFilter.push(new Filter("BP_cocd", FilterOperator.Contains, BP_cocd))}
           if (BP_city) {aFilter.push(new Filter("BP_city", FilterOperator.Contains, BP_city))}
-          if (BP_country) {aFilter.push(new Filter("BP_country", FilterOperator.Contains, BP_country))}
           if (BP_category) {aFilter.push(new Filter("BP_category", FilterOperator.Contains, BP_category))}
 
             let oTable = this.byId("BPmain").getBinding("rows");  
@@ -93,21 +98,18 @@ sap.ui.define(
         
     },
 
-      onClearField : function () {
-          this.getView().byId("BP_zipcode").setValue(""); 
-          this.getView().byId("BP_number").setValue(""); 
-          this.getView().byId("BP_street").setValue(""); 
-          this.getView().byId("BP_city").setValue("");
-          this.getView().byId("BP_country").removeAllTokens();
-          this.getView().byId("BP_category").setSelectedKey("");
-          this.getView().byId("BP_cocd").setValue("");
-      },
+    onClearField : function () {
+        this.getView().byId("BP_number").setValue(""); 
+        this.getView().byId("BP_name").setValue(""); 
+        this.getView().byId("BP_cocd").setSelectedKey("");
+        this.getView().byId("BP_category").setSelectedKey("");
+        this.getView().byId("BP_city").setValue("");
+        this.getView().byId("BP_country").removeAllTokens();
+    },
 
       onReset : function () {
           this.onClearField();
-
           this.onSearch();
-
       },
 
       onBPCreate: function (sText, CreateCategory) {

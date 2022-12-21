@@ -11,8 +11,6 @@ sap.ui.define(
     function (Controller, JSONModel, Filter, FilterOperator, MessageBox, Fragment, syncStyleClass) {
         "use strict";
 
-        let Today;
-
         return Controller.extend("projectBP.controller.BPcreate", {
 
             onInit: function () {
@@ -90,6 +88,7 @@ sap.ui.define(
                 let now = new Date();
                 let Today = now.getFullYear() + "-" + (now.getMonth() + 1).toString().padStart(2, '0') + "-"
                     + now.getDate().toString().padStart(2, '0');
+                this._Today = Today;
 
                 this.getView().byId("BP_number").setText(CreateNum);
                 this.getView().byId("BP_createdate").setText(Today);
@@ -132,7 +131,6 @@ sap.ui.define(
                 temp.BP_number = this._createNum;
                 temp.BP_category = this.byId('BP_category').getText() === '1' ? '개인' : '조직';
                 temp.BP_name = this.byId("BP_name").getValue();
-                temp.BP_title = this.byId("BP_title").getSelectedKey();
                 temp.BP_street = this.byId("BP_street").getValue()
                 temp.BP_house = this.byId("BP_house").getValue()
                 temp.BP_zipcode = this.byId("BP_zipcode").getValue()
@@ -142,7 +140,7 @@ sap.ui.define(
                 temp.BP_cocd = this.byId("BP_cocd").getSelectedKey();
                 temp.BP_payterm = this.byId("BP_payterm").getSelectedKey();
                 temp.BP_manager = this.byId("BP_manager").getValue();
-                temp.BP_createdate = Today;
+                temp.BP_createdate = this._Today;
                 temp.BP_estdate = this.byId("BP_manager").getValue();
                 temp.BP_tin = this.byId("BP_tin").getValue();
                 temp.BP_industry = this.byId("BP_industry").getValue();
@@ -150,6 +148,8 @@ sap.ui.define(
                 temp.BP_fax = this.byId("BP_fax").getValue();
                 temp.BP_email = this.byId("BP_email").getValue();
                 temp.BP_website = this.byId("BP_website").getValue();
+ 
+                console.log(temp);
 
                 var bValidationError = false;
                 for (var key in temp) {
@@ -157,6 +157,8 @@ sap.ui.define(
                         bValidationError = true;
                     }
                 }
+                temp.BP_title = this.byId("BP_title").getSelectedKey();
+
                 if (!bValidationError) {
                     await $.ajax({
                         type: "POST",

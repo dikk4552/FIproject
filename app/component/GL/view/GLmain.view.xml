@@ -95,7 +95,7 @@
                     <Button
                         text="생성"
                         press="onNavToCreate"
-                        type="Transparent"/>
+                        type="Emphasized"/>
                 </OverflowToolbar>
             </t:extension>
             <t:columns>
@@ -129,10 +129,11 @@
                         <Text text = "{GLmodel>GL_acctgroup}" />
                     </t:template>
                 </t:Column>
-                <t:Column hAlign = "Center">
-                    <Label text = "계정 비활성"/>
+                <t:Column width="5%"
+                hAlign = "Center">
+                    <Label text = "삭제 표시"/>
                     <t:template>
-                        <CheckBox selected="true" 
+                        <CheckBox selected="{GLmodel>GL_deletion}" 
                         textAlign="Center" enabled="false"/>                   
                     </t:template>
                 </t:Column>                

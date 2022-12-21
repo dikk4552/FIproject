@@ -114,7 +114,7 @@ sap.ui.define([
         // 범주를 변경했을 때 나타나는 창
 		setCategory: function () {
 			this.setDiscardableProperty({
-				message: "Are you sure you want to change the Business Partner Category? This will discard your progress.",
+				message: "카테고리를 변경하시겠습니까?",
 				discardStep: this.byId("BPcategoryStep"),
 			});
 		},
@@ -137,13 +137,13 @@ sap.ui.define([
 		},
 		
 		handleWizardCancel: function() {
-			this._handleMessageBoxOpen_Cancel("Are you sure you want to cancel?", "warning");
+			this._handleMessageBoxOpen_Cancel("생성을 취소하시겠습니까?", "warning");
 		},
 		handleWizardBack: function() {
-			this._handleMessageBoxOpen_Back("Are you sure you want to go back to main?", "warning");
+			this._handleMessageBoxOpen_Back("조회 화면으로 이동하시겠습니까?", "warning");
 		},
 		handleWizardSubmit: function () {
-			this._handleMessageBoxOpen_Submit("Are you sure you want to submit?", "confirm");
+			this._handleMessageBoxOpen_Submit("생성하시겠습니까?", "confirm");
 		},
 		_handleMessageBoxOpen_Submit: function (sMessage, sMessageBoxType) {
 			MessageBox[sMessageBoxType](sMessage, {
@@ -188,6 +188,7 @@ sap.ui.define([
 		},
 		
 		navBackToMain: function () {
+			this._navBackToStep(this.byId("BPcategoryStep"));
 			this.getOwnerComponent().getRouter().navTo("BPmain");
 		},
 		_navBackToList: function () {
