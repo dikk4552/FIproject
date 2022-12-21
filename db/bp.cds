@@ -36,6 +36,6 @@ Reg_name : String @title : '국가/지역 이름';
 entity PayTerm {
 key PayTerm_number : String @title : '지급조건';
 PayTerm_accttype : String @title : '계정유형';
-PayTerm_duedate : String @title : '만기일';
+PayTerm_duedate : Integer @title : '만기일';
 PayTerm_text : String @title : '설명';
 };

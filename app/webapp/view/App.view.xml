@@ -17,7 +17,6 @@
                             <MenuItem text ="DOC" press=".onDocmain"/> 
                             <MenuItem text="GL" press=".onGL" />
                         </Menu>
-
                     </menu>
                 </MenuButton>
             </tnt:ToolHeader>
