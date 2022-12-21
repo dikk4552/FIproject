@@ -140,19 +140,11 @@
       },
       "routes": [
         {
-          "name": "BPhome",
-          "pattern": "BPhome",
-          "target": [
-            "BPhome"
-          ]
-        },
-        {
           "name": "BPmain",
           "pattern": "",
-          "target": [
-            "BPmain"
-          ]
-          
+          "target": {
+            "name": "BPmain"
+          }
         },
         {
           "name": "BPdetail",
@@ -171,13 +163,6 @@
         
       ],
       "targets": {
-        "BPhome" : {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": true,
-          "viewId": "BPhome",
-          "viewName": "BPhome"
-        },
         "BPmain" : {
           "viewType": "XML",
           "transition": "slide",

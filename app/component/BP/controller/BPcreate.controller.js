@@ -9,7 +9,7 @@ sap.ui.define(
     function(Controller, JSONModel, Filter, MessageBox) {
        "use strict";
 
-       let Today;
+       let Today, CreateNum, category;
   
       return Controller.extend("projectBP.controller.BPcreate", {
 

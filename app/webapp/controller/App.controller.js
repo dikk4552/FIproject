@@ -10,15 +10,19 @@ sap.ui.define(
         onHome : function(){
           this.getOwnerComponent().getRouter().navTo("Home");
         },
-        onBPmain : function() {
-          this.getOwnerComponent().getRouter().navTo("BP");
-        },
-        onDocmain : function() {
-          this.getOwnerComponent().getRouter().navTo("Doc");
+        onBP : function(){
+          this.getOwnerComponent().getRouter().navTo("BP")
         },
 
         onGL : function(){
-          this.getOwnerComponent().getRouter().navTo("GL");
+          this.getOwnerComponent().getRouter().navTo("GL")
+        },
+
+        onDoc : function(){
+          this.getOwnerComponent().getRouter().navTo("Doc")
+          },
+        onMenuGL : function() {
+          this.getOwnerComponent().getRouter().navTo("GL")
         }
       
 
