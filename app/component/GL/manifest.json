@@ -16,8 +16,8 @@
       "toolsId": "d1a40033-ed7a-4cb8-b161-66f0a52632fc"
     },
     "dataSources": {
-      "requestService": {
-        "uri": "/request/",
+      "BPservice": {
+        "uri": "/BP/",
         "type": "OData",
         "settings": {
           "annotations": [],
@@ -25,8 +25,8 @@
           "odataVersion": "4.0"
         }
       },
-      "companyService": {
-        "uri": "/company/",
+      "GLservice": {
+        "uri": "/GL/",
         "type": "OData",
         "settings": {
           "annotations": [],
@@ -34,7 +34,6 @@
           "odataVersion": "4.0"
         }
       }
-      
     }
   },
   "sap.ui": {
@@ -68,26 +67,6 @@
         "sap.ushell": {}
       }
     },
-    "componentUsages": {
-      "requestComponent" : {
-        "name" : "project2",
-        "settings" : {},
-        "componentData" : {},
-        "lazy" : true
-      },
-      "companyComponent" : {
-        "name" : "project3",
-        "settings" : {},
-        "componentData" : {},
-        "lazy" : true
-      },
-      "productComponent" : {
-        "name" : "project4",
-        "settings" : {},
-        "componentData" : {},
-        "lazy" : true
-      }
-    },
     "contentDensities": {
       "compact": true,
       "cozy": true
@@ -111,6 +90,16 @@
       },
       "Vendor" : {
         "dataSource": "companyService",
+        "preload": true,
+        "settings": {
+          "operationMode" : "Server",
+          "earlyRequests" : true,
+          "synchronizationMode" : "None",
+          "autoExpandSelect" : true
+        }
+      },
+      "GL" : {
+        "dataSource": "GLservice",
         "preload": true,
         "settings": {
           "operationMode" : "Server",
@@ -145,8 +134,6 @@
             "Dochome"
           ]
         }
-        
-        
       ],
       "targets": {
         "Dochome" : {

@@ -16,7 +16,7 @@
                 <Image id="IdGenImage2" height = "1.5rem"
                      class="sapUiSmallMarginBegin"
                      src="view/img/logo.svg" press=".onHome"/>
-                <MenuButton id="_IDGenMenuButton1" enabled="true" text="메뉴" buttonMode="Split" width="auto">
+                <MenuButton id="_IDGenMenuButton1" enabled="true" text="카테고리" width="auto">
                     <menu>
                         <Menu id="_IDGenMenu1">
 

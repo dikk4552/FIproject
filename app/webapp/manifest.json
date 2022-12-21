@@ -33,8 +33,16 @@
           "localUri": "localService/metadata.xml",
           "odataVersion": "4.0"
         }
+      },
+      "BPService": {
+        "uri": "/BP/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "4.0"
+        }
       }
-      
     }
   },
   "sap.ui": {
@@ -54,7 +62,7 @@
     }
   },
   "sap.ui5": {
-    "flexEnabled": true,
+    "flexEnabled": false,
     "dependencies": {
       "minUI5Version": "1.102.1",
       "libs": {
@@ -118,6 +126,10 @@
           "synchronizationMode" : "None",
           "autoExpandSelect" : true
         }
+      },
+      "cardManifests" : {
+        "type": "sap.ui.model.json.JSONModel",
+        "uri" : "model/cardManifests.json"
       }
     },
     "resources": {
@@ -169,8 +181,6 @@
             "prefix": "Doc"
           }
         }
-        
-        
       ],
       "targets": {
         "Home" : {
