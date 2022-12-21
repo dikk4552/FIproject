@@ -33,6 +33,15 @@
           "localUri": "localService/metadata.xml",
           "odataVersion": "4.0"
         }
+      },
+      "Docservice":{
+        "uri": "/docservice/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "4.0"
+        }
       }
       
     }
@@ -112,6 +121,16 @@
       },
       "GL":{
         "dataSource": "GLservice",
+        "preload": true,
+        "settings": {
+          "operationMode" : "Server",
+          "earlyRequests" : true,
+          "synchronizationMode" : "None",
+          "autoExpandSelect" : true
+        }
+      },
+      "Doc":{
+        "dataSource": "Docservice",
         "preload": true,
         "settings": {
           "operationMode" : "Server",

@@ -1,20 +1,17 @@
 <mvc:View controllerName="project1.controller.Home"
-xmlns:mvc="sap.ui.core.mvc"
-xmlns="sap.m"     xmlns:f="sap.f"
-xmlns:card="sap.f.cards"
->
+xmlns:mvc="sap.ui.core.mvc" xmlns="sap.m"
+xmlns:f="sap.f" xmlns:card="sap.f.cards"
+xmlns:viz="sap.viz.ui5.controls" 
+xmlns:viz.data="sap.viz.ui5.data"
+xmlns:vizFeeds="sap.viz.ui5.controls.common.feeds">
 
  <ScrollContainer height="100%" width="100%" vertical="true">
   <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region" backgroundDesign="Transparent" >
-    <content class="panelbottomline"> 
-     
-        <HBox width="100%" height="3rem">    
-         <OverflowToolbar class="sapUiLargeMarginBottom sapUiLarMarginTop">      
-            <Title text="Management"/>   
-           </OverflowToolbar>     
-        </HBox>   
-
-       <GenericTile width="15rem" class="sapUiTinyMarginBegin sapUiSmallMarginTop sapUiSmallMarginEnd " 
+    <content>    
+        <HBox width="100%" height="3rem">          
+            <Title text="Management"/>        
+        </HBox>                    
+       <GenericTile width="15rem" class="sapUiTinyMarginBegin sapUiTinyMarginTop sapUiSmallMarginEnd " 
        header="BP 마스터 데이터 관리" press=".onBP_list">                     
           <TileContent>                         
               <ImageContent src="sap-icon://menu" />                     
@@ -37,6 +34,61 @@ xmlns:card="sap.f.cards"
 
       <HBox width="100%" height="3rem"/>
       <HBox width="100%" height="3rem"/>
+      <HBox width="100%" height="3rem">          
+            <Title text="Overview"/>        
+      </HBox> 
+
+      <HBox >
+
+      <f:Card class="sapUiMediumMarginBegin" width="auto">
+        <f:header>
+          <card:Header title="분기별 매출"/>
+        </f:header>
+        <f:content>
+          <viz:VizFrame class="sapUiSmallMarginBegin" id="idVizFrame"
+                        uiConfig="{'applicationSet':'fiori'}" vizType="column">
+            <viz:dataset>
+              <viz.data:FlattenedDataset data="{DataModel>/Charts}">
+                <viz.data:dimensions>
+                  <viz.data:DimensionDefinition name="Quarter" value="{DataModel>Quarter}" displayValue="{DataModel>Quarter}"/>
+                </viz.data:dimensions>
+                <viz.data:measures>
+                  <viz.data:MeasureDefinition name="lastAmount" value="{DataModel>lastAmount}"/>
+                  <viz.data:MeasureDefinition name="thisAmount" value="{DataModel>thisAmount}"/>
+                </viz.data:measures>
+              </viz.data:FlattenedDataset>
+            </viz:dataset>
+            <viz:feeds>
+              <vizFeeds:FeedItem id="valueAxisFeed" type="Measure" uid="valueAxis" values="lastAmount"/>
+              <vizFeeds:FeedItem id='categoryAxisFeed' type="Dimension" uid="categoryAxis" values="Quarter"/>
+            </viz:feeds> 
+          </viz:VizFrame>
+        </f:content>
+      
+      </f:Card>
+        
+      <f:Card class="sapUiMediumMarginBegin" width="250px">
+          <f:header>
+            <card:Header title="신규 고객 리스트"/>
+          </f:header>
+          <f:content>
+            <List showSeparators="None" items="{path:'NewBPModel>/'}">
+            <CustomListItem>
+                <HBox alignItems="Center" justifyContent="SpaceBetween">
+					        <VBox class="sapUiSmallMarginBegin sapUiSmallMarginTopBottom">
+						        <Title level="H3" text="{NewBPModel>BP_name}"/>
+						        <Text text="{NewBPModel>BP_number}"/>
+					        </VBox>
+					        <ObjectStatus
+						          class="sapUiTinyMarginBegin sapUiSmallMarginEnd"
+						          
+                      icon="{=${NewBPModel>BP_category}==='조직'?'sap-icon://building':'sap-icon://customer'}"/>
+					      </HBox>
+            </CustomListItem>
+            </List>
+          </f:content>
+      </f:Card>
+      </HBox>
       <HBox width="100%" height="3rem"/>          
             
             
