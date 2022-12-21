@@ -4,7 +4,7 @@
   xmlns="sap.m" 
   displayBlock="true">
   <MessagePage id="_IDGenMessagePage1"
-    text="환영합니다." 
+    text="환영합니다>" 
     icon="sap-icon://home">
   </MessagePage>
 

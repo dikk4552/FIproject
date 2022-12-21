@@ -111,10 +111,7 @@ sap.ui.define(
                 if (sCategory === 'B') {
                     aFilter = new Filter('PayTerm_accttype', 'EQ', 'Vendor');
                 }
-
-                oComboBox.getBinding('items').filter(aFilter)
             },
-
             onDataView: async function (sCategory) {
                 const BPcreate = await $.ajax({
                     type: "get",

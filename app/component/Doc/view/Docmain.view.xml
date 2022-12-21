@@ -1,4 +1,4 @@
-<mvc:View controllerName="projectBP.controller.BPmain"    
+<mvc:View controllerName="projectDoc.controller.Docmain"    
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns="sap.m"   
     xmlns:f="sap.f" 
@@ -14,7 +14,7 @@
                 <f:heading>
                     <HBox>
                         <!-- <Button icon="sap-icon://nav-back" press=".onHome" type="Transparent"  /> -->
-                        <Title text= "BP 조회" />
+                        <Title text= "전표 조회" />
                     </HBox>
                 </f:heading>
             </f:DynamicPageTitle>
@@ -25,22 +25,33 @@
                 <form:SimpleForm layout="ResponsiveGridLayout">
                     <form:content>  
                         <VBox>
-                            <Label text="BP 코드: " />
-                            <Input id="BP_number" />
+                            <Label text="전표번호 : " />
+                            <Input id="Doc_number" />
                             <layoutData>
                                 <layout:GridData span="XL2 L2 M6 S12" />
                             </layoutData>
                         </VBox>
                         <VBox>
-                            <Label text="BP 명칭: " />
-                            <Input id="BP_name" />
+                            <Label text="증빙일 : " />
+                            <DatePicker id="Doc_docdate" 
+                                   displayFormat="yyyy-MM-dd" 
+                                   valueFormat="yyyy-MM-dd" />
                             <layoutData>
                                 <layout:GridData span="XL2 L2 M6 S12" />
                             </layoutData>
                         </VBox>
                         <VBox>
-                            <Label text="회사 코드 : " />
-                            <ComboBox id="BP_cocd" width="100%"
+                            <Label text="전기일 : " />
+                            <DatePicker id="Doc_postdate" 
+                                   displayFormat="yyyy-MM-dd" 
+                                   valueFormat="yyyy-MM-dd"/>
+                            <layoutData>
+                                <layout:GridData span="XL2 L2 M6 S12" />
+                            </layoutData>
+                        </VBox>
+                        <VBox>
+                            <Label text="회사코드 : " />
+                            <ComboBox id="Doc_cocd" width="100%"
                                     items="{
                                         path: 'CocdModel>/'
                                     }">
@@ -51,29 +62,9 @@
                             </layoutData>
                         </VBox>
                         <VBox>
-                            <Label text="국가/지역 : " />
-                            <MultiInput id="BP_country" 
-                                   showValueHelp="true"
-			                       valueHelpRequest=".onValueHelpCountry"
-                                   valueHelpOnly="true"/>
-                            <layoutData>
-                                <layout:GridData span="XL1 L1 M6 S12" />
-                            </layoutData>
-                        </VBox>
-                        <VBox>
-                            <Label text="도시 : " />
-                            <Input id="BP_city" />
-                            <layoutData>
-                                <layout:GridData span="XL2 L2 M6 S12" />
-                            </layoutData>
-                        </VBox>
-                        <VBox>
-                            <Label text="BP 범주 : " />
-                            <Select width="100%" id="BP_category">
-                                <core:Item text="전체" />
-                                <core:Item text="개인" key="개인"/>
-                                <core:Item text="조직" key="조직"/>
-                            </Select>
+                            <Label text="전표유형 : " />
+                            <Input id="Doc_type" />
+                                 
                             <layoutData>
                                 <layout:GridData span="XL2 L2 M6 S12" />
                             </layoutData>
@@ -91,9 +82,9 @@
                 </f:DynamicPageHeader>             
             </f:header>
 
-        <f:content>
-        <t:Table id="BPmain"
-            rows="{BPModel>/}"
+        <f:content >
+        <t:Table id="Docmain"
+            rows="{DocModel>/}"
             selectionMode="MultiToggle"
             width="auto"
             rowActionCount="1"
@@ -109,69 +100,64 @@
 
             <t:extension>
                 <OverflowToolbar>
-                <Title id="TableName"/>
-                <ToolbarSpacer />
+                    <Title id="TableName"/>
+                    <ToolbarSpacer />
 
-                <Button icon="sap-icon://excel-attachment" tooltip="Excel Download" press=".onDataExport" type="Transparent"  />
-                <MenuButton tooltip="생성" useDefaultActionOnly="true" type="Transparent" icon="sap-icon://add-document">
-                    <menu>
-                        <Menu itemSelected="onMenuAction">
-                                    <MenuItem text="Person" press=".onBPCreate($event, 'A')"  />
-                              
-                                    <MenuItem text="Organization" press=".onBPCreate($event, 'B')" />
-                        </Menu>
-                    </menu>
-                </MenuButton>
+                    <Button icon="sap-icon://excel-attachment" tooltip="Excel Download" press=".onDataExport" type="Transparent"  />
+                    <Button tooltip="생성"  type="Transparent" press=".onDoccreate" icon="sap-icon://add-document"/>
 
-                <Button type="Emphasized" text="생성마법사 TEST"  press=".onBPCreateWizard"/>
-                
                 </OverflowToolbar>     
             </t:extension>
 
             <t:columns>
                         <t:Column hAlign="Center" >
-                    <Label  text="BP 코드" />
+                    <Label  text="전표 번호" />
                     <t:template>
-                        <Text text="{BPModel>BP_number}" />
+                        <Text text="{DocModel>Doc_number}" />
                     </t:template>
                 </t:Column>
                 <t:Column hAlign="Center" >
-                    <Label  text="BP 명칭" />
+                    <Label  text="증빙일" />
                     <t:template>
-                        <Text text="{BPModel>BP_name}" />
+                        <Text text="{DocModel>Doc_docdate}" />
                     </t:template>
                 </t:Column>
                 <t:Column hAlign="Center" >
-                    <Label  text="회사 코드" />
+                    <Label  text="전기일" />
                     <t:template>
-                        <Text text="{BPModel>BP_cocd}" />
+                        <Text text="{DocModel>Doc_postdate}" />
                     </t:template>
                 </t:Column>
                 <t:Column hAlign="Center" >
-                    <Label  text="국가/지역" />
+                    <Label  text="회사코드" />
                     <t:template>
-                        <Text text="{BPModel>BP_country}" />
-                    </t:template>
-                </t:Column>
-                 <t:Column hAlign="Center" >
-                    <Label  text="우편번호" />
-                    <t:template>
-                        <Text text="{BPModel>BP_zipcode}" />
+                        <Text text="{DocModel>Doc_cocd}" />
                     </t:template>
                 </t:Column>
                 <t:Column hAlign="Center" >
-                    <Label  text="도시" />
+                    <Label  text="전표유형" />
                     <t:template>
-                        <Text text="{BPModel>BP_city}" />
+                        <Text text="{DocModel>Doc_type}" />
                     </t:template>
                 </t:Column>
                 <t:Column hAlign="Center" >
-                    <Label  text="BP 범주" />
+                    <Label  text="통화" />
                     <t:template>
-                        <Text text="{BPModel>BP_category}" />
+                        <Text text="{DocModel>Doc_curr}" />
                     </t:template>
-                </t:Column>   
-                
+                </t:Column>
+                <t:Column hAlign="Center" >
+                    <Label  text="헤더텍스트" />
+                    <t:template>
+                        <Text text="{DocModel>Doc_text}" />
+                    </t:template>
+                </t:Column>
+                <t:Column hAlign="Center" >
+                    <Label  text="참조" />
+                    <t:template>
+                        <Text text="{DocModel>Doc_ref}" />
+                    </t:template>
+                </t:Column>
 
             </t:columns>
         </t:Table>

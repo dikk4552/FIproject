@@ -48,14 +48,15 @@ sap.ui.define([
         },
         onCreate: async function () {
             let inputData = {
-                GL_number: String(this.byId("gl").getValue()),
-                GL_coa: String(this.byId("coa").getValue()),
-                GL_accttype: String(this.byId("accttype").getSelectedKey()),
-                GL_acctgroup: String(this.byId("acctgroup").getValue()),
-                GL_pltype: String(this.byId("pltype").getValue()),
-                GL_function: String(this.byId("function").getValue()),
-                GL_shorttext: String(this.byId("shorttext").getValue()),
-                GL_longtext: String(this.byId("longtext").getValue())
+				GL_number:		String(this.byId("gl").getValue()),
+                GL_coa:			String(this.byId("coa").getValue()),
+                GL_accttype:	String(this.byId("accttype").getSelectedKey()),
+                GL_acctgroup:	String(this.byId("acctgroup").getValue()),
+                GL_pltype:		String(this.byId("pltype").getValue()),
+                GL_function:	String(this.byId("function").getValue()),
+                GL_shorttext:	String(this.byId("shorttext").getValue()),
+                GL_longtext:	String(this.byId("longtext").getValue()),
+                GL_deletion:    false
             };
             await $.ajax({
                 type: "POST",

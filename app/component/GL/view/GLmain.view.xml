@@ -94,7 +94,7 @@
                     <ToolbarSpacer/>
                     <Button
                         text="생성"
-                        press="onCreateGL"
+                        press="onNavToCreate"
                         type="Transparent"/>
                 </OverflowToolbar>
             </t:extension>

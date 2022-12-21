@@ -6,8 +6,9 @@ sap.ui.define(
       "use strict";
   
       return BaseController.extend("project1.controller.App", {
+
         onHome : function(){
-          this.getOwnerComponent().getRouter().navTo("Home")
+          this.getOwnerComponent().getRouter().navTo("Home");
         },
         onBP : function(){
           this.getOwnerComponent().getRouter().navTo("BP")
@@ -23,6 +24,8 @@ sap.ui.define(
         onMenuGL : function() {
           this.getOwnerComponent().getRouter().navTo("GL")
         }
+      
+
         }
       );
     }

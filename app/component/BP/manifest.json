@@ -33,6 +33,15 @@
           "localUri": "localService/metadata.xml",
           "odataVersion": "4.0"
         }
+      },
+      "Docservice":{
+        "uri": "/docservice/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "4.0"
+        }
       }
       
     }
@@ -54,7 +63,7 @@
     }
   },
   "sap.ui5": {
-    "flexEnabled": true,
+    "flexEnabled": false,
     "dependencies": {
       "minUI5Version": "1.102.1",
       "libs": {
@@ -69,6 +78,24 @@
       }
     },
     "componentUsages": {
+      "BPComponent" : {
+        "name" : "projectBP",
+        "settings" : {},
+        "componentData" : {},
+        "lazy" : true
+      },
+      "companyComponent" : {
+        "name" : "project3",
+        "settings" : {},
+        "componentData" : {},
+        "lazy" : true
+      },
+      "productComponent" : {
+        "name" : "project4",
+        "settings" : {},
+        "componentData" : {},
+        "lazy" : true
+      }
     },
     "contentDensities": {
       "compact": true,
@@ -94,6 +121,16 @@
       },
       "GL":{
         "dataSource": "GLservice",
+        "preload": true,
+        "settings": {
+          "operationMode" : "Server",
+          "earlyRequests" : true,
+          "synchronizationMode" : "None",
+          "autoExpandSelect" : true
+        }
+      },
+      "Doc":{
+        "dataSource": "Docservice",
         "preload": true,
         "settings": {
           "operationMode" : "Server",
@@ -150,7 +187,6 @@
           }
         }
         
-        
       ],
       "targets": {
         "BPmain" : {
@@ -182,6 +218,8 @@
           "viewName": "BPcreateWizard"
         }
       }
+        
+      
     },
     "rootView": {
       "viewName": "projectBP.view.App",
