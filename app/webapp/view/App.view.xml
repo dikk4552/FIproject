@@ -13,9 +13,9 @@
                 <MenuButton enabled="true" text="메뉴" buttonMode="Split" width="auto">
                     <menu>
                         <Menu>
-                            <MenuItem id="menu1" text="BP" press=".onBP"/>
-                            <MenuItem text="GL" press=".onGL"/>
-                            <MenuItem text="Doc" press=".onDoc"/>
+                            <MenuItem text ="BP" press=".onBPmain"/> 
+                            <MenuItem text ="DOC" press=".onDocmain"/> 
+                            <MenuItem text="GL" press=".onGL" />
                         </Menu>
 
                     </menu>

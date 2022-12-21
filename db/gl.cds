@@ -1,6 +1,6 @@
 namespace FIproject.gl;
 entity GL {
-key GL_number : String @title : 'G/L 계정';
+key GL_number : String @title : 'G/L 계정'; 
 GL_coa : String @title : '계정과목표';
 GL_accttype : String @title : 'G/L 계정 유형';
 GL_acctgroup : String @title : '계정 그룹';

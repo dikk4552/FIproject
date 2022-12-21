@@ -63,7 +63,7 @@
     }
   },
   "sap.ui5": {
-    "flexEnabled": true,
+    "flexEnabled": false,
     "dependencies": {
       "minUI5Version": "1.102.1",
       "libs": {
@@ -78,6 +78,24 @@
       }
     },
     "componentUsages": {
+      "BPComponent" : {
+        "name" : "projectBP",
+        "settings" : {},
+        "componentData" : {},
+        "lazy" : true
+      },
+      "companyComponent" : {
+        "name" : "project3",
+        "settings" : {},
+        "componentData" : {},
+        "lazy" : true
+      },
+      "productComponent" : {
+        "name" : "project4",
+        "settings" : {},
+        "componentData" : {},
+        "lazy" : true
+      }
     },
     "contentDensities": {
       "compact": true,
@@ -141,11 +159,11 @@
       },
       "routes": [
         {
-          "name": "BPhome",
+          "name": "BPmain",
           "pattern": "",
-          "target": [
-            "BPhome"
-          ]
+          "target": {
+            "name": "BPmain"
+          }
         },
         {
           "name": "BPdetail",
@@ -157,20 +175,19 @@
         {
           "name": "BPcreate",
           "pattern": "BPcreate/{num}/{category}",
-          "target": {
-            "name": "BPcreate"
-          }
+          "target": [
+            "BPcreate"
+          ]
         }
-        
         
       ],
       "targets": {
-        "BPhome" : {
+        "BPmain" : {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
-          "viewId": "BPhome",
-          "viewName": "BPhome"
+          "viewId": "BPmain",
+          "viewName": "BPmain"
         },
         "BPdetail" : {
           "viewType": "XML",
@@ -187,6 +204,8 @@
           "viewName": "BPcreate"
         }
       }
+        
+      
     },
     "rootView": {
       "viewName": "projectBP.view.App",
