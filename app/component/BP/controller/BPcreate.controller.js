@@ -6,10 +6,10 @@ sap.ui.define(
         "sap/m/MessageBox"
        
     ],
-    function(Controller, JSONModel, Filter,MessageBox) {
+    function(Controller, JSONModel, Filter, MessageBox) {
        "use strict";
 
-       let Today;
+       let Today, CreateNum, category;
   
       return Controller.extend("projectBP.controller.BPcreate", {
 
@@ -106,7 +106,16 @@ sap.ui.define(
             oComboBox.getBinding('items').filter(aFilter)
         },
 
-        onDataView: async function (sCategory) {      
+        onDataView: async function (sCategory) {  
+            
+            const Cocd=await $.ajax({
+                type:"get",
+                url:"/glservice/CoCd"
+              });
+              
+              var CocdModel=new JSONModel(Cocd.value);
+              this.getView().setModel(CocdModel,"CocdModel");
+
             const BPcreate = await $.ajax({      
                 type: "get",
                 url: "/bpservice/PayTerm"
@@ -144,7 +153,6 @@ sap.ui.define(
             temp.BP_fax = this.byId("BP_fax").getValue();
             temp.BP_email = this.byId("BP_email").getValue();
             temp.BP_website = this.byId("BP_website").getValue();
-        
             var bValidationError=false;
             for(var key in temp){
               if(temp[key]===''){
@@ -157,27 +165,28 @@ sap.ui.define(
                     url: "/bpservice/BP",
                     contentType: "application/json;IEEE754Compatible=true",
                     data:JSON.stringify(temp)
-                });
-                this.onBack();
-            }else{
-              MessageBox.alert("입력이 완료되지 않았습니다.");
-            }
-        
-        
+
+
+        })
+        this.onBack();
+    }else{
+        MessageBox.alert("입력이 완료되지 않았습니다.");
+      }
+ 
        
     },
 
     onClearField: function () {
         this.getView().byId("BP_name").setValue("");
-        this.getView().byId("BP_title").setValue("");
+        this.getView().byId("BP_title").setSelectedKey("");
         this.getView().byId("BP_street").setValue("");
         this.getView().byId("BP_house").setValue("");
         this.getView().byId("BP_zipcode").setValue("");
         this.getView().byId("BP_city").setValue("");
         this.getView().byId("BP_country").setValue("");
         this.getView().byId("BP_language").setValue("");
-        this.getView().byId("BP_cocd").setValue("");
-        this.getView().byId("BP_payterm").setValue("");
+        this.getView().byId("BP_cocd").setSelectedKey("");
+        this.getView().byId("BP_payterm").setSelectedKey("");
         this.getView().byId("BP_manager").setValue("");
         this.getView().byId("BP_estdate").setValue("");
         this.getView().byId("BP_tin").setValue("");
@@ -190,8 +199,9 @@ sap.ui.define(
 
 
            onBack : function() {
-            this.getOwnerComponent().getRouter().navTo("BPhome");
+            this.getOwnerComponent().getRouter().navTo("BPmain");
            }
         
       });
     });
+  

@@ -139,49 +139,22 @@
       },
       "routes": [
         {
-
-          "name": "GL",
+          "name": "GLhome",
           "pattern": "",
           "target": [
-            "GLmain"
-          ]
-        },
-        {
-          "name": "GLcreate",
-          "pattern": "GLcreate",
-          "target": [
-            "GLcreate"
-          ]
-        },
-        {
-          "name": "GLdetail",
-          "pattern": "GLdetail/{num}",
-          "target": [
-            "GLdetail"
+            "GLhome"
           ]
         }
+        
+        
       ],
       "targets": {
-        "GLmain" : {
+        "GLhome" : {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
-          "viewId": "GLmain",
-          "viewName": "GLmain"
-        },
-        "GLcreate" : {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": true,
-          "viewId": "GLcreate",
-          "viewName": "GLcreate"
-        },
-        "GLdetail" : {
-          "viewType": "XML",
-          "transition": "slide",
-          "clearControlAggregation": true,
-          "viewId": "GLdetail",
-          "viewName": "GLdetail"
+          "viewId": "GLhome",
+          "viewName": "GLhome"
         }
       }
     },
