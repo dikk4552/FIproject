@@ -16,8 +16,8 @@
       "toolsId": "d1a40033-ed7a-4cb8-b161-66f0a52632fc"
     },
     "dataSources": {
-      "requestService": {
-        "uri": "/request/",
+      "BPservice":{
+        "uri": "/bpservice/",
         "type": "OData",
         "settings": {
           "annotations": [],
@@ -25,8 +25,17 @@
           "odataVersion": "4.0"
         }
       },
-      "companyService": {
-        "uri": "/company/",
+      "GLservice":{
+        "uri": "/glservice/",
+        "type": "OData",
+        "settings": {
+          "annotations": [],
+          "localUri": "localService/metadata.xml",
+          "odataVersion": "4.0"
+        }
+      },
+      "Docservice":{
+        "uri": "/docservice/",
         "type": "OData",
         "settings": {
           "annotations": [],
@@ -54,7 +63,7 @@
     }
   },
   "sap.ui5": {
-    "flexEnabled": true,
+    "flexEnabled": false,
     "dependencies": {
       "minUI5Version": "1.102.1",
       "libs": {
@@ -69,8 +78,8 @@
       }
     },
     "componentUsages": {
-      "requestComponent" : {
-        "name" : "project2",
+      "BPComponent" : {
+        "name" : "projectBP",
         "settings" : {},
         "componentData" : {},
         "lazy" : true
@@ -99,8 +108,9 @@
           "bundleName": "projectBP.i18n.i18n"
         }
       },
-      "Request" : {
-        "dataSource": "requestService",
+      
+      "BP":{
+        "dataSource": "BPservice",
         "preload": true,
         "settings": {
           "operationMode" : "Server",
@@ -109,8 +119,18 @@
           "autoExpandSelect" : true
         }
       },
-      "Vendor" : {
-        "dataSource": "companyService",
+      "GL":{
+        "dataSource": "GLservice",
+        "preload": true,
+        "settings": {
+          "operationMode" : "Server",
+          "earlyRequests" : true,
+          "synchronizationMode" : "None",
+          "autoExpandSelect" : true
+        }
+      },
+      "Doc":{
+        "dataSource": "Docservice",
         "preload": true,
         "settings": {
           "operationMode" : "Server",
@@ -139,24 +159,53 @@
       },
       "routes": [
         {
-          "name": "BPhome",
+          "name": "BPmain",
           "pattern": "",
+          "target": {
+            "name": "BPmain"
+          }
+        },
+        {
+          "name": "BPdetail",
+          "pattern": "BPdetail/{bpnumber}",
           "target": [
-            "BPhome"
+            "BPdetail"
+          ]
+        },
+        {
+          "name": "BPcreate",
+          "pattern": "BPcreate/{num}/{category}",
+          "target": [
+            "BPcreate"
           ]
         }
         
-        
       ],
       "targets": {
-        "BPhome" : {
+        "BPmain" : {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
-          "viewId": "BPhome",
-          "viewName": "BPhome"
+          "viewId": "BPmain",
+          "viewName": "BPmain"
+        },
+        "BPdetail" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "BPdetail",
+          "viewName": "BPdetail"
+        },
+        "BPcreate" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "BPcreate",
+          "viewName": "BPcreate"
         }
       }
+        
+      
     },
     "rootView": {
       "viewName": "projectBP.view.App",

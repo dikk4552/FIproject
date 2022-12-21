@@ -1,0 +1,233 @@
+<mvc:View controllerName="projectGL.controller.GLdetail"
+    xmlns="sap.m"
+	xmlns:uxap="sap.uxap"
+	xmlns:f="sap.f"
+	xmlns:t="sap.ui.table"
+    xmlns:mvc="sap.ui.core.mvc"
+	xmlns:core="sap.ui.core"
+	xmlns:layout="sap.ui.layout"
+	xmlns:form="sap.ui.layout.form"
+	height="100%">
+
+	<uxap:ObjectPageLayout id="ObjectPageLayout"
+		useIconTabBar="true"
+		enableLazyLoading="true"
+		showTitleInHeaderContent="true"
+		showEditHeaderButton="true"
+		editHeaderButtonPress="handleEditBtnPress"
+		upperCaseAnchorBar="false"> 
+        <!-- useIconTabBar : 탭으로 페이지 이동 -->
+
+		<uxap:headerTitle>
+			<uxap:ObjectPageDynamicHeaderTitle>
+
+				<uxap:actions>
+					<Button text="편집" press="onEdit"			visible="{=!${editModel>/editMode}}"		type="Emphasized"/>
+					<Button text="삭제" press="onDelete"		visible="{=!${GLModel>/GL_deletion} &amp;&amp; !${editModel>/editMode}}"	type="Emphasized"	ariaHasPopup="Dialog"/>
+					<Button text="저장" press="onEditConfirm"	visible="{=${editModel>/editMode}}"			type="Emphasized"/>
+					<Button text="취소" press="onEditCancel"	visible="{=${editModel>/editMode}}"			type="Default"/>
+				</uxap:actions>
+
+				<uxap:expandedHeading>
+					<VBox class="sapUiTinyMarginTop">
+						<Title text="G/L 계정 {GLModel>/GL_number}" wrapping="true"/>
+					</VBox>
+				</uxap:expandedHeading>
+
+				<uxap:expandedContent>
+					<Text text="{GLModel>/GL_shorttext}"/>
+					
+					<FlexBox wrap="Wrap" alignItems="Start" class="sapUiDemoFlexBoxSizeAdjustmentsZeroWidthItems">
+						<VBox>
+							<layoutData>
+								<FlexItemData growFactor="1" />
+							</layoutData>
+							<layout:HorizontalLayout class="sapUiMediumMargin">
+								<Label text="계정과목표 : {GLModel>/GL_coa}"/>
+							</layout:HorizontalLayout>
+						</VBox>
+						<VBox>
+							<layoutData>
+								<FlexItemData growFactor="1" />
+							</layoutData>
+							<layout:HorizontalLayout class="sapUiMediumMargin">
+								<CheckBox text="삭제 표시 (Mark for deletion)" editable="false" selected="{GLModel>/GL_deletion}"/>
+							</layout:HorizontalLayout>
+						</VBox>
+					</FlexBox>
+				</uxap:expandedContent>
+
+			</uxap:ObjectPageDynamicHeaderTitle>
+		</uxap:headerTitle>
+
+		<uxap:headerContent>
+		</uxap:headerContent>
+
+		<uxap:sections>
+			<uxap:ObjectPageSection id="basicSection" title="기본 정보" titleUppercase="false">
+                <uxap:subSections>
+					<uxap:ObjectPageSubSection id="basicSubSection" title="기본 정보" titleUppercase="false">
+						<uxap:blocks>
+							<form:SimpleForm layout="ResponsiveGridLayout">
+								<core:Title text="관리"/>
+								<VBox>
+									<layoutData>
+						            	<layout:GridData span="XL6 L6 M6 S12"/>
+					            	</layoutData>
+									<VBox class="sapUiTinyMarginBottom" height="2.5rem">
+										<Label	text="계정과목표 : "/>
+										<Text		id="coa"		text="{GLModel>/GL_coa}"/>
+									</VBox>
+									<VBox class="sapUiTinyMarginBottom" height="2.5rem">
+										<Label	text="G/L 계정 유형 : "/>
+										<Text		id="accttype"		text="{GLModel>/GL_accttype}"			visible="{=!${editModel>/editMode}}"/>
+										<Select	id="accttypeInput"	visible="{=${editModel>/editMode}}"		width="100%">
+											<core:Item text="X (Balance Sheet Account)" 			key="X (Balance Sheet Account)"/>
+											<core:Item text="C (Cash Account)"						key="C (Cash Account)"/>
+											<core:Item text="N (Nonoperating Expense or Income)"	key="N (Nonoperating Expense or Income)"/>
+											<core:Item text="P (Primary Costs or Revenue)"			key="P (Primary Costs or Revenue)"/>
+											<core:Item text="S (Secondary Costs)"					key="S (Secondary Costs)"/>
+										</Select>
+									</VBox>
+									<VBox class="sapUiTinyMarginBottom" height="2.5rem">
+										<Label	text="계정 그룹 : "/>
+										<Text		id="acctgroup"		text="{GLModel>/GL_acctgroup}"	visible="{=!${editModel>/editMode}}"/>
+										<Input	id="acctgroupInput"	visible="{=${editModel>/editMode}}" showValueHelp="true" valueHelpRequest="onOpenAcctGroupDialog"/>
+									</VBox>
+									<VBox class="sapUiTinyMarginBottom" height="2.5rem">
+										<Label	text="손익계산서 계정 유형 : "/>
+										<Text		id="pltype"			text="{GLModel>/GL_pltype}"/>
+									</VBox>
+									<VBox class="sapUiTinyMarginBottom" height="2.5rem">
+										<Label	text="기능 영역 : "/>
+										<Text		id="function"		text="{GLModel>/GL_function}"/>
+									</VBox>
+								</VBox>
+								<core:Title text="내역"/>
+								<VBox>
+									<layoutData>
+						            	<layout:GridData span="XL6 L6 M6 S12"/>
+					            	</layoutData>
+									<VBox class="sapUiTinyMarginBottom" height="2.5rem">
+										<Label	text="내역 : "/>
+										<Text		id="shorttext"		text="{GLModel>/GL_shorttext}"	visible="{=!${editModel>/editMode}}"/>
+										<Input	id="shorttextInput"	visible="{=${editModel>/editMode}}"/>
+									</VBox>
+									<VBox class="sapUiTinyMarginBottom" height="2.5rem">
+										<Label	text="G/L 계정 설명 : "/>
+										<Text		id="longtext"		text="{GLModel>/GL_longtext}"	visible="{=!${editModel>/editMode}}"/>
+										<Input	id="longtextInput"	visible="{=${editModel>/editMode}}"/>
+									</VBox>
+								</VBox>
+							</form:SimpleForm>
+						</uxap:blocks>
+					</uxap:ObjectPageSubSection>
+					<uxap:ObjectPageSubSection id="cocdSubSection" title="회사코드 데이터" titleUppercase="false">
+						<t:Table	id="CoCdTable" rows="{CoCdModel>/value}" visibleRowCount="5"
+									selectionMode="None" width="auto" class="sapUiSmallMargin">
+							<t:columns>
+								<t:Column hAlign="Left" >
+									<Label text="회사코드" textAlign="Left" width="100%"/>
+									<t:template>
+										<Text text="{CoCdModel>CoCd_number}"/>
+									</t:template>
+								</t:Column>
+								<t:Column hAlign="Left" >
+									<Label text="회사이름" textAlign="Left" width="100%"/>
+									<t:template>
+										<Text text="{CoCdModel>CoCd_name}"/>
+									</t:template>
+								</t:Column>
+								<t:Column hAlign="Left" >
+									<Label text="관리회계영역" textAlign="Left" width="100%"/>
+									<t:template>
+										<Text text="{CoCdModel>CoCd_coarea}"/>
+									</t:template>
+								</t:Column>
+								<t:Column hAlign="Left" >
+									<Label text="계정과목표" textAlign="Left" width="100%"/>
+									<t:template>
+										<Text text="{CoCdModel>CoCd_coa}"/>
+									</t:template>
+								</t:Column>
+								<t:Column hAlign="Left" >
+									<Label text="통화" textAlign="Left" width="100%"/>
+									<t:template>
+										<Text text="{CoCdModel>CoCd_curr}"/>
+									</t:template>
+								</t:Column>
+							</t:columns>
+						</t:Table>
+					</uxap:ObjectPageSubSection>
+				</uxap:subSections>
+			</uxap:ObjectPageSection>
+
+			<uxap:ObjectPageSection id="mngSection" title="관리" titleUppercase="false">
+				<uxap:subSections>
+                    <uxap:ObjectPageSubSection id="mngSubSection1" title="삭제 플래그" titleUppercase="false">
+                        <uxap:blocks>
+							<form:SimpleForm layout="ResponsiveGridLayout">
+								<VBox>
+									<layoutData>
+										<layout:GridData span="XL6 L6 M6 S12"/>
+									</layoutData>
+									<VBox class="sapUiTinyMarginTopBottom" height="2.5rem">
+										<CheckBox id="deletion" text="삭제 표시 (Mark for deletion)" editable="false" selected="{GLModel>/GL_deletion}"/>
+									</VBox>
+									<VBox class="sapUiTinyMarginBottom" height="2.5rem">
+										<Label	id="delreasonLabel"	text="삭제 사유 : "				visible="{=${GLModel>/GL_deletion}}" textAlign="Left" width="100%"/>
+										<Text	id="delreason"		text="{GLModel>/GL_delreason}"	visible="{=${GLModel>/GL_deletion}}"/>
+									</VBox>
+								</VBox>
+							</form:SimpleForm>
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+					<uxap:ObjectPageSubSection id="mngSubSection2" title="변경 이력 조회" titleUppercase="false">
+                        <t:Table	id="HistoryTable" rows="{HistoryModel>/value}" visibleRowCount="15"
+									selectionMode="None" width="auto" class="sapUiSmallMargin">
+							<t:columns>
+								<t:Column hAlign="Left" >
+									<Label text="변경이력번호" textAlign="Left" width="100%"/>
+									<t:template>
+										<Text text="{HistoryModel>History_number}"/>
+									</t:template>
+								</t:Column>
+								<t:Column hAlign="Left" >
+									<Label text="테이블명" textAlign="Left" width="100%"/>
+									<t:template>
+										<Text text="{HistoryModel>History_table}"/>
+									</t:template>
+								</t:Column>
+								<t:Column hAlign="Left" >
+									<Label text="컬럼명" textAlign="Left" width="100%"/>
+									<t:template>
+										<Text text="{HistoryModel>History_column}"/>
+									</t:template>
+								</t:Column>
+								<t:Column hAlign="Left" >
+									<Label text="변경 전" textAlign="Left" width="100%"/>
+									<t:template>
+										<Text text="{HistoryModel>History_old}"/>
+									</t:template>
+								</t:Column>
+								<t:Column hAlign="Left" >
+									<Label text="변경 후" textAlign="Left" width="100%"/>
+									<t:template>
+										<Text text="{HistoryModel>History_new}"/>
+									</t:template>
+								</t:Column>
+								<t:Column hAlign="Left" >
+									<Label text="변경일시" textAlign="Left" width="100%"/>
+									<t:template>
+										<Text text="{HistoryModel>History_datetime}"/>
+									</t:template>
+								</t:Column>
+							</t:columns>
+						</t:Table>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+			</uxap:ObjectPageSection>
+
+		</uxap:sections>
+	</uxap:ObjectPageLayout>
+</mvc:View>

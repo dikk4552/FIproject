@@ -1,0 +1,370 @@
+<mvc:View controllerName="projectBP.controller.BPdetail"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+    xmlns:form="sap.ui.layout.form"
+    xmlns:core="sap.ui.core"
+    xmlns:uxap="sap.uxap" xmlns:l="sap.ui.layout" 
+    xmlns:viz="sap.viz.ui5.controls" 
+    xmlns:viz.data="sap.viz.ui5.data"
+    xmlns:vizFeeds="sap.viz.ui5.controls.common.feeds"
+    xmlns:t="sap.ui.table" height="100%">
+
+    <uxap:ObjectPageLayout id="ObjectPageLayout" headerContentPinned="true" useIconTabBar="true" showTitleInHeaderContent="true" alwaysShowContentHeader="true">
+        <uxap:headerTitle>
+            <uxap:ObjectPageDynamicHeaderTitle>
+                <uxap:heading>
+                    <HBox width="100%">
+                        <Button icon="sap-icon://nav-back" press=".onNavToBack" type="Transparent"/>
+                        <Title text="{BPModel>/BP_name}"/>
+                        
+                    </HBox>
+                
+                </uxap:heading>
+                <uxap:actions>
+                    <Button type="Emphasized" text="편집" press=".onEdit" visible="{=!${oModel>/EditMode}}"/>
+                    <Button type="Emphasized" text="삭제" press=".onDelete" visible="{=!${oModel>/EditMode}}"/>
+                    <Button type="Emphasized" text="저장" press=".onConfirm" visible="{=${oModel>/EditMode}}"/>
+                    <Button type="Emphasized" text="취소" press=".onCancel" visible="{=${oModel>/EditMode}}"/>
+                </uxap:actions>
+                <uxap:expandedContent >
+                <Text class="sapUiMediumMarginBegin" text="{BPModel>/BP_number}"/>
+                <FlexBox alignItems="Start" class="sapUiDemoFlexBoxSizeAdjustmentsZeroWidthItems">
+                
+                    <VBox ><core:Icon class="sapUiMediumMarginBegin sapUiTinyMarginTop sapUiLargeMarginEnd"
+                    backgroundColor="paleturquoise"
+                    size="50px"
+                    src="sap-icon://building"
+                    width="55px"
+                    visible="{=${BPModel>/BP_category}==='개인'?false:true}"/>
+                    <core:Icon class="sapUiMediumMarginBegin sapUiTinyMarginTop sapUiLargeMarginEnd"
+                    backgroundColor="paleturquoise"
+                    size="50px"
+                    src="sap-icon://customer"
+                    width="55px"
+                    visible="{=${BPModel>/BP_category}==='개인'?true:false}"/>
+                    </VBox>
+                    <VBox>
+                        <Text class="sapUiSmallMarginTop sapUiTinyMarginBegin" text="BP 카테고리: {BPModel>/BP_category}"/>
+                        <layoutData>
+						<FlexItemData growFactor="2" />
+					</layoutData>
+                    </VBox>
+                    <VBox>
+                     <Text text="회사 코드"/>
+                     <Text class="sapUiTinyMarginTop" text="{BPModel>/BP_cocd}"/>
+                        <layoutData>
+						<FlexItemData growFactor="2" />
+					</layoutData>
+                    </VBox>
+                    <VBox>
+                     <Text text="사업자 등록번호"/>
+                     <Text class="sapUiTinyMarginTop" text="{BPModel>/BP_tin}"/>
+                        <layoutData>
+						<FlexItemData growFactor="3" />
+					</layoutData>
+                    </VBox>
+                    <VBox>
+                     <Text text="웹사이트"/>
+                     <Link class="sapUiTinyMarginTop" text="{BPModel>/BP_website}" target="_blank" href="{BPModel>/BP_website}"/>
+
+                        <layoutData>
+						<FlexItemData growFactor="3" />
+					</layoutData>
+                    </VBox>
+                
+                </FlexBox>
+                
+                </uxap:expandedContent>
+            </uxap:ObjectPageDynamicHeaderTitle>
+        </uxap:headerTitle>
+        <uxap:sections>
+            <uxap:ObjectPageSection titleUppercase="false" id="normaldata" title="기본 데이터">
+                <uxap:subSections>
+                <uxap:ObjectPageSubSection id="normaldata1" title="일반 정보" titleUppercase="false">
+                <uxap:blocks>
+                    
+                        <form:SimpleForm layout="ResponsiveGridLayout">
+                        <VBox class="sapUiTinyMarginBottom" height="2.5rem">
+                                <Label text="BP 번호: "/>
+	                        	<Text text="{BPModel>/BP_number}"/>
+                                <layoutData>
+						            <l:GridData span="XL3 L4 M6 S12"/>
+					            </layoutData>
+                        </VBox>
+                        <VBox class="sapUiTinyMarginBottom" height="2.5rem">
+                                <Label text="BP 카테고리: "/>
+	                        	<Text text="{BPModel>/BP_category}"/>
+                                <layoutData>
+						            <l:GridData span="XL3 L4 M6 S12"/>
+					            </layoutData>
+                        </VBox>
+                        <VBox class="sapUiTinyMarginBottom" width="70%" height="2.5rem">
+                                <Label text="BP 이름: "/>
+	                        	<Text id="oldBPname" text="{BPModel>/BP_name}" visible="{=!${oModel>/PEditMode}}"/>
+                                <Input id="InputBPname" value="" visible="{=${oModel>/PEditMode}}"/>
+                                <layoutData>
+						            <l:GridData span="XL3 L4 M6 S12"/>
+					            </layoutData>
+                        </VBox>
+                        <VBox class="sapUiTinyMarginBottom" height="2.5rem">
+                                <Label text="회사코드: "/>
+	                        	<Text text="{BPModel>/BP_cocd}"/>
+                                <layoutData>
+						            <l:GridData span="XL3 L4 M6 S12"/>
+					            </layoutData>
+                        </VBox>
+                        
+                        <VBox class="sapUiTinyMarginBottom" height="2.5rem">
+                                <Label text="생성일자: "/>
+	                        	<Text text="{BPModel>/BP_createdate}"/>
+                                <layoutData>
+						            <l:GridData span="XL3 L4 M6 S12"/>
+					            </layoutData>
+                        </VBox>
+                        
+                        <VBox class="sapUiTinyMarginBottom" width="70%" height="2.5rem">
+                                <Label text="담당자: "/>
+	                        	<Text id="oldBPmanager" text="{BPModel>/BP_manager}" visible="{=!${oModel>/CEditMode}}"/>
+                                <Input id="InputBPmanager" value="" visible="{=${oModel>/CEditMode}}"/>
+                                <layoutData>
+						            <l:GridData span="XL3 L4 M6 S12"/>
+					            </layoutData>
+                        </VBox>
+                        <VBox class="sapUiTinyMarginBottom" width="70%" height="2.5rem">
+                                <Label text="개인 칭호: "/>
+	                        	<Text id="oldBPtitle" text="{BPModel>/BP_title}" visible="{=!${oModel>/PEditMode}}"/>
+                                <Select id="SelectBPTitle" width="100%" visible="{=${oModel>/PEditMode}}">
+                                    <core:Item text="Mr." key="Mr."/>
+                                    <core:Item text="Ms." key="Ms."/>
+                                </Select>
+                                <layoutData>
+						            <l:GridData span="XL3 L4 M6 S12"/>
+					            </layoutData>
+                        </VBox>
+                        <VBox class="sapUiTinyMarginBottom" height="2.5rem">
+                                <Label text="생일/설립일: "/>
+	                        	<Text text="{BPModel>/BP_estdate}"/>
+                                <layoutData>
+						            <l:GridData span="XL3 L4 M6 S12"/>
+					            </layoutData>
+                        </VBox>
+                    </form:SimpleForm>
+                    </uxap:blocks>
+                    
+                </uxap:ObjectPageSubSection>
+                <uxap:ObjectPageSubSection id="normaldata2" title="고객 정보" titleUppercase="false">
+                   <uxap:blocks>
+                    <form:SimpleForm layout="ResponsiveGridLayout">
+                        <VBox class="sapUiTinyMarginBottom" width="70%" height="2.5rem">
+                                <Label text="전화번호: "/>
+	                        	<Text id="oldBPphone" text="{BPModel>/BP_phone}" visible="{=!${oModel>/EditMode}}"/>
+                                <Input id="InputBPphone" value="" visible="{=${oModel>/EditMode}}"/>
+                                <layoutData>
+						            <l:GridData span="XL3 L4 M6 S12"/>
+					            </layoutData>
+                        </VBox>
+                        <VBox class="sapUiTinyMarginBottom" height="2.5rem">
+                                <Label text="이메일: "/>
+	                        	<Text text="{BPModel>/BP_email}"/>
+                                <layoutData>
+						            <l:GridData span="XL3 L4 M6 S12"/>
+					            </layoutData>
+                        </VBox>
+                        <VBox class="sapUiTinyMarginBottom" height="2.5rem">
+                                <Label text="사업자 등록번호: "/>
+	                        	<Text text="{BPModel>/BP_tin}"/>
+                                <layoutData>
+						            <l:GridData span="XL3 L4 M6 S12"/>
+					            </layoutData>
+                        </VBox>
+                        <VBox class="sapUiTinyMarginBottom" width="70%" height="2.5rem">
+                                <Label text="웹사이트: "/>
+	                        	<Text id="oldBPwebsite" text="{BPModel>/BP_website}" visible="{=!${oModel>/EditMode}}"/>
+                                <Input id="InputBPwebsite" value="" visible="{=${oModel>/EditMode}}"/>
+                                <layoutData>
+						            <l:GridData span="XL3 L4 M6 S12"/>
+					            </layoutData>
+                        </VBox>
+                        <VBox class="sapUiTinyMarginBottom" height="2.5rem"> 
+                                <Label text="업종: "/>
+	                        	<Text text="{BPModel>/BP_industry}"/>
+                                <layoutData>
+						            <l:GridData span="XL3 L4 M6 S12"/>
+					            </layoutData>
+                        </VBox>
+                        <VBox class="sapUiTinyMarginBottom" height="2.5rem">
+                                <Label text="언어: "/>
+	                        	<Text text="{BPModel>/BP_language}"/>
+                                <layoutData>
+						            <l:GridData span="XL3 L4 M6 S12"/>
+					            </layoutData>
+                        </VBox>
+                        <VBox class="sapUiTinyMarginBottom" height="2.5rem">
+                                <Label text="팩스: "/>
+	                        	<Text text="{BPModel>/BP_fax}"/>
+                                <layoutData>
+						            <l:GridData span="XL3 L4 M6 S12"/>
+					            </layoutData>
+                        </VBox>
+                        <VBox class="sapUiTinyMarginBottom" height="2.5rem">
+                                <Label text="지급조건: "/>
+	                        	<Text text="{BPModel>/BP_payterm}"/>
+                                <layoutData>
+						            <l:GridData span="XL3 L4 M6 S12"/>
+					            </layoutData>
+                        </VBox>
+                    </form:SimpleForm>
+                        
+                    </uxap:blocks> 
+                </uxap:ObjectPageSubSection>
+                <uxap:ObjectPageSubSection id="normaldata3" title="주소" titleUppercase="false">
+                   <uxap:blocks>
+                    
+                    <form:SimpleForm layout="ResponsiveGridLayout">
+                        
+                        <VBox class="sapUiTinyMarginBottom" width="70%" height="2.5rem">
+                                <Label text="도로주소: "/>
+	                        	<Text id="oldBPstreet" text="{BPModel>/BP_street}"  visible="{=!${oModel>/EditMode}}"/>
+                                <Input id="InputBPstreet" value="" visible="{=${oModel>/EditMode}}"/>
+                                <layoutData>
+						            <l:GridData span="XL3 L4 M6 S12"/>
+					            </layoutData>
+                        </VBox>
+                        <VBox class="sapUiTinyMarginBottom" width="70%" height="2.5rem">
+                                <Label text="우편번호: "/>
+	                        	<Text id="oldBPzipcode" text="{BPModel>/BP_zipcode}"  visible="{=!${oModel>/EditMode}}"/>
+                                <Input id="InputBPzipcode" value="" visible="{=${oModel>/EditMode}}"/>
+                                <layoutData>
+						            <l:GridData span="XL3 L4 M6 S12"/>
+					            </layoutData>
+                        </VBox>
+                        <VBox class="sapUiTinyMarginBottom" width="70%" height="2.5rem">
+                                <Label text="국가/지역: "/>
+	                        	<!-- <Text id="oldBPcountry" text="{BPModel>/BP_country}"  visible="{=!${oModel>/EditMode}}"/> -->
+                                <!-- <Input id="InputBPcountry" value="" visible="{=${oModel>/EditMode}}"/> -->
+                                <ObjectStatus visible="{=!${oModel>/EditMode}}" id="oldBPcountry"/>
+                                <Select id="SelectBPcountry" width="100%"
+                                        items="{path: 'BPregionModel>/'}"
+                                        visible="{=${oModel>/EditMode}}">
+                                    <core:Item key="{BPregionModel>Reg_number}" text="{BPregionModel>Reg_name} ({BPregionModel>Reg_number})"/>
+
+                                </Select>
+                                <layoutData>
+						            <l:GridData span="XL3 L4 M6 S12"/>
+					            </layoutData>
+                        </VBox>
+                        <VBox class="sapUiTinyMarginBottom" width="70%" height="2.5rem">
+                                <Label text="번지: "/>
+	                        	<Text id="oldBPhouse" text="{BPModel>/BP_house}"  visible="{=!${oModel>/EditMode}}"/>
+                                <Input id="InputBPhouse" value="" visible="{=${oModel>/EditMode}}"/>
+                                <layoutData>
+						            <l:GridData span="XL3 L4 M6 S12"/>
+					            </layoutData>
+                        </VBox>
+                        <VBox class="sapUiTinyMarginBottom" width="70%" height="2.5rem">
+                                <Label text="도시: "/>
+	                        	<Text id="oldBPcity" text="{BPModel>/BP_city}"  visible="{=!${oModel>/EditMode}}"/>
+                                <Input id="InputBPcity" value="" visible="{=${oModel>/EditMode}}"/>
+                                <layoutData>
+						            <l:GridData span="XL3 L4 M6 S12"/>
+					            </layoutData>
+                        </VBox>
+                    </form:SimpleForm>
+                    </uxap:blocks> 
+                </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+            
+            <uxap:ObjectPageSection titleUppercase="false" id="Documents" title="지급 전표 조회">
+                <uxap:subSections>
+                    <uxap:ObjectPageSubSection id="goalsSS1" titleUppercase="false">
+                        <uxap:blocks>
+                        <l:ResponsiveSplitter defaultPane="default">
+                            <l:PaneContainer >
+                                    <l:SplitPane>
+                                        <l:layoutData>
+						                    <l:SplitterLayoutData size="45rem" resizable="false" />
+					                    </l:layoutData>
+                                        <Panel headerText="Payment Term Chart" backgroundDesign="Transparent" >
+                                            <viz:VizFrame class="sapUiSmallMarginBegin" id="idVizFrame" uiConfig="{applicationSet:'fiori'}"
+                                                        vizType='bar' selectData=".onSelectChart" deselectData=".onDeselectChart">
+                                            <viz:dataset>
+                                                <viz.data:FlattenedDataset id="chartDataSet" data="{DataModel>/Charts}">
+                                                    <viz.data:dimensions>
+                                                        <viz.data:DimensionDefinition name="Payment Term" value="{DataModel>Term}" displayValue="{DataModel>Term}"/>
+                                                    </viz.data:dimensions>
+                                                    <viz.data:measures>
+                                                        <viz.data:MeasureDefinition name="Amount" value="{DataModel>금액}"/>
+                                                    </viz.data:measures>
+                                                </viz.data:FlattenedDataset>
+                                            </viz:dataset>  
+                                            <viz:feeds>
+                                                <vizFeeds:FeedItem id='valueAxisFeed' type="Measure" uid="valueAxis" values="Amount"/>
+                                                <vizFeeds:FeedItem type="Dimension" uid="categoryAxis" values="Payment Term"/>
+                                            </viz:feeds>          
+                                            </viz:VizFrame>
+                                        </Panel>
+                                    </l:SplitPane>
+
+                                <l:SplitPane>
+                                    <l:layoutData>
+					                    <l:SplitterLayoutData resizable="false" />
+				                    </l:layoutData>
+                                    <Panel headerText="지급 전표 목록" backgroundDesign="Transparent">
+                                            <t:Table id="DocTable" rows="{DRDocModel>/}" width="100%" visibleRowCount="14" cellClick=".onCellClick" selectionMode="None">
+                                            
+                                                <t:columns>
+                                                     <t:Column hAlign="Center">
+                                                         <Label text="전표번호"/>
+                                                        <t:template>
+                                                            <Text text="{DRDocModel>Doc_number}"/>
+                                                        </t:template>
+                                                    </t:Column>
+                                                    <t:Column hAlign="Center">
+                                                        <Label text="증빙일"/>
+                                                        <t:template>
+                                                            <Text text="{DRDocModel>Doc_docdate}"/>
+                                                        </t:template>
+                                                    </t:Column>
+                                                    <t:Column hAlign="Center">
+                                                        <Label text="전기일"/>
+                                                        <t:template>
+                                                            <Text text="{DRDocModel>Doc_postdate}"/>
+                                                        </t:template>
+                                                    </t:Column>
+                                                    <t:Column hAlign="Center">
+                                                        <Label text="전표유형"/>
+                                                        <t:template>
+                                                            <Text text="{DRDocModel>Doc_type}"/>
+                                                        </t:template>
+                                                    </t:Column>
+                                                    <t:Column hAlign="Center">
+                                                        <Label text="헤더텍스트"/>
+                                                        <t:template>
+                                                            <Text text="{DRDocModel>Doc_text}"/>
+                                                        </t:template>
+                                                    </t:Column>
+                                                    <t:Column hAlign="Center">
+                                                        <Label text="금액"/>
+                                                        <t:template>
+                                                            <!-- <Text text="{DocModel>Doc_D_amount}"/> -->
+                                                            <ObjectStatus text="{path: 'DRDocModel>Doc_D_amount',
+                                                                                formatter:'.formatter.numberWithCommas'}"/>
+                                                        </t:template>
+                                                    </t:Column>
+                                                 </t:columns>
+                                             </t:Table>
+                                        </Panel>
+                                </l:SplitPane>
+                            </l:PaneContainer>
+                        </l:ResponsiveSplitter>
+                                
+                        </uxap:blocks>
+                    </uxap:ObjectPageSubSection>
+                </uxap:subSections>
+            </uxap:ObjectPageSection>
+        </uxap:sections>
+    </uxap:ObjectPageLayout>
+
+    
+</mvc:View>

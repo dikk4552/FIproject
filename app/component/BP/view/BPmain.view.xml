@@ -1,4 +1,4 @@
-<mvc:View controllerName="projectBP.controller.BPhome"    
+<mvc:View controllerName="projectBP.controller.BPmain"    
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns="sap.m"   
     xmlns:f="sap.f" 
@@ -13,6 +13,7 @@
             <f:DynamicPageTitle>
                 <f:heading>
                     <HBox>
+                        <!-- <Button icon="sap-icon://nav-back" press=".onHome" type="Transparent"  /> -->
                         <Title text= "BP 조회" />
                     </HBox>
                 </f:heading>
@@ -23,32 +24,30 @@
                 <f:DynamicPageHeader pinnable="true">
                 <form:SimpleForm layout="ResponsiveGridLayout">
                     <form:content>  
-                        <VBox height="3rem">
-                            <Label text="우편번호 : " />
-                            <Input id="BP_zipcode" />
-                            <layoutData>
-                                <layout:GridData span="XL1 L1 M6 S12" />
-                            </layoutData>
-                        </VBox>
-                        <VBox height="3rem">
-                            <Label text="비즈니스 파트너 : " />
+                        <VBox>
+                            <Label text="BP 코드: " />
                             <Input id="BP_number" />
                             <layoutData>
-                                <layout:GridData span="XL1 L1 M6 S12" />
+                                <layout:GridData span="XL2 L2 M6 S12" />
                             </layoutData>
                         </VBox>
                         <VBox>
-                            <Label text="도로 주소 : " />
-                            <Input id="BP_street" />
+                            <Label text="BP 명칭: " />
+                            <Input id="BP_name" />
                             <layoutData>
-                                <layout:GridData span="XL1 L1 M6 S12" />
+                                <layout:GridData span="XL2 L2 M6 S12" />
                             </layoutData>
                         </VBox>
                         <VBox>
-                            <Label text="도시 : " />
-                            <Input id="BP_city" />
+                            <Label text="회사 코드 : " />
+                            <ComboBox id="BP_cocd" width="100%"
+                                    items="{
+                                        path: 'CocdModel>/'
+                                    }">
+                                <core:Item key="{CocdModel>CoCd_number}" text="{CocdModel>CoCd_number}"/>
+                            </ComboBox>
                             <layoutData>
-                                <layout:GridData span="XL1 L1 M6 S12" />
+                                <layout:GridData span="XL2 L2 M6 S12" />
                             </layoutData>
                         </VBox>
                         <VBox>
@@ -58,7 +57,14 @@
 			                       valueHelpRequest=".onValueHelpContry"
                                    valueHelpOnly="true"/>
                             <layoutData>
-                                <layout:GridData span="XL1 L1 M6 S12" />
+                                <layout:GridData span="XL2 L2 M6 S12" />
+                            </layoutData>
+                        </VBox>
+                        <VBox>
+                            <Label text="도시 : " />
+                            <Input id="BP_city" />
+                            <layoutData>
+                                <layout:GridData span="XL2 L2 M6 S12" />
                             </layoutData>
                         </VBox>
                         <VBox>
@@ -69,24 +75,10 @@
                                 <core:Item text="조직" key="조직"/>
                             </Select>
                             <layoutData>
-                                <layout:GridData span="XL1 L1 M6 S12" />
+                                <layout:GridData span="XL2 L2 M6 S12" />
                             </layoutData>
                         </VBox>
-                        <VBox>
-                            <Label text="회사 코드 : " />
-                            <!-- <ComboBox width="100%" id="BP_cocd" >
-                                <core:Item text="1010" key="1010"/>
-                            </ComboBox> -->
-                            <ComboBox id="BP_cocd" width="100%"
-                                    items="{
-                                        path: 'CocdModel>/'
-                                    }">
-                                <core:Item key="{CocdModel>CoCd_number}" text="{CocdModel>CoCd_number}"/>
-                            </ComboBox>
-                            <layoutData>
-                                <layout:GridData span="XL1 L1 M6 S12" />
-                            </layoutData>
-                        </VBox>
+                        
                         <FlexBox justifyContent="End"> 
                             <Button text="검색" type="Emphasized" press=".onSearch" />
                             <Button text="초기화" type="Transparent" press=".onReset" class="sapUiTinyMarginBegin" />
@@ -99,10 +91,10 @@
                 </f:DynamicPageHeader>             
             </f:header>
 
-        <f:content class="sapUiSmallMargin">
+        <f:content>
         <t:Table id="BPmain"
             rows="{BPModel>/}"
-            selectionMode="None"
+            selectionMode="MultiToggle"
             width="auto"
             rowActionCount="1"
             visibleRowCountMode="Auto">
@@ -120,28 +112,30 @@
                 <Title id="TableName"/>
                 <ToolbarSpacer />
 
-             	<MenuButton text="생성" useDefaultActionOnly="true" type="Transparent">
+                <Button icon="sap-icon://excel-attachment" tooltip="Excel Download" press=".onDataExport" type="Transparent"  />
+                <MenuButton tooltip="생성" useDefaultActionOnly="true" type="Transparent" icon="sap-icon://add-document">
                     <menu>
                         <Menu itemSelected="onMenuAction">
-                                    <MenuItem text="Person" press=".onBPCreate($event, 'A')" type="Active"  />
+                                    <MenuItem text="Person" press=".onBPCreate($event, 'A')"  />
                               
-                                    <MenuItem text="Organization" press=".onBPCreate($event, 'B')" type="Active" />
+                                    <MenuItem text="Organization" press=".onBPCreate($event, 'B')"/>
                         </Menu>
                     </menu>
                 </MenuButton>
+
                 
                 </OverflowToolbar>     
             </t:extension>
 
             <t:columns>
-                <t:Column hAlign="Center" >
-                    <Label  text="BP 번호" />
+                        <t:Column hAlign="Center" >
+                    <Label  text="BP 코드" />
                     <t:template>
                         <Text text="{BPModel>BP_number}" />
                     </t:template>
                 </t:Column>
-                        <t:Column hAlign="Center" >
-                    <Label  text="비즈니스 파트너" />
+                <t:Column hAlign="Center" >
+                    <Label  text="BP 명칭" />
                     <t:template>
                         <Text text="{BPModel>BP_name}" />
                     </t:template>
@@ -152,23 +146,22 @@
                         <Text text="{BPModel>BP_cocd}" />
                     </t:template>
                 </t:Column>
-                
                 <t:Column hAlign="Center" >
-                    <Label  text="도시" />
+                    <Label  text="국가/지역" />
                     <t:template>
-                        <Text text="{BPModel>BP_city}" />
+                        <Text text="{BPModel>BP_country}" />
                     </t:template>
                 </t:Column>
-                <t:Column hAlign="Center" >
+                 <t:Column hAlign="Center" >
                     <Label  text="우편번호" />
                     <t:template>
                         <Text text="{BPModel>BP_zipcode}" />
                     </t:template>
                 </t:Column>
                 <t:Column hAlign="Center" >
-                    <Label  text="국가/지역" />
+                    <Label  text="도시" />
                     <t:template>
-                        <Text text="{BPModel>BP_country}" />
+                        <Text text="{BPModel>BP_city}" />
                     </t:template>
                 </t:Column>
                 <t:Column hAlign="Center" >
