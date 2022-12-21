@@ -175,8 +175,11 @@ sap.ui.define([
         onGL_list: function () {
             this.getOwnerComponent().getRouter().navTo("GL");
         },
-        onDoc_list: function () {
+		onDoc_list: function () {
             this.getOwnerComponent().getRouter().navTo("Doc");
+        },
+        onNews: function () {
+            window.open('https://news.sap.com/'); 
         }
-    });
+	});
 });
