@@ -17,7 +17,7 @@
     },
     "dataSources": {
       "requestService": {
-        "uri": "/request/",
+        "uri": "/Doc/",
         "type": "OData",
         "settings": {
           "annotations": [],
@@ -70,13 +70,13 @@
     },
     "componentUsages": {
       "requestComponent" : {
-        "name" : "project2",
+        "name" : "projectBP",
         "settings" : {},
         "componentData" : {},
         "lazy" : true
       },
       "companyComponent" : {
-        "name" : "project3",
+        "name" : "projectDoc",
         "settings" : {},
         "componentData" : {},
         "lazy" : true
@@ -99,8 +99,8 @@
           "bundleName": "projectDoc.i18n.i18n"
         }
       },
-      "Request" : {
-        "dataSource": "requestService",
+      "Doc" : {
+        "dataSource": "DocService",
         "preload": true,
         "settings": {
           "operationMode" : "Server",
@@ -140,19 +140,60 @@
       "routes": [
         {
           "name": "Dochome",
+<<<<<<< HEAD
+          "pattern": "Dochome",
+          "target": [
+            "Dochome"
+          ]
+        },
+        
+        {
+          "name": "Docmain",
+          "pattern": "",
+          "target": [
+            "Docmain"
+          ]
+        },
+        
+        {
+          "name": "Doccreate",
+          "pattern": "Doccreate/{num}",
+          "target": [
+            "Doccreate"
+=======
           "pattern": "",
           "target": [
             "Dochome"
+>>>>>>> master
           ]
         }        
       ],
       "targets": {
-        "GLhome" : {
+        "Dochome" : {
           "viewType": "XML",
           "transition": "slide",
           "clearControlAggregation": true,
           "viewId": "Dochome",
           "viewName": "Dochome"
+        },
+        "Docmain" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "Docmain",
+          "viewName": "Docmain"
+        },
+        "Doccreate" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+<<<<<<< HEAD
+          "viewId": "Doccreate",
+          "viewName": "Doccreate"
+=======
+          "viewId": "Dochome",
+          "viewName": "Dochome"
+>>>>>>> master
         }
       }
     },
