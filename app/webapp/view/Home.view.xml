@@ -1,22 +1,35 @@
 <mvc:View controllerName="project1.controller.Home"
 xmlns:mvc="sap.ui.core.mvc"
-xmlns="sap.m"     xmlns:f="sap.f">
+xmlns="sap.m"     xmlns:f="sap.f"
+xmlns:card="sap.f.cards"
+>
 
  <ScrollContainer height="100%" width="100%" vertical="true">
-  <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region">
-    <content class="panelbottomline">    
-        <HBox width="100%" height="3rem">          
-            <Title text="Management"/>        
-        </HBox>                    
-       <GenericTile width="15rem" class="sapUiTinyMarginBegin sapUiTinyMarginTop sapUiSmallMarginEnd " 
+  <Panel width="auto" class="sapUiResponsiveMargin" accessibleRole="Region" backgroundDesign="Transparent" >
+    <content class="panelbottomline"> 
+     
+        <HBox width="100%" height="3rem">    
+         <OverflowToolbar class="sapUiLargeMarginBottom sapUiLarMarginTop">      
+            <Title text="Management"/>   
+           </OverflowToolbar>     
+        </HBox>   
+
+       <GenericTile width="15rem" class="sapUiTinyMarginBegin sapUiSmallMarginTop sapUiSmallMarginEnd " 
        header="BP 마스터 데이터 관리" press=".onBP_list">                     
           <TileContent>                         
               <ImageContent src="sap-icon://menu" />                     
           </TileContent>                 
        </GenericTile>   
 
-       <GenericTile width="15rem" class="sapUiTinyMarginBegin sapUiTinyMarginTop sapUiSmallMarginEnd" 
+       <GenericTile width="15rem" class="sapUiTinyMarginBegin sapUiSmallMarginTop sapUiSmallMarginEnd" 
        header="G/L 계정과목 마스터 관리" press=".onGL_list">                     
+          <TileContent>                         
+            <ImageContent src="sap-icon://menu" />                     
+          </TileContent>
+      </GenericTile> 
+
+       <GenericTile width="15rem" class="sapUiTinyMarginBegin sapUiSmallMarginTop sapUiSmallMarginEnd" 
+       header="전표 관리" press=".onDoc_list">                     
           <TileContent>                         
             <ImageContent src="sap-icon://menu" />                     
           </TileContent>
@@ -24,9 +37,46 @@ xmlns="sap.m"     xmlns:f="sap.f">
 
       <HBox width="100%" height="3rem"/>
       <HBox width="100%" height="3rem"/>
-      <HBox width="100%" height="3rem">          
-            <Title text="Overview"/>        
-      </HBox> 
+      <HBox width="100%" height="3rem"/>          
+            
+            
+            <HBox width="100%" height="3rem">
+            <OverflowToolbar class="sapUiLargeMarginBottom sapUiLarMarginTop">  
+            <Title text="Overview"/>
+            </OverflowToolbar>
+            </HBox>       
+
+      <f:Card class="sapUiTinyMarginBegin sapUiSmallMarginTop" width="300px"  >
+				<f:header>
+					<card:Header title="지급 기일 집계" />
+				</f:header>
+			<f:content>
+				<List showSeparators="None" items="{path:'overview>/'}">
+            <CustomListItem>
+                <HBox class="sapUiSmallMarginBegin sapUiSmallMarginEnd sapUiSmallMarginTop " alignItems="Center" justifyContent="SpaceBetween" >
+                  <ObjectStatus text="Today" state="Error"/>
+                  <ObjectStatus text="{path: 'overview>today',formatter:'.formatter.numberWithCommas'}건 / {path: 'overview>aAmount',formatter:'.formatter.numberWithCommas'}원"/>
+                  
+                     </HBox>
+                <HBox class="sapUiSmallMarginBegin sapUiSmallMarginEnd sapUiSmallMarginTopBottom " alignItems="Center" justifyContent="SpaceBetween">
+                  <Label text="-1 days" design="Bold" />
+                  <ObjectStatus text="{path: 'overview>one',formatter:'.formatter.numberWithCommas'}건 / {path: 'overview>bAmount',formatter:'.formatter.numberWithCommas'}원"/>
+                     </HBox>
+                <HBox class="sapUiSmallMarginBegin sapUiSmallMarginEnd sapUiSmallMarginTopBottom " alignItems="Center" justifyContent="SpaceBetween">
+                  <Label text="-2 days" design="Bold" />
+                  <ObjectStatus text="{path: 'overview>two',formatter:'.formatter.numberWithCommas'}건 / {path: 'overview>cAmount',formatter:'.formatter.numberWithCommas'}원"/>
+                     </HBox>
+                <HBox class="sapUiSmallMarginBegin sapUiSmallMarginEnd sapUiSmallMarginTopBottom " alignItems="Center" justifyContent="SpaceBetween">
+                  <Label text="-3 days" design="Bold" />
+                  <ObjectStatus text="{path: 'overview>three',formatter:'.formatter.numberWithCommas'}건 / {path: 'overview>dAmount',formatter:'.formatter.numberWithCommas'}원"/>
+                     </HBox>
+            </CustomListItem>
+          </List>
+
+
+			</f:content>
+			</f:Card>		
+
   
       </content>
     </Panel>

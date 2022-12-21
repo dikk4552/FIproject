@@ -69,6 +69,24 @@
       }
     },
     "componentUsages": {
+      "BPComponent" : {
+        "name" : "projectBP",
+        "settings" : {},
+        "componentData" : {},
+        "lazy" : true
+      },
+      "companyComponent" : {
+        "name" : "project3",
+        "settings" : {},
+        "componentData" : {},
+        "lazy" : true
+      },
+      "productComponent" : {
+        "name" : "project4",
+        "settings" : {},
+        "componentData" : {},
+        "lazy" : true
+      }
     },
     "contentDensities": {
       "compact": true,
@@ -138,9 +156,9 @@
         {
           "name": "BPcreate",
           "pattern": "BPcreate/{num}/{category}",
-          "target": {
-            "name": "BPcreate"
-          }
+          "target": [
+            "BPcreate"
+          ]
         }
         
       ],

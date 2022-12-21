@@ -13,7 +13,7 @@
             <f:DynamicPageTitle>
                 <f:heading>
                     <HBox>
-                        <Button icon="sap-icon://nav-back" press=".onHome" type="Transparent"  />
+                        <!-- <Button icon="sap-icon://nav-back" press=".onHome" type="Transparent"  /> -->
                         <Title text= "전표 조회" />
                     </HBox>
                 </f:heading>
@@ -85,7 +85,7 @@
         <f:content >
         <t:Table id="Docmain"
             rows="{DocModel>/}"
-            selectionMode="None"
+            selectionMode="MultiToggle"
             width="auto"
             rowActionCount="1"
             visibleRowCountMode="Auto">
@@ -103,8 +103,9 @@
                     <Title id="TableName"/>
                     <ToolbarSpacer />
 
+                    <Button icon="sap-icon://excel-attachment" tooltip="Excel Download" press=".onDataExport" type="Transparent"  />
                     <Button tooltip="생성"  type="Transparent" press=".onDoccreate" icon="sap-icon://add-document"/>
-                    
+
                 </OverflowToolbar>     
             </t:extension>
 

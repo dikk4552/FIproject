@@ -15,7 +15,7 @@
             </f:DynamicPageTitle>
         </f:title>
         <f:content>
-            <form:SimpleForm layout="ResponsiveGridLayout">
+            <form:SimpleForm layout="ResponsiveGridLayout" id="simpleform">
                 <form:content >
                     <VBox width="100%" height="6rem" class="sapUiSmallMarginTop">
                         <OverflowToolbar>
@@ -27,38 +27,16 @@
                             <layout:GridData span="XL12 L12 M12 S12" />
                         </layoutData>
                     </VBox>
-
-                    <VBox width="50%">
-                        <VBox class="sapUiSmallMargin" height="4rem">
+                    <VBox class="sapUiSmallMargin" height="4rem">
                             <Label text="전표 번호 :" />
-                            <Text id="Doc_number" />
-                        </VBox>
-                        <VBox class="sapUiSmallMargin" height="4rem">
-                            <Label text="회사코드 :" />
-                            <ComboBox id="Doc_cocd" width="100%"
-                                    items="{
-                                        path: 'CocdModel>/'
-                                    }">
-                                <core:Item key="{CocdModel>CoCd_number}" text="{CocdModel>CoCd_number}"/>
-                            </ComboBox>
-                        </VBox>
-                        <VBox class="sapUiSmallMargin" height="4rem">
-                            <Label text="전기일 :" />
-                            <DatePicker id="Doc_postdate" displayFormat="yyyy-MM-dd" valueFormat="yyyy-MM-dd" />
-                        </VBox>
-                        <VBox class="sapUiSmallMargin" height="12rem">
-                            <Label text="증빙일 :" />
-                            <DatePicker id="Doc_docdate" displayFormat="yyyy-MM-dd" valueFormat="yyyy-MM-dd" />
-                        </VBox>
-                        <layoutData>
-                            <layout:GridData span="XL6 L6 M6 S12" />
+                            <Text id="Doc_number" width="50%"/>
+                            <layoutData>
+                            <layout:GridData span="XL6 L6 M6 S6" />
                         </layoutData>
                     </VBox>
-
-                    <VBox width="50%">
-                        <VBox class="sapUiSmallMargin" height="4rem">
-                            <Label text="전표 유형 :" />
-                            <ComboBox id="Doc_type" width="100%" >
+                    <VBox class="sapUiSmallMargin" height="4rem">
+                            <Label text="전표 유형 :" labelFor="Doc_type"/>
+                            <ComboBox id="Doc_type" width="50%" required="true" >
                                 <core:Item text="SA" key="SA" />
                                 <core:Item text="KZ" key="KZ"/>
                                 <core:Item text="DR" key="DR"/>  
@@ -68,12 +46,26 @@
                                 <core:Item text="KG" key="KG"/>  
                                 <core:Item text="AA" key="AA"/> 
                              </ComboBox>
-                        </VBox>
+                            <layoutData>
+                            <layout:GridData span="XL6 L6 M6 S6" />
+                        </layoutData>
+                    </VBox>
+                    <VBox class="sapUiSmallMargin" height="4rem">
+                            <Label text="회사코드 :" labelFor="Doc_cocd"/>
+                            <ComboBox id="Doc_cocd" width="50%" required="true"
+                                    items="{
+                                        path: 'CocdModel>/'
+                                    }">
+                                <core:Item key="{CocdModel>CoCd_number}" text="{CocdModel>CoCd_number}"/>
+                            </ComboBox>
+                            <layoutData>
+                            <layout:GridData span="XL6 L6 M6 S6" />
+                        </layoutData>
+                    </VBox>
+                    <VBox class="sapUiSmallMargin" height="4rem">
+                            <Label text="통화 :" labelFor="Doc_curr"/>
 
-                        <VBox class="sapUiSmallMargin" height="4rem">
-                            <Label text="통화 :" />
-
-                            <ComboBox id="Doc_curr" width="100%" >
+                            <ComboBox id="Doc_curr" width="50%" required="true">
                             <core:Item text="USD" key="USD" />
                                 <core:Item text="KRW" key="KRW"/>
                                 <core:Item text="THB" key="THB"/>  
@@ -87,19 +79,40 @@
                                 <core:Item text="QAR" key="QAR"/>  
                                 <core:Item text="PLN" key="PLN"/>  
                             </ComboBox>
-                        </VBox>
-                        <VBox class="sapUiSmallMargin" height="4rem">
-                            <Label text="헤더 텍스트 :" labelFor="Doc_text"/>
-                            <Input id="Doc_text" required="true"/>
-                        </VBox>
-                        <VBox class="sapUiSmallMargin" height="12rem">
-                            <Label text="참조 :" />
-                            <Input id="Doc_ref" />
-                        </VBox>
-                        <layoutData>
-                            <layout:GridData span="XL6 L6 M6 S12" />
+                            <layoutData>
+                            <layout:GridData span="XL6 L6 M6 S6" />
                         </layoutData>
                     </VBox>
+                    <VBox class="sapUiSmallMargin" height="4rem">
+                            <Label text="전기일 :" labelFor="Doc_postdate"/>
+                            <DatePicker required="true" width="50%" id="Doc_postdate" displayFormat="yyyy-MM-dd" valueFormat="yyyy-MM-dd" />
+                            <layoutData>
+                            <layout:GridData span="XL6 L6 M6 S6" />
+                        </layoutData>
+                    </VBox>
+                    <VBox class="sapUiSmallMargin" height="4rem">
+                            <Label text="헤더 텍스트 :" labelFor="Doc_text"/>
+                            <Input id="Doc_text" required="true" width="50%"/>
+                            <layoutData>
+                            <layout:GridData span="XL6 L6 M6 S6" />
+                        </layoutData>
+                    </VBox>
+                    <VBox class="sapUiSmallMargin" height="4rem">
+                            <Label text="증빙일 :" labelFor="Doc_docdate"/>
+                            <DatePicker required="true" width="50%" id="Doc_docdate" displayFormat="yyyy-MM-dd" valueFormat="yyyy-MM-dd" />
+                            <layoutData>
+                            <layout:GridData span="XL6 L6 M6 S6" />
+                        </layoutData>
+                    </VBox>
+                    <VBox class="sapUiSmallMargin" height="4rem">
+                            <Label text="참조 :" />
+                            <Input id="Doc_ref" width="50%"/>
+                            <layoutData>
+                            <layout:GridData span="XL6 L6 M6 S6" />
+                        </layoutData>
+                    </VBox>
+
+
 
 
                     <VBox>
@@ -124,7 +137,7 @@
                             </t:extension>
                             
 
-                            <t:columns >
+                            <t:columns>
                                 <t:Column width = "5rem" hAlign="Center" >
                                     <Label text="NO." />
                                     <t:template >
@@ -132,33 +145,33 @@
                                     </t:template>
                                 </t:Column>
                                 <t:Column width = "5rem" hAlign="Center">
-                                    <Label text="C/D" />
+                                    <Label text="D/C" />
                                     <t:template>
                                         <Text id="Doc_CD" text="{createDoc>Doc_CD}" textAlign="Center"/>
                                     </t:template>
                                 </t:Column>
                                 <t:Column hAlign="Center">
-                                    <Label text="Account" />
+                                    <Label text="Account" labelFor="Doc_D_acct"/>
                                     <t:template>
-                                        <Input id="Doc_D_acct" value="{createDoc>Doc_D_acct}" />
+                                        <Input id="Doc_D_acct" value="{createDoc>Doc_D_acct}" required="true"/>
+                                    </t:template>
+                                </t:Column>
+                                <t:Column hAlign="Center" >
+                                    <Label text="금액" labelFor="Doc_D_amount"/>
+                                    <t:template>
+                                        <Input id="Doc_D_amount"  value="{createDoc>Doc_D_amount}" required="true"/>
                                     </t:template>
                                 </t:Column>
                                 <t:Column hAlign="Center">
-                                    <Label text="금액" />
+                                    <Label text="Cost Center" labelFor="Doc_D_cost"/>
                                     <t:template>
-                                        <Input id="Doc_D_amount" value="{createDoc>Doc_D_amount}" />
+                                        <Input id="Doc_D_cost" value="{createDoc>Doc_D_cost}" required="true"/>
                                     </t:template>
                                 </t:Column>
                                 <t:Column hAlign="Center">
-                                    <Label text="Cost Center" />
+                                    <Label text="Profit Center" labelFor="Doc_D_prof"/>
                                     <t:template>
-                                        <Input id="Doc_D_cost" value="{createDoc>Doc_D_cost}" />
-                                    </t:template>
-                                </t:Column>
-                                <t:Column hAlign="Center">
-                                    <Label text="Profit Center" />
-                                    <t:template>
-                                        <Input id="Doc_D_prof" value="{createDoc>Doc_D_prof}" />
+                                        <Input id="Doc_D_prof" value="{createDoc>Doc_D_prof}" required="true"/>
                                     </t:template>
                                 </t:Column>
                                 <t:Column hAlign="Center">

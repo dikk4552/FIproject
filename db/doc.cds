@@ -16,4 +16,5 @@ Doc_C_acct : String @title : 'G/L';
 Doc_C_amount : Integer @title : '금액';
 Doc_C_cost : String @title : 'Cost Center';
 Doc_C_prof : String @title : 'Profit Center';
+Doc_duedate : String @title : '만기일';
 }

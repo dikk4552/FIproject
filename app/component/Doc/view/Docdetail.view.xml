@@ -11,10 +11,13 @@
             <f:DynamicPageTitle>
                 <f:heading>
                     <HBox>
-                        <Button icon="sap-icon://nav-back" press=".onBack" type="Transparent" />
+                        <Button icon="sap-icon://nav-back" press=".onBack" type="Transparent" tooltip="돌아가기"/>
                         <Title text="전표 상세" />
                     </HBox>
                 </f:heading>
+                <f:actions>
+                    <Button type="Emphasized" text="삭제" press=".onDelete"  />
+                </f:actions>
               
             </f:DynamicPageTitle>
         </f:title>
@@ -35,24 +38,22 @@
                     <VBox width="50%">
                         <VBox class="sapUiSmallMargin" height="4rem">
                             <Label text="전표 번호 :" />
-                            <Text id="Doc_number" />
+                            <Text id="Doc_number" text="{DocModel>/Doc_number}" />
                         </VBox>
                         <VBox class="sapUiSmallMargin" height="4rem">
                             <Label text="회사코드 :" />
-                            <ComboBox id="Doc_cocd" width="100%"
-                                    items="{
-                                        path: 'CocdModel>/'
-                                    }">
-                                <core:Item key="{CocdModel>CoCd_number}" text="{CocdModel>CoCd_number}"/>
-                            </ComboBox>
+                            <Text id="Doc_cocd" text="{DocModel>/Doc_cocd}"/>
+
                         </VBox>
                         <VBox class="sapUiSmallMargin" height="4rem">
                             <Label text="전기일 :" />
-                            <DatePicker id="Doc_postdate" displayFormat="yyyy-MM-dd" valueFormat="yyyy-MM-dd" />
+                            <Text id="Doc_postdate" text="{DocModel>/Doc_postdate}"/>
+
                         </VBox>
                         <VBox class="sapUiSmallMargin" height="12rem">
                             <Label text="증빙일 :" />
-                            <DatePicker id="Doc_docdate" displayFormat="yyyy-MM-dd" valueFormat="yyyy-MM-dd" />
+                            <Text id="Doc_docdate" text="{DocModel>/Doc_docdate}"/>
+
                         </VBox>
                         <layoutData>
                             <layout:GridData span="XL6 L6 M6 S12" />
@@ -62,43 +63,21 @@
                     <VBox width="50%">
                         <VBox class="sapUiSmallMargin" height="4rem">
                             <Label text="전표 유형 :" />
-                            <ComboBox id="Doc_type" width="100%" >
-                                <core:Item text="SA" key="SA" />
-                                <core:Item text="KZ" key="KZ"/>
-                                <core:Item text="DR" key="DR"/>  
-                                <core:Item text="DZ" key="DZ" />
-                                <core:Item text="KR" key="KR"/>
-                                <core:Item text="AA" key="AA"/>  
-                                <core:Item text="KG" key="KG"/>  
-                                <core:Item text="AA" key="AA"/> 
-                             </ComboBox>
+                            <Text id="Doc_type" text="{DocModel>/Doc_type}"/>
+
                         </VBox>
 
                         <VBox class="sapUiSmallMargin" height="4rem">
                             <Label text="통화 :" />
-
-                            <ComboBox id="Doc_curr" width="100%" >
-                            <core:Item text="USD" key="USD" />
-                                <core:Item text="KRW" key="KRW"/>
-                                <core:Item text="THB" key="THB"/>  
-                                <core:Item text="JPY" key="JPY" />
-                                <core:Item text="CNY" key="CNY"/>
-                                <core:Item text="VND" key="VND"/>  
-                                <core:Item text="RUB" key="RUB"/>  
-                                <core:Item text="CAD" key="CAD"/>  
-                                <core:Item text="AUD" key="CAUD"/>  
-                                <core:Item text="EUR" key="EUR"/>  
-                                <core:Item text="QAR" key="QAR"/>  
-                                <core:Item text="PLN" key="PLN"/>  
-                            </ComboBox>
+                            <Text id="Doc_curr" text="{DocModel>/Doc_curr}"/>
                         </VBox>
                         <VBox class="sapUiSmallMargin" height="4rem">
-                            <Label text="헤더 텍스트 :" labelFor="Doc_text"/>
-                            <Input id="Doc_text" required="true"/>
+                            <Label text="헤더 텍스트 :" />
+                            <Text id="Doc_text" text="{DocModel>/Doc_text}"/>
                         </VBox>
                         <VBox class="sapUiSmallMargin" height="12rem">
                             <Label text="참조 :" />
-                            <Input id="Doc_ref" />
+                            <Text id="Doc_ref" text="{DocModel>/Doc_ref}"/>
                         </VBox>
                         <layoutData>
                             <layout:GridData span="XL6 L6 M6 S12" />
@@ -112,15 +91,8 @@
                             selectionMode="None" 
                             width="100%" 
                             visibleRowCount="2"
-                            rows="{createDoc>/}">
-                            <!-- <t:rowActionTemplate>
-                <t:RowAction>
-                    <t:items>
-                        <t:RowActionItem type="Navigation" press=".onNavToDetail" />
-                    </t:items>
-                </t:RowAction>
-            </t:rowActionTemplate> -->
-                            
+                            rows="{DoctableModel>/}">
+         
                             <t:extension>
                                 <OverflowToolbar class="sapUiLargeMarginBottom">
                                     <Title text="Line items" />
@@ -132,43 +104,43 @@
                                 <t:Column width = "5rem" hAlign="Center" >
                                     <Label text="NO." />
                                     <t:template >
-                                        <Text id="Doc_NO" text="{createDoc>Doc_NO}"  textAlign="End" />
+                                        <Text id="Doc_NO" text="{DoctableModel>Doc_NO}"  textAlign="End" />
                                     </t:template>
                                 </t:Column>
                                 <t:Column width = "5rem" hAlign="Center">
-                                    <Label text="C/D" />
+                                    <Label text="D/C" />
                                     <t:template>
-                                        <Text id="Doc_CD" text="{createDoc>Doc_CD}" textAlign="Center"/>
+                                        <Text id="Doc_CD" text="{DoctableModel>Doc_CD}" textAlign="Center"/>
                                     </t:template>
                                 </t:Column>
                                 <t:Column hAlign="Center">
                                     <Label text="Account" />
                                     <t:template>
-                                        <Input id="Doc_D_acct" value="{createDoc>Doc_D_acct}" />
+                                        <Text id="Doc_D_acct" text="{DoctableModel>Doc_D_acct}" />
                                     </t:template>
                                 </t:Column>
                                 <t:Column hAlign="Center">
                                     <Label text="금액" />
                                     <t:template>
-                                        <Input id="Doc_D_amount" value="{createDoc>Doc_D_amount}" />
-                                    </t:template>
+                                    <ObjectStatus id="Doc_D_amount"  text="{path: 'DoctableModel>Doc_D_amount',formatter:'.formatter.numberWithCommas'}" />
+                                    </t:template>    
                                 </t:Column>
                                 <t:Column hAlign="Center">
                                     <Label text="Cost Center" />
                                     <t:template>
-                                        <Input id="Doc_D_cost" value="{createDoc>Doc_D_cost}" />
+                                        <Text id="Doc_D_cost" text="{DoctableModel>Doc_D_cost}" />
                                     </t:template>
                                 </t:Column>
                                 <t:Column hAlign="Center">
                                     <Label text="Profit Center" />
                                     <t:template>
-                                        <Input id="Doc_D_prof" value="{createDoc>Doc_D_prof}" />
+                                        <Text id="Doc_D_prof" text="{DoctableModel>Doc_D_prof}" />
                                     </t:template>
                                 </t:Column>
                                 <t:Column hAlign="Center">
                                     <Label text="비고" />
                                     <t:template>
-                                        <Input id="Doc_b" value="{createDoc>Doc_b}" />
+                                        <Text id="Doc_b" text="{DoctableModel>Doc_b}" />
                                     </t:template>
                                 </t:Column>
                             </t:columns>

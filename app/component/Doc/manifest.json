@@ -161,6 +161,17 @@
             "Doccreate"
           ]
         }        
+        ,
+        
+        {
+          "name": "Docdetail",
+          "pattern": "Docdetail/{num}",
+          "target": [
+            "Docdetail"
+          ]
+        }  
+         
+
       ],
       "targets": {
         "Dochome" : {
@@ -183,6 +194,13 @@
           "clearControlAggregation": true,
           "viewId": "Doccreate",
           "viewName": "Doccreate"
+        }        ,
+        "Docdetail" : {
+          "viewType": "XML",
+          "transition": "slide",
+          "clearControlAggregation": true,
+          "viewId": "Docdetail",
+          "viewName": "Docdetail"
         }
       }
     },
