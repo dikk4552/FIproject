@@ -1,18 +1,12 @@
-<!-- XML, HTML, JS, JSON 지원, XMLView 추천 -->
-
 <mvc:View controllerName="project1.controller.App"
-    xmlns:html="http://www.w3.org/1999/xhtml"
     xmlns:mvc="sap.ui.core.mvc" displayBlock="true"
     xmlns:tnt="sap.tnt"
     xmlns="sap.m"
     height = "100%">
-    <!-- sap sdk : toolpage layout -->
+
     <tnt:ToolPage id="toolPage">
 		<tnt:header>
 			<tnt:ToolHeader id="_IDGenToolHeader1">
-				<!-- <Image id="_IDGenImage1" height="1.5rem"
-					   class="sapUiSmallMarginBegin"
-					   src="https://www.sap.com/dam/application/shared/logos/sap-logo-svg.svg" /> -->
                 <Image id="IdGenImage2" height = "1.5rem"
                      class="sapUiSmallMarginBegin"
                      src="view/img/logo.svg" press=".onHome"/>
@@ -22,8 +16,6 @@
                             <MenuItem id="menu1" text="BP" press=".onBP"/>
                             <MenuItem text="GL" press=".onGL"/>
                             <MenuItem text="Doc" press=".onDoc"/>
-                        <Menu id="_IDGenMenu1">
-                            <MenuItem text="GL 계정과목" press="onMenuGL"></MenuItem>
                         </Menu>
 
                     </menu>
@@ -32,12 +24,9 @@
 		</tnt:header>
 
 		<tnt:mainContents>
-        <!-- 실제로 들어올 content 불러오는 페이지 -->
             <App id="app">
-            <!-- id="app"은 manifest의 routing의 controlId값으로 연동 -->
             </App>
 
 		</tnt:mainContents>
 	</tnt:ToolPage>
-    <!-- app이라는 공간 할당해서 load될 파일을 manifest의 routing에서 할당 -->
 </mvc:View>
