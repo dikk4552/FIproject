@@ -54,7 +54,7 @@
 								<Label text="이름" id="BP_name" />
 								<Input value="{wizardModel>/BP_name}" liveChange="checkPerGeneralStep" valueLiveUpdate="true"/>
 								<Label text="개인 칭호"/>
-                                <ComboBox width="100%" id="BP_title" 
+                                <ComboBox placeholder="선택하세요" width="100%" id="BP_title" 
 									selectedKey="{wizardModel>/BP_title}" 
 									change="checkPerGeneralStep" showClearIcon="true" >
                                     <core:Item text="Mr." key="Mr."/>
@@ -96,7 +96,7 @@
 								<Label text="도시 "  />
 								<Input id="BP_city" value="{wizardModel>/BP_city}" liveChange="checkStandardStep" valueLiveUpdate="true"/>
 								<Label text="국가/지역 "  />
-								<Input id="BP_country" 
+								<Input id="BP_country" placeholder="선택하세요"
 									showValueHelp="true"
 									valueHelpRequest=".onValueHelpCountry"
 									valueHelpOnly="true"
@@ -115,14 +115,14 @@
 							<MessageStrip text="비즈니스 파트너의 조직 데이터를 입력하세요." />
 							<form:SimpleForm editable="true">
 								<Label text="회사코드 "  />
-								<ComboBox id="BP_cocd" width="100%" selectedKey="{wizardModel>/BP_cocd}" change="checkCompanyStep"
+								<ComboBox id="BP_cocd" placeholder="선택하세요" width="100%" selectedKey="{wizardModel>/BP_cocd}" change="checkCompanyStep"
 										items="{
 											path: 'CocdModel>/'
 										}">
 									<core:Item key="{CocdModel>CoCd_number}" text="{CocdModel>CoCd_number}"/>
 								</ComboBox>
 								<Label text="지급조건 "  />
-								<ComboBox id="BP_payterm" width="100%" selectedKey="{wizardModel>/BP_payterm}" change="checkCompanyStep"
+								<ComboBox id="BP_payterm" placeholder="선택하세요" width="100%" selectedKey="{wizardModel>/BP_payterm}" change="checkCompanyStep"
 										items="{
 												path: 'PayTermModel>/'
 										}">

@@ -65,8 +65,12 @@ sap.ui.define(
                 var Doc_docdate=this.byId("Doc_docdate").getValue();
                 var check_table = await this.tablevalidate("Docmain");
                 var check = await this.validate("simpleform");
-                if(check===false||check_table==false||Doc_docdate.length<10||Doc_postdate.length<10){
+                if(check===false||check_table==false){
                     sap.m.MessageBox.error("필수 값을 전부 입력해주세요.");
+                    return;
+                }
+                if(Doc_docdate.length<10||Doc_postdate.length<10){
+                    sap.m.MessageBox.error("날짜 형식을 맞춰주세요.");
                     return;
                 }
 
@@ -228,14 +232,15 @@ sap.ui.define(
             ontest:function(oEvent){
                 var value = oEvent.getSource().getValue().replace(/[^\d]/g, '');
                 oEvent.getSource().setValue(value);
+                this.handleChange(oEvent);
         },
 
 		handleChange: function (oEvent) {
-			var oDP = oEvent.getSource(),
-				bValid = oEvent.getParameter("valid");
-            console.log(this.byId("Doc_postdate").getValue().length)
-
-			if (bValid) {
+			var oDP = oEvent.getSource(), 
+                bValid = oDP.getValue();
+				//bValid = oEvent.getParameter("valid");
+			
+            if (bValid) {
 				oDP.setValueState(ValueState.None);
 			} else {
 				oDP.setValueState(ValueState.Error);

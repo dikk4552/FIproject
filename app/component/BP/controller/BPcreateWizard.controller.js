@@ -49,6 +49,10 @@ sap.ui.define([
 			
 			console.log(this._createNum);
 			console.log(this._todayDate);
+			this.setDefaultValue();
+		},
+
+		setDefaultValue: function() {
 			this.getView().byId("BP_number").setText(this._createNum);
 			this.getView().byId("BP_createdate1").setText(this._todayDate);
 			this.getView().byId("BP_createdate2").setText(this._todayDate);
@@ -127,6 +131,7 @@ sap.ui.define([
 						if (oAction === MessageBox.Action.YES) {  // 클릭 : 예 wizardModel>/BP_category
 							this._wizard.discardProgress(params.discardStep);
 							this.onSetWizardModel();
+							this.setDefaultValue();
 						} else { // 클릭 : 아니오 wizardModel>/BP_category
 						}
 					}.bind(this)
@@ -165,6 +170,7 @@ sap.ui.define([
 					if (oAction === MessageBox.Action.YES) {
 						this._wizard.discardProgress(this._wizard.getSteps()[0]);
 						this.onSetWizardModel();
+						this.setDefaultValue();
 						this._navBackToList();
 					}
 				}.bind(this)

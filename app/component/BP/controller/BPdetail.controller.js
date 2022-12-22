@@ -210,7 +210,7 @@ sap.ui.define(
               BP_website:this.byId("InputBPwebsite").getValue(),
               BP_street:this.byId("InputBPstreet").getValue(),
               BP_zipcode:this.byId("InputBPzipcode").getValue(),
-              BP_country:this.byId("SelectBPcountry").getSelectedKey(),
+              BP_country:this.byId("BP_country").getValue(),
               BP_house:this.byId("InputBPhouse").getValue(),
               BP_city:this.byId("InputBPcity").getValue(),
             };
@@ -227,11 +227,12 @@ sap.ui.define(
                 contentType: "application/json;IEEE754Compatible=true",
                 data:JSON.stringify(temp)
               });
+              this.onDataView();
             }else{
               MessageBox.alert("입력이 완료되지 않았습니다.");
             }
            }
-           else{
+           else if(bpcate === '개인'){
             var temp={
               BP_manager:this.byId("InputBPname").getValue(),
               BP_name:this.byId("InputBPname").getValue(),
@@ -250,18 +251,20 @@ sap.ui.define(
                 bValidationError=true;
               }
             }
+            if (!bValidationError) {
+              await $.ajax({
+                type: "patch",
+                url: sUrl,
+                contentType: "application/json;IEEE754Compatible=true",
+                data: JSON.stringify(temp)
+              });
+              this.onDataView();
+            } else {
+              MessageBox.alert("입력이 완료되지 않았습니다.");
+            }
           }
-          if (!bValidationError) {
-            await $.ajax({
-              type: "patch",
-              url: sUrl,
-              contentType: "application/json;IEEE754Compatible=true",
-              data: JSON.stringify(temp)
-            });
-          } else {
-            MessageBox.alert("입력이 완료되지 않았습니다.");
-          }
-        this.onDataView();
+          
+        
       },
 
       onCancel: function () {
@@ -282,20 +285,20 @@ sap.ui.define(
           var arr=[];
           var tabledata = {
                Doc_NO : 1,
-               Doc_CD : "C",
-               Doc_D_acct :table.Doc_C_acct,
-               Doc_D_amount : Number(table.Doc_C_amount),
-               Doc_D_cost : table.Doc_C_cost,
-               Doc_D_prof : table.Doc_C_prof,
-               Doc_b :""
-            }
-          var tabledata2 = {
-               Doc_NO : 2,
                Doc_CD : "D",
                Doc_D_acct :table.Doc_D_acct,
                Doc_D_amount : Number(table.Doc_D_amount),
                Doc_D_cost : table.Doc_D_cost,
                Doc_D_prof : table.Doc_D_prof,
+               Doc_b :""
+            }
+          var tabledata2 = {
+               Doc_NO : 2,
+               Doc_CD : "C",
+               Doc_D_acct :table.Doc_C_acct,
+               Doc_D_amount : Number(table.Doc_C_amount),
+               Doc_D_cost : table.Doc_C_cost,
+               Doc_D_prof : table.Doc_C_prof,
                Doc_b :""
             }
             arr.push(tabledata);

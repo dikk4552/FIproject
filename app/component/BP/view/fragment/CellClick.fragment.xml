@@ -94,7 +94,7 @@
                                     </t:template>
                                 </t:Column>
                                 <t:Column width = "5rem" hAlign="Center">
-                                    <Label text="C/D" />
+                                    <Label text="D/C" />
                                     <t:template>
                                         <Text id="Doc_CD" text="{DoctableModel>Doc_CD}" textAlign="Center"/>
                                     </t:template>

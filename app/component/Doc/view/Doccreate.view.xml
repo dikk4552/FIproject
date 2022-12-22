@@ -36,7 +36,7 @@
                     </VBox>
                     <VBox class="sapUiSmallMargin" height="4rem">
                             <Label text="전표 유형 :" labelFor="Doc_type"/>
-                            <ComboBox id="Doc_type" width="50%" required="true" >
+                            <ComboBox id="Doc_type" change="handleChange" width="50%" required="true" >
                                 <core:Item text="SA" key="SA" />
                                 <core:Item text="KZ" key="KZ"/>
                                 <core:Item text="DR" key="DR"/>  
@@ -52,7 +52,7 @@
                     </VBox>
                     <VBox class="sapUiSmallMargin" height="4rem">
                             <Label text="회사코드 :" labelFor="Doc_cocd"/>
-                            <ComboBox id="Doc_cocd" width="50%" required="true"
+                            <ComboBox id="Doc_cocd" width="50%" required="true" change="handleChange"
                                     items="{
                                         path: 'CocdModel>/'
                                     }">
@@ -65,7 +65,7 @@
                     <VBox class="sapUiSmallMargin" height="4rem">
                             <Label text="통화 :" labelFor="Doc_curr"/>
 
-                            <ComboBox id="Doc_curr" width="50%" required="true">
+                            <ComboBox id="Doc_curr" width="50%" change="handleChange" required="true">
                             <core:Item text="USD" key="USD" />
                                 <core:Item text="KRW" key="KRW"/>
                                 <core:Item text="THB" key="THB"/>  
@@ -92,7 +92,7 @@
                     </VBox>
                     <VBox class="sapUiSmallMargin" height="4rem">
                             <Label text="헤더 텍스트 :" labelFor="Doc_text"/>
-                            <Input id="Doc_text" required="true" width="50%"/>
+                            <Input id="Doc_text" required="true" width="50%" liveChange="handleChange"/>
                             <layoutData>
                             <layout:GridData span="XL6 L6 M6 S6" />
                         </layoutData>
@@ -153,25 +153,25 @@
                                 <t:Column hAlign="Center">
                                     <Label text="Account" labelFor="Doc_D_acct"/>
                                     <t:template>
-                                        <Input id="Doc_D_acct" value="{createDoc>Doc_D_acct}" required="true"/>
+                                        <Input id="Doc_D_acct" liveChange="handleChange" value="{createDoc>Doc_D_acct}" required="true"/>
                                     </t:template>
                                 </t:Column>
                                 <t:Column hAlign="Center" >
                                     <Label text="금액" labelFor="Doc_D_amount"/>
                                     <t:template>
-                                        <Input id="Doc_D_amount"  value="{createDoc>Doc_D_amount}" required="true" liveChange=".ontest"/>
+                                        <Input id="Doc_D_amount" value="{createDoc>Doc_D_amount}" required="true" liveChange=".ontest"/>
                                     </t:template>
                                 </t:Column>
                                 <t:Column hAlign="Center">
                                     <Label text="Cost Center" labelFor="Doc_D_cost"/>
                                     <t:template>
-                                        <Input id="Doc_D_cost" value="{createDoc>Doc_D_cost}" required="true"/>
+                                        <Input id="Doc_D_cost" liveChange="handleChange" value="{createDoc>Doc_D_cost}" required="true"/>
                                     </t:template>
                                 </t:Column>
                                 <t:Column hAlign="Center">
                                     <Label text="Profit Center" labelFor="Doc_D_prof"/>
                                     <t:template>
-                                        <Input id="Doc_D_prof" value="{createDoc>Doc_D_prof}" required="true"/>
+                                        <Input id="Doc_D_prof" liveChange="handleChange" value="{createDoc>Doc_D_prof}" required="true"/>
                                     </t:template>
                                 </t:Column>
                                 <t:Column hAlign="Center">

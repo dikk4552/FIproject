@@ -27,6 +27,7 @@ sap.ui.define([
 
 	return Controller.extend("projectGL.controller.GLdetail", {
 		onInit: async function () {
+			
 			this.getOwnerComponent().getRouter().getRoute("GLdetail").attachPatternMatched(this.onRoutePatternMatched, this);
 
 			var oData = { editMode : false };
@@ -39,11 +40,14 @@ sap.ui.define([
 			});
 			let AcctGroup = new JSONModel(Group.value);
 			this.getView().setModel(AcctGroup,"AcctGroup");
+
+			this.coaInput = this.byId("coa");
 		},
         onRoutePatternMatched: function (oEvent) {
             glNUM = oEvent.getParameter("arguments").num;
             glURL = "/glservice/GL/" + glNUM;
             this.onDataView();
+			console.log("?");
         },
         onDataView: async function () {
 			const getGL = await $.ajax({
@@ -116,46 +120,35 @@ sap.ui.define([
 		onEditCancel: function () {
             this.getView().getModel("editModel").setProperty("/editMode", false);
 		},
-        onHistory: async function (newKeys, newValues, oldValues) {
-			const getHistoryNUM = await $.ajax({
-                type: "get",
-                url: "/glservice/History?$orderby=History_number%20desc&$top=1"
-            });
-			this.getView().setModel(new JSONModel(getHistoryNUM), "HistoryNUMModel");
-			let tempNUM = this.getView().getModel("HistoryNUMModel").getProperty("/value/0/History_number");
-			let historyNUM = parseInt(tempNUM) + 1;
+		onHistory: async function (newKeys, newValues, oldValues) {
+            for ( var i=0; i < newKeys.length; i++ ) {
+                if ( oldValues[i] !== newValues[i] ) {
+                    const getHistoryNUM = await $.ajax({
+                        type: "get",
+                        url: "/glservice/History?$orderby=History_number%20desc&$top=1"
+                    });
+                    this.getView().setModel(new JSONModel(getHistoryNUM), "HistoryNUMModel");
+                    let lastHistoryNUM = this.getView().getModel("HistoryNUMModel").getProperty("/value/0/History_number");
 
-			function returnTypeCheck (vCheckValue) {
-				let result;
+                    let historyData = {
+                        History_number:        String(parseInt(lastHistoryNUM)+1),
+                        History_table:        "GL",
+                        History_key:        String(glNUM),
+                        History_column:        String(newKeys[i]),
+                        History_old:        String(oldValues[i]),
+                        History_new:        String(newValues[i]),
+                        History_datetime:    new Date()
+                    };
 
-				result = vCheckValue;
-				if(vCheckValue === 'true') result = 'true';
-				if(vCheckValue === 'false') result = 'false';
-				
-				return result;
-			}
-
-			for ( var i=0; i < newKeys.length; i++ ) {
-				if ( oldValues[i] !== newValues[i] ) {
-					let historyData = {
-						History_number:		String(parseInt(historyNUM)+i),
-						History_table:		"GL",
-						History_key:		String(glNUM),
-						History_column:		String(newKeys[i]),
-						History_old:		String(oldValues[i]),
-						History_new:		String(newValues[i]),
-						History_datetime:	new Date()
-					};
-					
-					await $.ajax({
-						type: "POST",
-						url: "/glservice/History",
-						data: JSON.stringify(historyData),
-						contentType: "application/json;IEEE754Compatible=true"
-					});
-				}
-			}
-			this.onDataView();
+                    await $.ajax({
+                        type: "POST",
+                        url: "/glservice/History",
+                        data: JSON.stringify(historyData),
+                        contentType: "application/json;IEEE754Compatible=true"
+                    });
+                }
+            }
+            this.onDataView();
         },
         onDelete: function () {
             if (!this.oDeleteDialog) {
@@ -309,11 +302,11 @@ sap.ui.define([
             aFilters.push(new Filter({
                 filters: [
                     new Filter({ path: "AcctGroup_number", operator: FilterOperator.Contains, value1: sValue }),
-                    new Filter({ path: "AcctGroup_coa", operator: FilterOperator.Contains, value1: sValue }),
                     new Filter({ path: "AcctGroup_name", operator: FilterOperator.Contains, value1: sValue })
                 ],
                 and: false
             }));
+			aFilters.push(new Filter({ path: "AcctGroup_coa", operator: FilterOperator.Contains, value1: this.coaInput.getText() }))
             var oBinding = oEvent.getSource().getBinding("items");
             oBinding.filter(aFilters);
         },

@@ -33,6 +33,7 @@ sap.ui.define([
             let AcctGroup = new JSONModel(Group.value);
             this.getView().setModel(AcctGroup, "AcctGroup");
 
+            this.coaInput = this.byId("coa");
         },
         onRoutePatternMatched: function (oEvent) {
             this.onClearField();
@@ -221,11 +222,11 @@ sap.ui.define([
             aFilters.push(new Filter({
                 filters: [
                     new Filter({ path: "AcctGroup_number", operator: FilterOperator.Contains, value1: sValue }),
-                    new Filter({ path: "AcctGroup_coa", operator: FilterOperator.Contains, value1: sValue }),
                     new Filter({ path: "AcctGroup_name", operator: FilterOperator.Contains, value1: sValue })
                 ],
                 and: false
             }));
+            aFilters.push(new Filter({ path: "AcctGroup_coa", operator: FilterOperator.Contains, value1: this.coaInput.getText() }))
             var oBinding = oEvent.getSource().getBinding("items");
             oBinding.filter(aFilters);
         },

@@ -41,20 +41,20 @@ function(Controller, JSONModel, MessageBox, formatter) {
 			var arr=[];
 			var tabledata = {
 					Doc_NO : 1,
-					Doc_CD : "C",
-					Doc_D_acct :table.Doc_C_acct,
-					Doc_D_amount : table.Doc_C_amount,
-					Doc_D_cost : table.Doc_C_cost,
-					Doc_D_prof : table.Doc_C_prof,
-					Doc_b :""
-				}
-			var tabledata2 = {
-					Doc_NO : 2,
 					Doc_CD : "D",
 					Doc_D_acct :table.Doc_D_acct,
 					Doc_D_amount : table.Doc_D_amount,
 					Doc_D_cost : table.Doc_D_cost,
 					Doc_D_prof : table.Doc_D_prof,
+					Doc_b :""
+				}
+			var tabledata2 = {
+					Doc_NO : 2,
+					Doc_CD : "C",
+					Doc_D_acct :table.Doc_C_acct,
+					Doc_D_amount : table.Doc_C_amount,
+					Doc_D_cost : table.Doc_C_cost,
+					Doc_D_prof : table.Doc_C_prof,
 					Doc_b :""
 				}
 				arr.push(tabledata);
