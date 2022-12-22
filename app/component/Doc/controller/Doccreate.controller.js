@@ -3,13 +3,16 @@ sap.ui.define(
         "sap/ui/core/mvc/Controller",
         "sap/ui/model/json/JSONModel",
         "sap/ui/model/Filter",
-        "sap/m/MessageBox"
+        "sap/m/MessageBox",
+        "sap/ui/core/Core",
+        "sap/ui/core/library",
 
     ],
-    function (Controller, JSONModel, Filter, MessageBox) {
+    function (Controller, JSONModel, Filter, MessageBox,Core,library) {
         "use strict";
 
         let CreateNum;
+        var ValueState = library.ValueState;
 
         return Controller.extend("projectDoc.controller.Doccreate", {
 
@@ -58,22 +61,25 @@ sap.ui.define(
 
 
             onCreate: async function () {
-                
+                var Doc_postdate=this.byId("Doc_postdate").getValue();
+                var Doc_docdate=this.byId("Doc_docdate").getValue();
                 var check_table = await this.tablevalidate("Docmain");
                 var check = await this.validate("simpleform");
-                if(check===false||check_table==false){
+                if(check===false||check_table==false||Doc_docdate.length<10||Doc_postdate.length<10){
                     sap.m.MessageBox.error("필수 값을 전부 입력해주세요.");
                     return;
                 }
-                console.log(this.byId("Doc_text").getValueStateText());
 
                 const oView = this.getView(),
                     oCreateModel = oView.getModel('createDoc'),
                     oTableData = oCreateModel.getProperty('/');
 
                 let Test = this.getView().byId("Docmain").getBinding("rows");
-                console.log(Test);
-                console.log(Test.oList[0].Doc_C_amount);
+
+                if (Test.oList[1].Doc_D_amount !== Test.oList[0].Doc_D_amount) {
+                    sap.m.MessageBox.error("차변 합계와 대변 합계가 일치하지 않습니다."); 
+                    return;
+                }
 
                 // let temp = new JSONModel(this.temp).oData;
                 let temp = {};
@@ -222,7 +228,19 @@ sap.ui.define(
             ontest:function(oEvent){
                 var value = oEvent.getSource().getValue().replace(/[^\d]/g, '');
                 oEvent.getSource().setValue(value);
-        }
+        },
+
+		handleChange: function (oEvent) {
+			var oDP = oEvent.getSource(),
+				bValid = oEvent.getParameter("valid");
+            console.log(this.byId("Doc_postdate").getValue().length)
+
+			if (bValid) {
+				oDP.setValueState(ValueState.None);
+			} else {
+				oDP.setValueState(ValueState.Error);
+			}
+		}
         
 
         });
