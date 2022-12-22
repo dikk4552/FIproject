@@ -8,6 +8,7 @@ sap.ui.define(
       return BaseController.extend("project1.controller.App", {
 
         onHome : function(){
+          this.byId("menu").setText("메뉴");
           this.getOwnerComponent().getRouter().navTo("Home");
         },
         onBPmain : function(){
