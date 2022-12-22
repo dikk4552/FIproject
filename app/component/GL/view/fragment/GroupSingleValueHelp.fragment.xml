@@ -8,7 +8,7 @@
 		search=".handleSearchGroup"
 		confirm=".handleCloseGroup"
 		cancel=".handleCloseGroup"
-		showClearButton="true"
+		showClearButton="false"
 		items="{path : 'AcctGroup>/'}">
 		<ColumnListItem>
 			<cells>
