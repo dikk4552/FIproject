@@ -4,7 +4,8 @@ sap.ui.define([
     "sap/ui/core/Fragment",
     "sap/ui/model/Filter",
     "sap/ui/model/FilterOperator",
-], function (Controller, JSONModel, Fragment, Filter, FilterOperator) {
+    "sap/m/MessageBox"
+], function (Controller, JSONModel, Fragment, Filter, FilterOperator, MessageBox) {
     "use strict";
 
     return Controller.extend("projectGL.controller.GLcreate", {
@@ -46,25 +47,53 @@ sap.ui.define([
             this.byId("shorttext").setValue("");
             this.byId("longtext").setValue("");
         },
+		_handleMessageBoxOpen: function (sMessage, sMessageBoxType) {
+			MessageBox[sMessageBoxType](sMessage, {
+				actions: [MessageBox.Action.YES, MessageBox.Action.NO],
+				onClose: function (oAction) {
+					if (oAction === MessageBox.Action.YES) {
+						this._wizard.discardProgress(this._wizard.getSteps()[0]);
+						this.onCreate();
+						this.onSetWizardModel();
+						this.navBackToMain();
+					}
+				}.bind(this)
+			}); // Submit 클릭하고 Yes 누르면 생성 데이터 저장까지 하게 설정
+		},
         onCreate: async function () {
-            let inputData = {
-				GL_number:		String(this.byId("gl").getValue()),
-                GL_coa:			String(this.byId("coa").getValue()),
-                GL_accttype:	String(this.byId("accttype").getSelectedKey()),
-                GL_acctgroup:	String(this.byId("acctgroup").getValue()),
-                GL_pltype:		String(this.byId("pltype").getValue()),
-                GL_function:	String(this.byId("function").getValue()),
-                GL_shorttext:	String(this.byId("shorttext").getValue()),
-                GL_longtext:	String(this.byId("longtext").getValue()),
-                GL_deletion:    false
-            };
-            await $.ajax({
-                type: "POST",
-                url: "/glservice/GL",
-                data: JSON.stringify(inputData),
-                contentType: "application/json;IEEE754Compatible=true"
-            });
-            this.onCancel();
+            let inputGL = this.byId("gl").getValue();
+            if ( inputGL === "" ) {
+                MessageBox.warning("G/L 계정을 입력하세요.");
+            } else {
+                const checkGL = await $.ajax({
+                    type: "get",
+                    url: "/glservice/GL?$filter=GL_number%20eq%20%27"+inputGL+"%27"
+                });
+                let checkGLvalue = new JSONModel(checkGL.value);
+
+                if (checkGLvalue.oData.length > 0) {
+                    MessageBox.warning("이미 존재하는 G/L 계정입니다.");
+                } else {
+                    let inputData = {
+                        GL_number:		String(this.byId("gl").getValue()),
+                        GL_coa:			String(this.byId("coa").getValue()),
+                        GL_accttype:	String(this.byId("accttype").getSelectedKey()),
+                        GL_acctgroup:	String(this.byId("acctgroup").getValue()),
+                        GL_pltype:		String(this.byId("pltype").getValue()),
+                        GL_function:	String(this.byId("function").getValue()),
+                        GL_shorttext:	String(this.byId("shorttext").getValue()),
+                        GL_longtext:	String(this.byId("longtext").getValue()),
+                        GL_deletion:    false
+                    };
+                    await $.ajax({
+                        type: "POST",
+                        url: "/glservice/GL",
+                        data: JSON.stringify(inputData),
+                        contentType: "application/json;IEEE754Compatible=true"
+                    });
+                    this.onCancel();
+                }
+            }
         },
         onCancel: function () {
             this.getOwnerComponent().getRouter().navTo("GLmain");
@@ -113,6 +142,7 @@ sap.ui.define([
             var coatext = aContexts.map(function (oContext) { return oContext.getObject().GL_coa; })
             this.byId("gl").setValue(text);
             this.byId("coa").setValue(coatext);
+            this.byId("acctgroup").setValue("");
         },
 
         /*         // 선택 : 계정과목표 Value Help Fragment 
