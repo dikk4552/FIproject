@@ -27,6 +27,7 @@
                     <VBox>
                         <Label text = "계정과목표 : "/>
                    		<MultiInput id="GL_coa"
+                            valueHelpOnly="true"
                             showValueHelp="true"
                             valueHelpRequest="onValueHelpRequested"/>
                         <layoutData>
@@ -57,6 +58,7 @@
                     <VBox>
                         <Label text = "계정 그룹 : " />
                         <MultiInput id = "GL_acctgroup"
+                            valueHelpOnly="true"
                             showValueHelp="true"
                             valueHelpRequest="onValueHelpRequested_Group" />
                         <layoutData>
@@ -78,7 +80,7 @@
     <f:content class="sapUiSmallMargin">
         <t:Table id="GLtable"
                 rows = "{GLmodel>/}" 
-                selectionMode="None"
+                selectionMode="MultiToggle"
                 rowActionCount="1"
                 width="auto" visibleRowCountMode="Auto">
             <t:rowActionTemplate>
@@ -92,6 +94,7 @@
                 <OverflowToolbar >
                     <Title id = "TableName"/>
                     <ToolbarSpacer/>
+                    <Button icon="sap-icon://excel-attachment" tooltip="Excel Download" press=".onDataExport" type="Transparent"  />
                     <Button
                         text="생성"
                         press="onNavToCreate"

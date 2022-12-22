@@ -85,7 +85,7 @@
                     </VBox>
                     <VBox class="sapUiSmallMargin" height="4rem">
                             <Label text="전기일 :" labelFor="Doc_postdate"/>
-                            <DatePicker required="true" width="50%" id="Doc_postdate" displayFormat="yyyy-MM-dd" valueFormat="yyyy-MM-dd" />
+                            <DatePicker required="true" width="50%" id="Doc_postdate" displayFormat="yyyy-MM-dd" valueFormat="yyyy-MM-dd" change="handleChange"/>
                             <layoutData>
                             <layout:GridData span="XL6 L6 M6 S6" />
                         </layoutData>
@@ -99,7 +99,7 @@
                     </VBox>
                     <VBox class="sapUiSmallMargin" height="4rem">
                             <Label text="증빙일 :" labelFor="Doc_docdate"/>
-                            <DatePicker required="true" width="50%" id="Doc_docdate" displayFormat="yyyy-MM-dd" valueFormat="yyyy-MM-dd" />
+                            <DatePicker required="true" width="50%" id="Doc_docdate" displayFormat="yyyy-MM-dd" valueFormat="yyyy-MM-dd" change="handleChange"/>
                             <layoutData>
                             <layout:GridData span="XL6 L6 M6 S6" />
                         </layoutData>

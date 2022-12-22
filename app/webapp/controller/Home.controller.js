@@ -159,16 +159,34 @@ sap.ui.define([
             this.getView().setModel(NewBPModel,"NewBPModel");
         },
         onBP_list: function () {
+            let oComponent = this.getOwnerComponent(),
+                oRootControl = oComponent.getRootControl(),
+                oControlMenu = oRootControl.byId('menu');
+
+            oControlMenu.setText('BP');
             this.getOwnerComponent().getRouter().navTo("BP");
         },
         onGL_list: function () {
+            let oComponent = this.getOwnerComponent(),
+                oRootControl = oComponent.getRootControl(),
+                oControlMenu = oRootControl.byId('menu');
+
+            oControlMenu.setText('GL');
             this.getOwnerComponent().getRouter().navTo("GL");
         },
 		onDoc_list: function () {
+            let oComponent = this.getOwnerComponent(),
+                oRootControl = oComponent.getRootControl(),
+                oControlMenu = oRootControl.byId('menu');
+
+            oControlMenu.setText('Doc');
             this.getOwnerComponent().getRouter().navTo("Doc");
         },
         onNews: function () {
             window.open('https://news.sap.com/'); 
+        },
+        pressOnTileOne:function(){
+            window.open('https://n.news.naver.com/mnews/article/015/0004789888?sid=101'); 
         }
 	});
 });

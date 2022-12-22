@@ -8,7 +8,7 @@
 		search=".handleSearch"
 		confirm=".handleClose"
 		cancel=".handleClose"
-		showClearButton="true"
+		showClearButton="false"
 		items="{path : 'RegionModel>/'}">
 		<ColumnListItem>
 			<cells>
