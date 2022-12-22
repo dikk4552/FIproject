@@ -51,11 +51,11 @@
 							<MessageStrip text="개인 - 비즈니스 파트너의 일반 데이터를 입력하세요." />
 							<form:SimpleForm
 									editable="true">
-								<Label text="이름" id="BP_name" required="true" />
+								<Label text="이름" id="BP_name" />
 								<Input value="{wizardModel>/BP_name}" liveChange="checkPerGeneralStep" valueLiveUpdate="true"/>
 								<Label text="개인 칭호"/>
                                 <ComboBox width="100%" id="BP_title" 
-									required="true" selectedKey="{wizardModel>/BP_title}" 
+									selectedKey="{wizardModel>/BP_title}" 
 									change="checkPerGeneralStep" showClearIcon="true" >
                                     <core:Item text="Mr." key="Mr."/>
                                     <core:Item text="Mrs." key="Mrs"/>
@@ -72,7 +72,7 @@
 							<MessageStrip text="조직 - 비즈니스 파트너의 일반 데이터를 입력하세요." />
 							<form:SimpleForm
 									editable="true">
-								<Label text="조직명" id="BP_orgname" required="true" />
+								<Label text="조직명" id="BP_orgname" />
 								<Input value="{wizardModel>/BP_name}" liveChange="checkOrgGeneralStep" valueLiveUpdate="true"/>
 							</form:SimpleForm>
 						</WizardStep>
@@ -157,8 +157,8 @@
 				<footer>
 					<OverflowToolbar height="60px">
 						<ToolbarSpacer/>
-						<Button text="Back to BP Main" press="handleWizardBack" type="Back"/>
-						<Button text="Cancel" press="handleWizardCancel"/>
+						<Button text="돌아가기" press="handleWizardBack" type="Back"/>
+						<Button text="취소하기" press="handleWizardCancel"/>
 					</OverflowToolbar>
 				</footer>
 			</Page>

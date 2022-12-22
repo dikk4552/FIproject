@@ -12,9 +12,12 @@ sap.ui.define([
 	'sap/m/SearchField',
 	'sap/ui/table/Column',
 	'sap/m/Column',
-	'sap/m/Text'
-], function(Controller, JSONModel, Filter, FilterOperator, Fragment, Token, compLibrary, TypeString, ColumnListItem, Label, SearchField, UIColumn, MColumn, Text) {
+	'sap/m/Text',
+	"sap/ui/export/Spreadsheet",
+	"sap/ui/export/library"
+], function(Controller, JSONModel, Filter, FilterOperator, Fragment, Token, compLibrary, TypeString, ColumnListItem, Label, SearchField, UIColumn, MColumn, Text,Spreadsheet,exportLibrary) {
 	"use strict";
+    const EdmType = exportLibrary.EdmType;
 
 	return Controller.extend("projectGL.controller.GLmain", {
 
@@ -388,6 +391,82 @@ sap.ui.define([
 		onNavToDetail: function (oEvent) {
 			var selectedGLNum = oEvent.getParameters().row.mAggregations.cells[0].mProperties.text;
 			this.getOwnerComponent().getRouter().navTo("GLdetail", {num: selectedGLNum});
+		},
+
+		// Excel Export 기능
+		onDataExport: function () {
+			let aCols, oRowBinding, tableIndices, oSettings, oSheet, oTable;
+	
+			oTable = this.byId('GLtable');    // 테이블 
+			oRowBinding = oTable.getBinding('rows');    // 테이블 전체 데이터
+			tableIndices = oRowBinding.aIndices;        // 조건에 의해 필터링된 데이터의 테이블 Index
+			console.log(oRowBinding);
+	
+			let oList = []; // 데이터 담을 배열 생성
+	
+			var selectedIndex = this.byId("GLtable").getSelectedIndices();    // 멀티토글에서 체크한 열의 테이블 데이터
+			console.log(selectedIndex);
+			if (selectedIndex.length == 0) {    // 선택한 열이 없을 때
+				for (let j = 0; j < oRowBinding.oList.length; j++) {    // 전체 데이터 만큼 for문 돌림
+					if (oRowBinding.aIndices.indexOf(j) > -1) {         // 데이터가 있을 때
+						oList.push(oRowBinding.oList[j]);               // 전체 데이터를 oList에 Push
+					}
+				}
+			}
+			else {                              // 선택한 열이 있을 때
+				for (let j = 0; j < selectedIndex.length; j++) {        // 선택한 열의 수만큼 for문 돌림
+					oList.push(oRowBinding.oList[tableIndices[selectedIndex[j]]]);      // [전체 데이터의 [필터링된 데이터의 [선택한 데이터[j]]]]
+					// console.log(oRowBinding.oList[tableIndices[selectedIndex[j]]]);
+				}
+			}
+	
+			aCols = this.createColumnConfig();
+	
+			oSettings = {
+				workbook: {
+					columns: aCols,
+					hierarchyLevel: 'Level'
+				},
+				dataSource: oList,
+				fileName: 'GLList.xlsx',
+				worker: false
+			};
+			oSheet = new Spreadsheet(oSettings);
+			oSheet.build().finally(function () {
+				oSheet.destroy();
+			});
+		},
+		createColumnConfig: function() {
+			const aCols = [];
+	
+			aCols.push({
+				label: 'G/L 계정',
+				property: 'GL_number',
+				type: EdmType.Int32
+			  });
+			  aCols.push({
+				label: '내역',
+				property: 'GL_shorttext',
+				type: EdmType.Int32
+			  });
+			  aCols.push({
+				label: '계정과목표',
+				property: 'GL_coa',
+				type: EdmType.Int32
+			  });
+			  aCols.push({
+				label: 'G/L 계정 유형',
+				property: 'GL_accttype',
+				type: EdmType.Int32
+			  });
+			  aCols.push({
+				label: '계정 그룹',
+				property: 'GL_acctgroup',
+				type: EdmType.Int32
+			  });
+			  return aCols;
+	
 		}
+
 	});
 });

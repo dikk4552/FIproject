@@ -8,7 +8,7 @@
 		search=".handleSearchGL"
 		confirm=".handleCloseGL"
 		cancel=".handleCloseGL"
-		showClearButton="true"
+		showClearButton="false"
 		items="{path : 'GLAcct>/'}">
 		<ColumnListItem>
 			<cells>
