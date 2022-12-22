@@ -225,12 +225,60 @@ sap.ui.define([
 			}
 			this.oDeleteDialog.open();
         },
+		onRecover: function () {
+			if (!this.oRecoverDialog) {
+				this.oRecoverDialog = new Dialog({
+                    type: DialogType.Message,
+					title: "계정 복구 확인",
+					content: [
+						new HorizontalLayout({
+							content: [
+								new VerticalLayout({
+									width: "120px",
+									content: [
+										new Text({ text: "G/L 계정: "}),
+										new Text({ text: "계정과목표: " }),
+										new Text({ text: "계정 그룹: " })
+									]
+								}),
+								new VerticalLayout({
+									content: [
+										new Text({ text: this.getView().getModel("GLModel").getProperty("/GL_number") }),
+										new Text({ text: this.getView().getModel("GLModel").getProperty("/GL_coa") }),
+										new Text({ text: this.getView().getModel("GLModel").getProperty("/GL_acctgroup") })
+									]
+								})
+							]
+						})
+					],
+					beginButton: new Button({
+						type: ButtonType.Emphasized,
+						text: "복구",
+						press: async function () {							
+							await $.ajax({
+								type: "patch",
+								url: glURL,
+								data: JSON.stringify( { GL_deletion: false } ),
+								contentType: "application/json;IEEE754Compatible=true"
+							});
+							this.onHistory(["GL_deletion"], [false], [true]);
+							this.oRecoverDialog.close();
+						}.bind(this)
+					}),
+					endButton: new Button({
+						text: "취소",
+						press: function () {
+							this.oRecoverDialog.close();
+						}.bind(this)
+					})
+				});
+			}
+			this.oRecoverDialog.open();
+		},
 		onBack: function () {
+			this.onEditCancel();
 			this.getOwnerComponent().getRouter().navTo("GLmain");
 		},
-        onOpenAcctGroupDialog: function () {
-            
-        },
 
         // 선택 : 계정그룹 Value Help Fragment 
 

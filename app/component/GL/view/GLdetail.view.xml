@@ -24,6 +24,7 @@
 				<uxap:actions>
 					<Button text="편집" press="onEdit"			visible="{=!${editModel>/editMode}}"		type="Emphasized"/>
 					<Button text="삭제" press="onDelete"		visible="{=!${GLModel>/GL_deletion} &amp;&amp; !${editModel>/editMode}}"	type="Emphasized"	ariaHasPopup="Dialog"/>
+					<Button text="복구" press="onRecover"		visible="{=${GLModel>/GL_deletion} &amp;&amp; !${editModel>/editMode}}"		type="Emphasized"/>
 					<Button text="저장" press="onEditConfirm"	visible="{=${editModel>/editMode}}"			type="Emphasized"/>
 					<Button text="취소" press="onEditCancel"	visible="{=${editModel>/editMode}}"			type="Default"/>
 				</uxap:actions>
@@ -75,11 +76,11 @@
 									<layoutData>
 						            	<layout:GridData span="XL6 L6 M6 S12"/>
 					            	</layoutData>
-									<VBox class="sapUiTinyMarginBottom" height="2.5rem">
+									<VBox class="sapUiSmallMarginTopBottom" height="3rem">
 										<Label	text="계정과목표 : "/>
 										<Text		id="coa"		text="{GLModel>/GL_coa}"/>
 									</VBox>
-									<VBox class="sapUiTinyMarginBottom" height="2.5rem">
+									<VBox class="sapUiSmallMarginBottom" height="3rem">
 										<Label	text="G/L 계정 유형 : "/>
 										<Text		id="accttype"		text="{GLModel>/GL_accttype}"			visible="{=!${editModel>/editMode}}"/>
 										<Select	id="accttypeInput"	visible="{=${editModel>/editMode}}"		width="100%">
@@ -90,16 +91,16 @@
 											<core:Item text="S (Secondary Costs)"					key="S (Secondary Costs)"/>
 										</Select>
 									</VBox>
-									<VBox class="sapUiTinyMarginBottom" height="2.5rem">
+									<VBox class="sapUiSmallMarginBottom" height="3rem">
 										<Label	text="계정 그룹 : "/>
 										<Text		id="acctgroup"		text="{GLModel>/GL_acctgroup}"	visible="{=!${editModel>/editMode}}"/>
 										<Input	id="acctgroupInput"	visible="{=${editModel>/editMode}}" showValueHelp="true"  valueHelpOnly="true" valueHelpRequest="onOpenAcctGroupDialog"/>
 									</VBox>
-									<VBox class="sapUiTinyMarginBottom" height="2.5rem">
+									<VBox class="sapUiSmallMarginBottom" height="3rem">
 										<Label	text="손익계산서 계정 유형 : "/>
 										<Text		id="pltype"			text="{GLModel>/GL_pltype}"/>
 									</VBox>
-									<VBox class="sapUiTinyMarginBottom" height="2.5rem">
+									<VBox class="sapUiSmallMarginBottom" height="3rem">
 										<Label	text="기능 영역 : "/>
 										<Text		id="function"		text="{GLModel>/GL_function}"/>
 									</VBox>
@@ -109,12 +110,12 @@
 									<layoutData>
 						            	<layout:GridData span="XL6 L6 M6 S12"/>
 					            	</layoutData>
-									<VBox class="sapUiTinyMarginBottom" height="2.5rem">
+									<VBox class="sapUiSmallMarginTopBottom" height="3rem">
 										<Label	text="내역 : "/>
 										<Text		id="shorttext"		text="{GLModel>/GL_shorttext}"	visible="{=!${editModel>/editMode}}"/>
 										<Input	id="shorttextInput"	visible="{=${editModel>/editMode}}"/>
 									</VBox>
-									<VBox class="sapUiTinyMarginBottom" height="2.5rem">
+									<VBox class="sapUiSmallMarginBottom" height="3rem">
 										<Label	text="G/L 계정 설명 : "/>
 										<Text		id="longtext"		text="{GLModel>/GL_longtext}"	visible="{=!${editModel>/editMode}}"/>
 										<Input	id="longtextInput"	visible="{=${editModel>/editMode}}"/>
@@ -172,10 +173,10 @@
 									<layoutData>
 										<layout:GridData span="XL6 L6 M6 S12"/>
 									</layoutData>
-									<VBox class="sapUiTinyMarginTopBottom" height="2.5rem">
+									<VBox class="sapUiTinyMarginTopBottom" height="3rem">
 										<CheckBox id="deletion" text="삭제 표시 (Mark for deletion)" editable="false" selected="{GLModel>/GL_deletion}"/>
 									</VBox>
-									<VBox class="sapUiTinyMarginBottom" height="2.5rem">
+									<VBox class="sapUiSmallMarginBottom" height="3rem">
 										<Label	id="delreasonLabel"	text="삭제 사유 : "				visible="{=${GLModel>/GL_deletion}}" textAlign="Left" width="100%"/>
 										<Text	id="delreason"		text="{GLModel>/GL_delreason}"	visible="{=${GLModel>/GL_deletion}}"/>
 									</VBox>

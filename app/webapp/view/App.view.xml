@@ -15,7 +15,7 @@
                         <Menu>
                             <MenuItem text ="BP" press=".onBPmain"/> 
                             <MenuItem text ="DOC" press=".onDocmain"/> 
-                            <MenuItem text="GL" press=".onGL" />
+                            <MenuItem text="GL" press=".onGL" /> 
                         </Menu>
                     </menu>
                 </MenuButton>
